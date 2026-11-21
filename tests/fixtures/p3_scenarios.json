@@ -1,0 +1,305 @@
+{
+  "version": "1.0",
+  "description": "Ten single-shot P3 regression scenarios: six established cards plus four new manually authored cards. Not AI video renders.",
+  "scenarios": [
+    {
+      "card_id": "sample.sword-activation",
+      "theme": "weapon-activation",
+      "medium": "semi-realistic-japanese-cg",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "sample.rainy-street",
+      "theme": "wet-weather",
+      "medium": "photoreal-live-action",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "sample.sakuga-clash",
+      "theme": "contact-frame",
+      "medium": "anime-2d",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "sample.mecha-sequence",
+      "theme": "mecha-shield",
+      "medium": "premium-cg",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "sample.mythic-portal",
+      "theme": "spatial-opening",
+      "medium": "stylized-3d",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "sample.transformation",
+      "theme": "noncombat-transformation",
+      "medium": "stylized-3d",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "p3.dark-ritual",
+      "theme": "dark-fantasy-ritual",
+      "medium": "premium-cg",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "p3.snow-blizzard",
+      "theme": "snow-environment",
+      "medium": "photoreal-live-action",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "p3.power-aura",
+      "theme": "character-power-no-attack",
+      "medium": "semi-realistic-japanese-cg",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    },
+    {
+      "card_id": "p3.underwater-caustics",
+      "theme": "underwater-optical",
+      "medium": "premium-cg",
+      "expected_source_preserved": true,
+      "expected_delta_nonempty": true
+    }
+  ],
+  "additional_cards": [
+    {
+      "card_id": "p3.dark-ritual",
+      "shot_id": "dark-ritual",
+      "intent": "石壁上的古老封印由弱转强，但不召唤生物",
+      "medium": "premium-cg",
+      "genres": [
+        "dark-fantasy",
+        "high-fantasy"
+      ],
+      "style_profiles": [
+        "dark-gritty"
+      ],
+      "family": "ritual",
+      "intensity": "L2",
+      "primary_read": "seal-activation",
+      "source_prompt": "荒废神殿内，一面封印石壁静止不动；画面为低照度电影CG特写。",
+      "immutable_constraints": [
+        "镜头不变",
+        "石壁不改变形状",
+        "不能召唤生物"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "idle",
+          "trigger": "石壁铭文原本存在",
+          "anchor": "石壁刻印",
+          "visual": "旧符纹边缘留有微弱余辉",
+          "response": "石纹与旧磨损依然可见",
+          "role": "secondary"
+        },
+        {
+          "phase": "activation",
+          "trigger": "符纹逐条点亮",
+          "anchor": "石壁现有刻痕",
+          "visual": "暗金符文依原刻痕分段亮起",
+          "response": "细微金光落在刻痕附近",
+          "role": "primary"
+        },
+        {
+          "phase": "settled",
+          "trigger": "封印完成稳定",
+          "anchor": "同一石壁表面",
+          "visual": "纹路稳定亮起，碎尘自然缓慢落下",
+          "response": "不改变石壁形态",
+          "role": "tertiary"
+        }
+      ],
+      "vfx_delta": "封印石壁原有刻痕由中心向外依序亮起暗金符文，低亮度边光照亮近处石材纹理，最终形成稳定封印辉光；不改变石壁、不召唤生物、不产生冲击波。",
+      "related_atom_ids": [
+        "vfx_term_102",
+        "vfx_term_336",
+        "vfx_term_488"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "p3.snow-blizzard",
+      "shot_id": "snow-blizzard",
+      "intent": "显示强风推动雪花时的空间深度",
+      "medium": "photoreal-live-action",
+      "genres": [
+        "natural-disaster",
+        "environmental"
+      ],
+      "style_profiles": [
+        "natural-cinematic"
+      ],
+      "family": "environment-weather",
+      "intensity": "L2",
+      "primary_read": "directional-snow",
+      "source_prompt": "真实摄影感的山路上正在下雪，人物从远景走向前景，机位固定。",
+      "immutable_constraints": [
+        "真实摄影风格",
+        "机位固定",
+        "人物行走方向不变"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "idle",
+          "trigger": "持续降雪",
+          "anchor": "山路及前后景",
+          "visual": "大小雪花随距离产生不同速度和散景",
+          "response": "远山仍保留空气透视",
+          "role": "primary"
+        },
+        {
+          "phase": "response",
+          "trigger": "阵风掠过山路",
+          "anchor": "空气中的雪花",
+          "visual": "雪花整体向风向偏折形成短时雪幕",
+          "response": "衣角也随同一风向轻动",
+          "role": "primary"
+        },
+        {
+          "phase": "settled",
+          "trigger": "阵风减弱",
+          "anchor": "相同山路空间",
+          "visual": "雪幕略薄，降雪持续",
+          "response": "物理世界保持稳定",
+          "role": "secondary"
+        }
+      ],
+      "vfx_delta": "雪花按照风向向同侧偏折，近景雪片与远处细雪形成分明空间层次；阵风时形成短促雪幕并随风势自然减弱，雪花与衣角运动方向一致。无魔法光圈、无额外镜头移动。",
+      "related_atom_ids": [
+        "vfx_term_135",
+        "vfx_term_354",
+        "vfx_term_433"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "p3.power-aura",
+      "shot_id": "power-aura",
+      "intent": "发力瞬间只提示体内力量唤醒，不释放攻击",
+      "medium": "semi-realistic-japanese-cg",
+      "genres": [
+        "superpower"
+      ],
+      "style_profiles": [
+        "soft-diffused"
+      ],
+      "family": "character",
+      "intensity": "L2",
+      "primary_read": "body-effort",
+      "source_prompt": "半写实3D CG人物站定，握紧拳头准备发力，但没有进行攻击。",
+      "immutable_constraints": [
+        "不能攻击",
+        "姿势不变",
+        "人物身份不变"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "anticipation",
+          "trigger": "拳头逐渐收紧",
+          "anchor": "握拳的手与袖口",
+          "visual": "局部微光从指节和现有衣缝透出",
+          "response": "衣角随压力轻微向外振动",
+          "role": "secondary"
+        },
+        {
+          "phase": "activation",
+          "trigger": "拳头完全握紧",
+          "anchor": "手部和前臂",
+          "visual": "一股贴近轮廓的柔和能量光短促汇聚",
+          "response": "附近衣料受到局部柔光",
+          "role": "primary"
+        },
+        {
+          "phase": "decay",
+          "trigger": "蓄力停止",
+          "anchor": "同一手部",
+          "visual": "能量回复低亮度静止状态",
+          "response": "无离体发射",
+          "role": "tertiary"
+        }
+      ],
+      "vfx_delta": "当手指完全握紧时，沿前臂与指节出现贴近人体轮廓的短促柔光流动，光色自然映照衣袖，随后缓缓衰减。人物不挥拳、不攻击、不释放能量弹，不增加全屏震动。",
+      "related_atom_ids": [
+        "vfx_term_001",
+        "vfx_term_007",
+        "vfx_term_336"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "p3.underwater-caustics",
+      "shot_id": "underwater-caustics",
+      "intent": "体现水体折射、悬浮微粒和真实深度",
+      "medium": "premium-cg",
+      "genres": [
+        "environmental",
+        "science-fiction"
+      ],
+      "style_profiles": [
+        "natural-cinematic"
+      ],
+      "family": "optical-compositing",
+      "intensity": "L2",
+      "primary_read": "underwater-depth",
+      "source_prompt": "深海写实电影CG镜头，潜水器停在安静的海底洞穴旁，摄影机缓慢推进。",
+      "immutable_constraints": [
+        "潜水器外形不变",
+        "镜头运动不变",
+        "不新增机械部件"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "idle",
+          "trigger": "潜水器已停止运动",
+          "anchor": "海底洞穴与潜水器外壳",
+          "visual": "稀疏悬浮颗粒分层漂浮",
+          "response": "外壳与岩石的真实体积光衰减",
+          "role": "primary"
+        },
+        {
+          "phase": "propagation",
+          "trigger": "原有探照灯扫过水体",
+          "anchor": "探照灯照明体积",
+          "visual": "水体出现自然散射，光束照亮邻近微粒",
+          "response": "海底岩壁有局部反射",
+          "role": "primary"
+        },
+        {
+          "phase": "settled",
+          "trigger": "探照灯扫描结束",
+          "anchor": "仍在海底的同一空间",
+          "visual": "散射光随灯光方向退去",
+          "response": "不生成新的装置",
+          "role": "secondary"
+        }
+      ],
+      "vfx_delta": "原探照灯在水中形成方向明确的体积散射光柱，稀疏悬浮微粒呈现前后景深度差，光在洞穴岩壁与潜水器金属表面形成克制反射。保留缓慢推进镜头，不新增机械部件。",
+      "related_atom_ids": [
+        "vfx_term_348",
+        "vfx_term_489",
+        "vfx_term_506"
+      ],
+      "changes": []
+    }
+  ]
+}
