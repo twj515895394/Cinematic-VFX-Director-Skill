@@ -43,9 +43,17 @@
     {
       "id": "sakuga-vfx",
       "url": "https://github.com/kanaworksai-hue/kanaworks-sakuga-vfx",
-      "reuse": "catalog metadata reference",
-      "status": "reviewed; effects are separately licensed, not vendored",
-      "license": "code MIT; effects separately licensed"
+      "reuse": "original 90 asset reference metadata and animation timing; no redistributed image/video asset collection",
+      "status": "vendored pinned original catalog and license, converted to searchable 90-case external-link index",
+      "license": "KanaWorks_AI VFX Asset License 1.0 for effect data; MIT for code; original asset library is not an open-source pack",
+      "upstream_commit": "7cfc9e6bd6ecc0239f3c141e9c5c42cbdc8bb365",
+      "vendor_path": "third_party/kanaworks-sakuga-vfx/",
+      "vendored_file_count": 2,
+      "integration": [
+        "adapters/sakuga_catalog.py",
+        "data/catalog/cases.json",
+        "scripts/search_cases.py"
+      ]
     }
   ]
 }
