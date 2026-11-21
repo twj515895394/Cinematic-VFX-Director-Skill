@@ -20,6 +20,18 @@ def scenarios():
 
 
 class DirectorCompilerTests(unittest.TestCase):
+    def test_published_ten_card_catalog_is_directly_runnable(self):
+        checks, cards = scenarios()
+        published = compile_prompt.load_cards(ROOT / "examples/p3-ten-cards.json")
+        self.assertEqual(len(published), 10)
+        self.assertEqual({item["card_id"] for item in published},
+                         {case["card_id"] for case in checks})
+        for card in published:
+            with self.subTest(card=card["card_id"]):
+                self.assertEqual(card, cards[card["card_id"]])
+                result = compile_prompt.compile_card(card)
+                self.assertEqual(result["compiled_prompt"], card["vfx_delta"])
+
     def test_ten_unique_shots_cover_combat_and_noncombat(self):
         checks, cards = scenarios()
         self.assertEqual(len(checks), 10)
