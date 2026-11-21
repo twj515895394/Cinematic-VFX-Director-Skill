@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.5（P4 知识库和来源视觉案例接入）｜日期：2026-11-21｜状态：P0–P3 完成，P4核心知识与首批案例索引完成；P5–P7 待实施  
+> 版本：v1.6（P5 双视频模型与面向新手的方案选择）｜日期：2026-11-21｜状态：P0–P3完成，P4首批知识案例索引完成，P5新手方案门禁/双模型适配/多镜头状态已完成结构测试；P6–P7待实施  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -225,7 +225,7 @@ Effect Card 的事件可用相对动作锚点（at grip / on actual contact / af
 - 第一期仅定义 schema 和字段规范；案例检索及预览接口依 P4/P5 演进。**不把外链图或视频误写为已经本地验证可播放。**
 
 ### 15.6 通用提示词输出和模型适配层
-先由导演输出模型无关 `Effect Card` 和最小必要的 VFX Prompt Delta；模型适配器只负责翻译/压缩表述与风险提示，不可擅自增加第二套特效概念。模型适配元数据：adapter_id、supported_scenarios、prompt_pattern、known_limitations、evidence_date、evidence_url、confidence；没有验证过的能力不写为确定事实。目标可包括 MiniMax H3、Seedance、Kling、Veo、Wan；P1 只保留通用接口，具体适配晚于 P3。
+先由导演输出模型无关 `Effect Card` 和最小必要的 VFX Prompt Delta；模型适配器只负责翻译/压缩表述与风险提示，不可擅自增加第二套特效概念。模型适配元数据：adapter_id、supported_scenarios、prompt_pattern、known_limitations、evidence_date、evidence_url、confidence；没有验证过的能力不写为确定事实。**P5用户已明确只做 MiniMax H3 和 Seedance 两种视频模型，未指明默认 MiniMax H3**。当前 `scripts/adapt_prompt.py` 只产生模型专属VFX-only插入段，完整有声模型提示词由Agent在用户授权后按照官方规范编排；不提供 Kling、Veo、Wan 等第三模型适配。
 
 ### 15.7 非侵入式协议与 QC 定向修复
 输入保留 `source_prompt`（原始文本）、`immutable_constraints`、`editable_scope` 和镜头事实；默认输出 `vfx_delta`，不覆写 `source_prompt`。可选 integrated_prompt 必须基于用户允许的范围，并列出 `changes`，禁止暗改镜头数量、动作先后、机位、服装、身份或时长。
@@ -286,3 +286,26 @@ P1 保留原创 `references/` 文档与 Schema 作为四维映射桥接层，优
 ### 20.3 质量门禁与待补差距
 自动验证扩展到6类JSON Schema、全部46 Profile/关联上游参考路径、90 Case/来源完整映射及其配对关系，并以 [CI #44862387129](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44862387129) 验证67项单测全部成功。
 P4 对“视觉案例库”的**首批**承诺已实现，覆盖的是动漫游戏类参考和完整的全题材**知识路由**；写实电影、日系半写实CG、MJ审美、动画电影和非战斗灾害的真实视觉案例证据尚需增补。该扩充不应阻塞 P5 的通用模型适配和多镜头状态开发，也不应以无证据推断填充。
+
+## 21. P5 完成：新手友好的选择优先工作流（2026-11-21）
+
+### 21.1 输入不再要求用户懂 VFX
+默认适配“仅提供某个场景、原视频提示词、图片/参考视频，然后说帮我加点特效”的普通创作者。Agent 必须根据可见事实（角色、环境、动作、光源、材质、机位、世界观）、四轴 Profile、上游566词 VFX 原子与专业构建规则作出专业判断，并提供 **3–5个匹配且有明显差异的可选VFX方案**，逐一解释：
+1. 普通用户可理解的方案标题（不要只有专业缩写）；
+2. 画面具体会发生什么变化；
+3. 为什么适用于该用户给的镜头/图片；
+4. 特效强度以及副作用/不应修改内容。
+
+标出一项推荐，但**不替用户预选**；在用户明确选定或授权组合前不生成被视为最终的 Effect Card/模型提示词。图片只有单帧时，未来动作不能凭空认定，未知部分需标注。若用户指定了非常明确的特效则直达效果设计，不机械要求多轮选择。用户要求不加特效时尊重。完整规则见 `references/choice-first-workflow.md`，结构契约见 `data/schemas/recommendation-package.schema.json`；`scripts/recommend_options.py` 提供3–5候选包验证和已选方案门禁，**不假装能自行识别图片内容**。已有三种测试输入、共12个候选方案。
+
+### 21.2 只支持两个视频模型，H3 为默认
+- **MiniMax H3**：用户未明说模型时使用；官方 `MiniMax-AI/MiniMax-H3` Skill及两份原始提示词指南已复制到 `third_party/minimax-h3/`（固定上游 SHA `199b7d0e1fd95e7b3eafa8c15eca692534142427`）。Agent 按官方 T2VA/I2VA/FL2VA/L2VA/Ref2VA 选择输入模式，不能假设用户提供了参考附件。
+- **Seedance**：仅用户明确选择时使用；参考字节跳动官方 Seedance 2.0/2.5 资料，不强制猜测用户实际版本/平台参数。按用户提供的真实引用媒体和镜头特效因果编排，不改动作和原镜头语言。
+- `data/model_profiles.json` 为仅含 `minimax-h3` / `seedance` 的模型策略表，`scripts/adapt_prompt.py` 复用P3已审核的卡片和原稿保护编译。返回的模型专属文本是**VFX插入片段，不是完整的官方有声模型提示词**；用户要求完整稿时需再由Agent按照实际模型官方模板做审稿与编排，不能任意插入不存在的演员、镜头、对白、音轨、参考标签或隐藏模型参数。
+- 默认用户没明说要完整整合稿时输出“原内容逐字保留 + 独立特效补充”，双授权门禁仍然生效。
+
+### 21.3 多镜头剧情和独立混剪并存
+`data/schemas/shot-sequence.schema.json` 与 `scripts/check_shot_states.py` 结构性校验：`continue` 明确延续同一特效的身份/颜色/锚点/尺度/状态，`reset` 需注明原因，`independent` 不强行继承上一镜头。测试包含3个连续剧情、3个独立混剪和1个明确跳时重置例；不强制轻剧情Vlog变成MV式解耦，也不让剪辑混剪被强制连续。
+
+### 21.4 验收与能力边界
+现有 [GitHub Actions #44863374042](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863374042) 已通过 **92项自动化测试、9套Schema检查**，覆盖默认H3/显式Seedance、3–5选项/确认、图像媒体引用门禁、原稿无侵入及镜头状态矛盾。测试验证的是**Agent可执行指令与离线数据/脚本**，不等于真实图片已被脚本自动理解，也不等于已调用 MiniMax/Seedance 视频生成或完成视频画面质量评测。P6才将真实输出QC与修复放进核心目标。
