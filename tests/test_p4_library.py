@@ -122,7 +122,7 @@ class P4ProfilesTests(unittest.TestCase):
 
     def test_exact_profile_lookup_without_unverified_fuzzy_inference(self):
         profile = lookup_profile.get_profile("style", "mj-dreamlike")
-        self.assertIn("柔", profile["vfx_treatment"])
+        self.assertIn("体积光", profile["vfx_treatment"])
         self.assertEqual(profile["id"], "mj-dreamlike")
         self.assertEqual(len(lookup_profile.get_profile("family")), 14)
         self.assertEqual(len(lookup_profile.get_profile("medium")), 9)
