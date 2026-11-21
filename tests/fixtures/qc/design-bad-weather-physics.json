@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "review_id": "design-bad-weather-physics",
+  "model": "minimax-h3",
+  "shot_id": "rain-falls-up",
+  "medium": "photoreal-live-action",
+  "source_prompt": "真实暴雨街道，不存在反重力设定。",
+  "immutable_constraints": [
+    "保持真实物理",
+    "不添加反重力"
+  ],
+  "reviewer": {
+    "id": "synthetic-design-review-fixture",
+    "role": "author"
+  },
+  "evidence": {
+    "kind": "design-only",
+    "description": "手写的提示词/效果卡设计检查夹具。没有输入任何渲染视频或帧图，不代表实际视觉审核。",
+    "asset_refs": [],
+    "observed_frame_ids": []
+  },
+  "scores": {
+    "causality": {
+      "score": 1,
+      "observation": "依据现有镜头文字检查来源、触发、是否擅自增加行动; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "space": {
+      "score": 1,
+      "observation": "依据镜头描述检查锚点、比例、视差与遮挡的设计逻辑; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "timing": {
+      "score": 2,
+      "observation": "依据设计节拍检查触发→接触→反应与结束的先后; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "style_intensity": {
+      "score": 1,
+      "observation": "依据指定媒介和强度判断是否过度或审美冲突; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "environment": {
+      "score": 0,
+      "observation": "依据已有光源/材质/风向判断局部环境交互; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "readability": {
+      "score": 1,
+      "observation": "依据提示词设计判断焦点是否能被保留；未实际查看成片; 案例中特别审查：错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  },
+  "hard_failures": [
+    {
+      "code": "PHYSICS_MISMATCH",
+      "observation": "错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "axis": "environment",
+      "problem": "错误设计：水花和雨滴突然逆重力上升，与街道风向矛盾。",
+      "target": "environment VFX layer",
+      "minimal_change": "让雨滴和飞溅遵循重力、风向及地面接触",
+      "evidence_refs": [
+        "script-brief"
+      ],
+      "priority": 1
+    }
+  ]
+}
