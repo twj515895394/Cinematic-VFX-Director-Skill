@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "default_model": "minimax-h3",
+  "models": {
+    "minimax-h3": {
+      "label": "MiniMax H3",
+      "type": "video-model",
+      "prompt_language": "English preferred for official structured prompt; preserve original-language dialog/visible text",
+      "default": true,
+      "supported_input_modes": [
+        "text",
+        "first-frame",
+        "first-last-frame",
+        "last-frame",
+        "reference"
+      ],
+      "official_modes": {
+        "text": "T2VA",
+        "first-frame": "I2VA",
+        "first-last-frame": "FL2VA",
+        "last-frame": "L2VA",
+        "reference": "Ref2VA"
+      },
+      "source_guides": [
+        "third_party/minimax-h3/skills/h3-prompt-writing/SKILL.md",
+        "third_party/minimax-h3/skills/h3-prompt-writing/references/base-en.txt",
+        "third_party/minimax-h3/skills/h3-prompt-writing/references/ref-en.txt"
+      ],
+      "rules": {
+        "text": "If composing a full H3 prompt on request, follow the official base 3-field structure with integrated_multimodal_description / overall_soundscape / non_diegetic_music. VFX selection only changes a shot's visual details and does not invent camera, music, speech or extra scenes.",
+        "first-frame": "Use actual Picture 1 as the existing first frame at 0.00s; attach VFX to existing object/material. Do not claim an image attachment if none was given.",
+        "first-last-frame": "Keep both user-supplied keyframes fixed, describe the VFX progression between them, never invent endpoint images.",
+        "last-frame": "Respect user's last-frame target as final image; do not fabricate first frame as provided reference.",
+        "reference": "Follow official subject_definitions / summary / retention_analysis / detailed_description / overall_soundscape / non_diegetic_music and source-label rules; reference only actual supplied assets."
+      },
+      "guardrails": [
+        "no-unsupported-parameter-names",
+        "no-fabricated-ref-label",
+        "keep-original-audio-and-editing",
+        "avoid-particle-overload",
+        "one-visible-trigger-per-beat"
+      ]
+    },
+    "seedance": {
+      "label": "Seedance",
+      "type": "video-model-family",
+      "prompt_language": "Natural language; preserve user language and original scene/dialogue",
+      "default": false,
+      "supported_input_modes": [
+        "text",
+        "first-frame",
+        "first-last-frame",
+        "reference",
+        "video-edit",
+        "extension"
+      ],
+      "official_modes": {
+        "text": "text-to-video",
+        "first-frame": "image-to-video",
+        "first-last-frame": "first-last-frame",
+        "reference": "multimodal-reference",
+        "video-edit": "video-editing",
+        "extension": "video-continuation"
+      },
+      "source_guides": [
+        "https://seed.bytedance.com/en/blog/seedance-2-0-official-launch",
+        "https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5"
+      ],
+      "rules": {
+        "text": "Specify observable subject, cause-and-effect VFX timing and spatial/lighting response. Keep given narrative and shot boundaries unchanged.",
+        "first-frame": "Use the supplied first frame as character/scene/props baseline; describe only allowed VFX progression.",
+        "first-last-frame": "Keep actual supplied first and last reference images, state only the visible connecting VFX.",
+        "reference": "Bind only supplied image/video/audio references by their actual role; do not synthesize @image1 / @video1 tokens when the user has not provided or assigned references.",
+        "video-edit": "Change specified VFX region/interval only; preserve original identity, action, camera and audio unless explicitly allowed.",
+        "extension": "Continue given existing video state only when requested; preserve the prior ending state and exposure. Do not force continuity for montage cuts."
+      },
+      "guardrails": [
+        "do-not-assume-seedance-subversion-or-api",
+        "no-invented-reference-label",
+        "no-unsupported-duration-or-resolution-controls",
+        "keep-original-sound-and-editing",
+        "no-unrequested-magic"
+      ]
+    }
+  },
+  "selection_policy": {
+    "explicit_user_model_overrides_default": true,
+    "unrecognized_explicit_model": "reject-with-help",
+    "when_user_only_says_seedance": "use-family-safe-prompt-and-ask-version-only-if-feature-requires-it",
+    "never_auto_switch_model": true
+  }
+}
