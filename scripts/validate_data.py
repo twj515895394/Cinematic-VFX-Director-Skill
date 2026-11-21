@@ -16,7 +16,10 @@ from jsonschema.exceptions import SchemaError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from adapters.sakuga_catalog import build_catalog  # unchanged source -> index
+sys.path.insert(0, str(ROOT / "scripts"))
+from adapters.sakuga_catalog import build_catalog
+import recommend_options
+import check_shot_states  # unchanged source -> index
 
 BANK = ROOT / "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json"
 TAXONOMY = ROOT / "data/taxonomy.json"
@@ -28,6 +31,9 @@ SOURCES = ROOT / "data/sources.json"
 PROFILES = ROOT / "data/profiles/cinematic_profiles.json"
 SAKUGA_BANK = ROOT / "third_party/kanaworks-sakuga-vfx/catalog.json"
 SCHEMAS = ROOT / "data/schemas"
+MODEL_PROFILES = ROOT / "data/model_profiles.json"
+RECOMMENDATIONS_DIR = ROOT / "examples/recommendations"
+SEQUENCES_DIR = ROOT / "examples/sequences"
 
 
 def load(path: Path):
@@ -70,6 +76,22 @@ def verify(*, overrides=None):
     _check(bank, schemas["upstream-bank.schema.json"], "upstream bank", problems)
     _check(curated, schemas["curated-index.schema.json"], "curated index", problems)
     _check(profiles, schemas["cinematic-profiles.schema.json"], "cinematic profiles", problems)
+    model_profiles = load(MODEL_PROFILES)
+    _check(model_profiles, schemas["model-profiles.schema.json"], "model profiles", problems)
+    if model_profiles.get("default_model") != "minimax-h3" or set(model_profiles.get("models", {})) != {"minimax-h3", "seedance"}:
+        problems.append("P5 supports only MiniMax H3 / Seedance and must default to MiniMax H3")
+    for mid, profile in model_profiles.get("models", {}).items():
+        for mode in profile.get("supported_input_modes", []):
+            if mode not in profile.get("official_modes", {}) or mode not in profile.get("rules", {}):
+                problems.append("P5 missing model input-mode guidance: %s/%s" % (mid, mode))
+        if (mid == "minimax-h3") != profile.get("default"):
+            problems.append("P5 default flag inconsistent: " + mid)
+        for ref in profile.get("source_guides", []):
+            if ref.startswith("https://"):
+                if not ref.startswith("https://seed.bytedance.com/"):
+                    problems.append("Unexpected external model reference " + ref)
+            elif not (ROOT / ref).is_file():
+                problems.append("Missing official H3 guide file " + ref)
 
     # Native upstream atoms have six fields; do not force the richer project
     # atom schema on them. Validate only future local rich atom instances.
@@ -241,6 +263,42 @@ def verify(*, overrides=None):
         if times != sorted(times):
             problems.append("Time markers out of order on case " + cid)
 
+    # P5: validate the actual option-first workflow and all multi-shot samples.
+    recommendation_files = sorted(RECOMMENDATIONS_DIR.glob("*.json"))
+    sequence_files = sorted(SEQUENCES_DIR.glob("*.json"))
+    if len(recommendation_files) < 3:
+        problems.append("P5 requires at least 3 novice scene/image recommendation examples")
+    if len(sequence_files) < 7:
+        problems.append("P5 requires 3 continuous, 3 independent and one reset example")
+    all_options = 0
+    for path in recommendation_files:
+        pack = load(path)
+        _check(pack, schemas["recommendation-package.schema.json"], "recommendation " + path.name, problems)
+        try:
+            recommend_options.validate_pack(pack)
+        except ValueError as exc:
+            problems.append("Recommendation invalid (%s): %s" % (path.name, exc))
+        if pack.get("selection_state") != "awaiting-user-selection" or pack.get("selected_option_id") is not None:
+            problems.append("Recommendation must await explicit user selection: " + path.name)
+        if pack.get("model") not in model_profiles.get("models", {}):
+            problems.append("Recommendation uses unsupported model: " + path.name)
+        all_options += len(pack.get("options", []))
+    sequence_types = {}
+    for path in sequence_files:
+        seq = load(path)
+        _check(seq, schemas["shot-sequence.schema.json"], "sequence " + path.name, problems)
+        sequence_types[seq["intended_editing"]] = sequence_types.get(seq["intended_editing"], 0) + 1
+        if seq.get("model") not in model_profiles.get("models", {}):
+            problems.append("Sequence uses unsupported model: " + path.name)
+        try:
+            result = check_shot_states.validate_sequence(seq)
+        except ValueError as exc:
+            problems.append("Sequence invalid (%s): %s" % (path.name, exc))
+        else:
+            problems.extend(path.name + ": " + issue for issue in result["issues"])
+    if sequence_types.get("continuous-story", 0) < 3 or sequence_types.get("independent-montage", 0) < 3:
+        problems.append("P5 requires at least three continuous and three independent sequence examples")
+
     stats = {
         "source_atoms": len(atoms), "unique_atom_ids": len(set(ids)),
         "curated_refs": len(curated.get("entries", [])),
@@ -251,6 +309,10 @@ def verify(*, overrides=None):
         "families": len(source_families), "schemas_checked": len(schemas),
         "p4_profiles": sum(len(p) for p in profiles.get("profiles", {}).values()),
         "sakuga_elements": len({x.get("element") for x in sakuga_source.get("assets", [])}),
+        "p5_models": len(model_profiles["models"]),
+        "p5_recommendation_packs": len(recommendation_files),
+        "p5_option_count": all_options,
+        "p5_shot_sequences": len(sequence_files),
     }
     return problems, stats
 
