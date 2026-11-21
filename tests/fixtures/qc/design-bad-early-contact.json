@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "review_id": "design-bad-early-contact",
+  "model": "minimax-h3",
+  "shot_id": "contact-before-touch",
+  "medium": "anime-2d",
+  "source_prompt": "两把刀剑即将接触，先不接触。",
+  "immutable_constraints": [
+    "不得提前碰撞"
+  ],
+  "reviewer": {
+    "id": "synthetic-design-review-fixture",
+    "role": "author"
+  },
+  "evidence": {
+    "kind": "design-only",
+    "description": "手写的提示词/效果卡设计检查夹具。没有输入任何渲染视频或帧图，不代表实际视觉审核。",
+    "asset_refs": [],
+    "observed_frame_ids": []
+  },
+  "scores": {
+    "causality": {
+      "score": 1,
+      "observation": "依据现有镜头文字检查来源、触发、是否擅自增加行动; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "space": {
+      "score": 2,
+      "observation": "依据镜头描述检查锚点、比例、视差与遮挡的设计逻辑; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "timing": {
+      "score": 0,
+      "observation": "依据设计节拍检查触发→接触→反应与结束的先后; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "style_intensity": {
+      "score": 1,
+      "observation": "依据指定媒介和强度判断是否过度或审美冲突; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "environment": {
+      "score": 1,
+      "observation": "依据已有光源/材质/风向判断局部环境交互; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "readability": {
+      "score": 2,
+      "observation": "依据提示词设计判断焦点是否能被保留；未实际查看成片; 案例中特别审查：错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  },
+  "hard_failures": [
+    {
+      "code": "EARLY_CONTACT",
+      "observation": "错误设计：两刀相距半米时便出现命中闪光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "axis": "timing",
+      "problem": "错误设计：两刀相距半米时便出现命中闪光。",
+      "target": "timing VFX layer",
+      "minimal_change": "把闪光延后到真实接触点，别增加新挥砍动作",
+      "evidence_refs": [
+        "script-brief"
+      ],
+      "priority": 1
+    }
+  ]
+}
