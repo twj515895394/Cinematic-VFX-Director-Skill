@@ -31,6 +31,23 @@ class P7ReleaseTests(unittest.TestCase):
         self.assertEqual(issues, [])
         self.assertEqual(stats["version"], "0.1.0-rc.2")
 
+    def test_skill_has_unique_name_and_bilingual_description(self):
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertTrue(skill.startswith("---\\nname: Cinematic-VFX-Director-Skill\\n".replace("\\n", "\n")))
+        self.assertIn("description: >-", skill)
+        self.assertIn("  中文：", skill)
+        self.assertIn("  English:", skill)
+        self.assertIn("**中文简介：**", skill)
+        self.assertIn("**English overview:**", skill)
+        self.assertTrue(readme.startswith("# Cinematic-VFX-Director-Skill\\n".replace("\\n", "\n")))
+        self.assertIn("**中文简介：**", readme)
+        self.assertIn("**English introduction:**", readme)
+        # The original upstream Skill keeps its own identity.
+        upstream = (ROOT / "third_party/skill-movie/cinematic-vfx-director/SKILL.md").read_text(encoding="utf-8")
+        self.assertIn("cinematic-vfx-director", upstream)
+        self.assertNotEqual(skill.split("name:", 1)[1].splitlines()[0].strip(), "cinematic-vfx-director")
+
     def test_user_acceptance_has_no_misleading_render_pass_claim(self):
         text = (ROOT / "docs/USER_ACCEPTANCE.md").read_text(encoding="utf-8")
         self.assertIn("未", text)
