@@ -36,6 +36,8 @@ def validate_pack(pack):
     models = read(MODELS)["models"]
     if pack["model"] not in models:
         raise ValueError("Unknown model; supported: minimax-h3, seedance")
+    if pack["model_selection_source"] == "default" and pack["model"] != read(MODELS)["default_model"]:
+        raise ValueError("An unspecified user model must default to MiniMax H3")
     ids = [x["id"] for x in pack["options"]]
     if len(set(ids)) != len(ids):
         raise ValueError("Duplicate recommendation option IDs")
@@ -59,6 +61,7 @@ def offer(pack):
     # Deliberately do not return vfx_delta, Effect Card, or integrated prompt.
     return {
         "model": pack["model"],
+        "model_selection_source": pack["model_selection_source"],
         "summary": pack["input"]["observed_content"],
         "uncertain_details": list(pack["input"]["uncertain_details"]),
         "options": [{
@@ -84,6 +87,7 @@ def select(pack, option_id, *, user_confirmed=False):
     # the Agent to apply the user's specific shot and timing constraints.
     return {
         "request_id": pack["request_id"], "model": pack["model"],
+        "model_selection_source": pack["model_selection_source"],
         "selection_state": "user-selected", "selected_option_id": option_id,
         "selected_option": chosen[0],
         "source_input": pack["input"],
