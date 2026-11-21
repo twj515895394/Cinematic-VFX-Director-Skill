@@ -19,7 +19,8 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 from adapters.sakuga_catalog import build_catalog
 import recommend_options
-import check_shot_states  # unchanged source -> index
+import check_shot_states
+import review_vfx
 
 BANK = ROOT / "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json"
 TAXONOMY = ROOT / "data/taxonomy.json"
@@ -34,6 +35,7 @@ SCHEMAS = ROOT / "data/schemas"
 MODEL_PROFILES = ROOT / "data/model_profiles.json"
 RECOMMENDATIONS_DIR = ROOT / "examples/recommendations"
 SEQUENCES_DIR = ROOT / "examples/sequences"
+QC_FIXTURES_DIR = ROOT / "tests/fixtures/qc"
 
 
 def load(path: Path):
@@ -299,6 +301,39 @@ def verify(*, overrides=None):
     if sequence_types.get("continuous-story", 0) < 3 or sequence_types.get("independent-montage", 0) < 3:
         problems.append("P5 requires at least three continuous and three independent sequence examples")
 
+    # P6 fixture integrity: intentionally synthetic, *not* real video audits.
+    qc_paths = sorted(QC_FIXTURES_DIR.glob("*.json"))
+    if len(qc_paths) < 10:
+        problems.append("P6 requires 10+ diverse, negative-inclusive QC fixtures")
+    qc_passes = qc_blocks = 0
+    ids_qc = set()
+    for path in qc_paths:
+        report = load(path)
+        _check(report, schemas["qc-review.schema.json"], "QC " + path.name, problems)
+        rid = report.get("review_id")
+        if rid in ids_qc:
+            problems.append("Duplicate QC review ID " + str(rid))
+        ids_qc.add(rid)
+        if report.get("evidence", {}).get("kind") != "design-only":
+            problems.append("No synthetic QC fixture may claim actual rendered-video evidence")
+        try:
+            result = review_vfx.evaluate(report)
+        except ValueError as exc:
+            problems.append("Invalid QC fixture (%s): %s" % (path.name, exc))
+            continue
+        if path.name.startswith("design-good-"):
+            qc_passes += 1
+            if not result["rubric_passed"] or result["verdict"] != "design-pass-pending-rendered-review":
+                problems.append("P6 positive fixture did not get design-only pass: " + path.name)
+        elif path.name.startswith("design-bad-"):
+            qc_blocks += 1
+            if result["rubric_passed"] or result["next_fix"] is None:
+                problems.append("P6 negative fixture was not blocked with a repair: " + path.name)
+        else:
+            problems.append("Unexpected P6 fixture naming: " + path.name)
+    if qc_passes < 5 or qc_blocks < 5:
+        problems.append("P6 requires at least 5 positive and 5 negative diverse cases")
+
     stats = {
         "source_atoms": len(atoms), "unique_atom_ids": len(set(ids)),
         "curated_refs": len(curated.get("entries", [])),
@@ -313,6 +348,9 @@ def verify(*, overrides=None):
         "p5_recommendation_packs": len(recommendation_files),
         "p5_option_count": all_options,
         "p5_shot_sequences": len(sequence_files),
+        "p6_qc_cases": len(qc_paths),
+        "p6_qc_design_passes": qc_passes,
+        "p6_qc_blocked": qc_blocks,
     }
     return problems, stats
 
