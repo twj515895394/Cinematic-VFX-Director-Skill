@@ -41,6 +41,7 @@
 ```bash
 python scripts/compile_prompt.py --card sample.sword-activation
 python scripts/compile_prompt.py --card sample.sword-activation --json
+python scripts/compile_prompt.py --cards examples/p3-ten-cards.json --card p3.dark-ritual
 python scripts/compile_prompt.py --card sample.sword-activation --integrated --approved
 # 最后一条会拒绝：该样例仍标记为 vfx-only；只有用户明确批准并同步更新Card才允许整合。
 ```
