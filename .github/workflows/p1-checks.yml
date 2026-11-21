@@ -35,3 +35,15 @@ jobs:
           python scripts/search_cases.py --paired-with water_charge_01 --json
           python scripts/lookup_profile.py --axis family --id spatial
           python scripts/lookup_profile.py --axis style --id mj-dreamlike --json
+      - name: Smoke test P5 novice option-first gate and two model adapters
+        run: |
+          python scripts/recommend_options.py --package examples/recommendations/sword-image.json
+          python scripts/recommend_options.py --package examples/recommendations/rainy-street.json --select A1 --user-confirmed --json
+          python scripts/adapt_prompt.py --card sample.sword-activation --json
+          python scripts/adapt_prompt.py --card sample.rainy-street --model seedance --json
+      - name: Smoke test P5 continuous shots versus independent montage
+        run: |
+          python scripts/check_shot_states.py --file examples/sequences/continuous-sword.json
+          python scripts/check_shot_states.py --file examples/sequences/continuous-mecha.json --json
+          python scripts/check_shot_states.py --file examples/sequences/montage-weather.json
+          python scripts/check_shot_states.py --file examples/sequences/mixed-explicit-reset.json
