@@ -33,12 +33,19 @@
     {
       "id": "effekseer-vfx-skill",
       "url": "https://github.com/kanaworksai-hue/effekseer-vfx-skill",
-      "reuse": "production workflow reference",
+      "reuse": "original independent review Skill, per-frame evidence/one-fix workflow, timing/layering references; AI video cinematic rubric is a thin project-specific adaptation",
       "status": "vendored MIT VFX and review source files",
       "upstream_commit": "b0eea1085f2e3e0fa0b5cc77c58c9a845f0bec96",
       "vendor_path": "third_party/effekseer-vfx-skill/",
       "license": "MIT",
-      "vendored_file_count": 12
+      "vendored_file_count": 12,
+      "integration": [
+        "SKILL.md",
+        "references/qc-rubric.md",
+        "references/qc-review-workflow.md",
+        "scripts/review_vfx.py",
+        "tests/test_p6_quality_review.py"
+      ]
     },
     {
       "id": "sakuga-vfx",
