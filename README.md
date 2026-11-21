@@ -159,7 +159,7 @@ python -m unittest discover -s tests -v
 参见：[六维Rubric](references/qc-rubric.md) · [独立审核流程](references/qc-review-workflow.md) · [16个正反例](examples/qc-regression.md)
 
 ## 关键文件
-- [产品详细设计 v1.6](docs/PRODUCT_DESIGN.md)
+- [产品详细设计 v1.8](docs/PRODUCT_DESIGN.md)
 - [分阶段实施计划](docs/IMPLEMENTATION_PLAN.md)
 - [上游直接复用路由](adapters/upstream-routing.md)
 - [四维分类](references/taxonomy.md)
@@ -181,7 +181,7 @@ python -m unittest discover -s tests -v
 - [P7 发布候选说明](docs/RELEASE_NOTES.md)
 - [数据验证脚本](scripts/validate_data.py)
 - [P2 检索与完整性校验说明](docs/SEARCH_AND_VALIDATION.md)
-- [GitHub Actions 成功运行](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037)
+- [查看最新 GitHub Actions 验证](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/workflows/p1-checks.yml)
 
 ## 仍待完成
 P4可以持续补充真人电影/CG/MJ动态案例；P6实测还需真实 MiniMax H3/Seedance 视频及独立审核者的修复前后验证；正式稳定版需用户实测批准。其余代码、文档、自动化预验收工具已进入发布候选。
