@@ -86,7 +86,7 @@ def guardrail_issues(root=ROOT):
     skill = (root / "SKILL.md").read_text(encoding="utf-8")
     # Distinct Skill identity: don't collide with the original upstream
     # cinematic-vfx-director Skill stored under third_party/.
-    frontmatter = re.match(r"\\A---\\r?\\n(.*?)\\r?\\n---\\r?\\n", skill, re.S)
+    frontmatter = re.match(r"\A---\r?\n(.*?)\r?\n---\r?\n", skill, re.S)
     if frontmatter is None:
         problems.append("Root SKILL.md is missing valid YAML frontmatter")
     else:
