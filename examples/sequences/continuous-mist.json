@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "continuous-mist",
+  "model": "minimax-h3",
+  "intended_editing": "continuous-story",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "content_summary": "山谷薄雾沿低地飘移",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "valley-mist",
+        "status": "flowing",
+        "color": "gray",
+        "anchor": "ground-valley",
+        "scale": "wide"
+      }
+    },
+    {
+      "shot_id": "S02",
+      "content_summary": "切换机位仍是同一片雾",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "valley-mist",
+        "status": "flowing",
+        "color": "gray",
+        "anchor": "ground-valley",
+        "scale": "wide"
+      },
+      "effect_state_out": {
+        "id": "valley-mist",
+        "status": "flowing",
+        "color": "gray",
+        "anchor": "ground-valley",
+        "scale": "wide"
+      }
+    },
+    {
+      "shot_id": "S03",
+      "content_summary": "镜头近景灰雾缓慢散去",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "valley-mist",
+        "status": "flowing",
+        "color": "gray",
+        "anchor": "ground-valley",
+        "scale": "wide"
+      },
+      "effect_state_out": {
+        "id": "valley-mist",
+        "status": "dissipating",
+        "color": "gray",
+        "anchor": "ground-valley",
+        "scale": "wide"
+      }
+    }
+  ]
+}
