@@ -2,7 +2,7 @@
 
 > 以下是经人工编写的结构化 VFX 场景与确定性编译样例。**它们并非视频模型的真实生成测试**；可验证的仅为原稿保留、结构、原子引用、输出权限等规则。P6 再进行渲染素材 QC。
 
-核心输入：已有 [6张基础 Effect Card](../examples/effect-cards.json) + [4张 P3 扩展卡及10条回归定义](../tests/fixtures/p3_scenarios.json)。
+**可直接运行的全部10张卡片**：[p3-ten-cards.json](p3-ten-cards.json)；底层来源为 [6张基础卡](effect-cards.json) + [4张 P3 扩展卡及10条回归定义](../tests/fixtures/p3_scenarios.json)。
 
 | # | 场景 | 媒介 / 题材 | 主特效任务 | 核心禁加 |
 |---:|---|---|---|---|
@@ -33,6 +33,7 @@ python -m pip install -r requirements-dev.txt
 python -m unittest discover -s tests -v
 python scripts/compile_prompt.py --card sample.sword-activation
 python scripts/compile_prompt.py --card sample.sword-activation --json
+python scripts/compile_prompt.py --cards examples/p3-ten-cards.json --card p3.power-aura
 ```
 
 ## 额外的导演级人工检查
