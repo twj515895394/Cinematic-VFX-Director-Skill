@@ -5,7 +5,7 @@ description: Design and audit cinematic visual effects for AI video prompts and 
 
 # Cinematic VFX Director
 
-> P3: the original skill-movie director/construction knowledge, 566-atom search and P2 data validation are integrated with a non-invasive VFX workflow and an Effect Card → copyable text compiler. **The compiler does not itself interpret new scripts, understand image frames, select effects, or provide model-specific rendering guarantees.** Full model adapters and rendered-video QC are later stages.
+> P4 knowledge and source-grounded case lookup are available: 46 four-axis guidance profiles and 90 source-derived anime VFX case references, alongside the existing 566-atom search, P3 director workflow and non-invasive prompt compiler. **Metadata references are not human-reviewed finished film shots.** Model adapters, multi-shot state automation and rendered-video QC are later stages.
 
 ## Mission
 Translate a VFX request into visible, causally grounded screen direction. Prioritize source → trigger → spatial anchor → trajectory/operation → target and environment response → decay / final state. Do **not** invent effects simply to make the shot busier.
@@ -29,6 +29,19 @@ Translate a VFX request into visible, causally grounded screen direction. Priori
 
 ## Reuse mature upstream before inventing new rules
 Read [Upstream routing](adapters/upstream-routing.md) first. For animation principles, elements, physics, brightness and medium-specific VFX art direction, use the existing [rng-vfx source](third_party/rng-vfx/skills/rng-vfx/SKILL.md) and its reference files. For effect design, layering, timing and review, use the existing [effekseer-vfx source](third_party/effekseer-vfx-skill/skills/effekseer-vfx/SKILL.md) and [independent VFX review](third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md). Treat game-engine-specific steps as background, not AI video prompt instructions. Only add this project's own rules where film/video use genuinely differs; keep vendored files unchanged.
+
+## P4 progressive knowledge and visual reference retrieval
+
+Read [cinematic profile routing](references/cinematic-profile-routing.md) to understand four independent axes and the source-linked knowledge plan. **Before composing any effect**, select only the relevant family, medium, genre and style; do not read every profile or every case at once.
+
+1. Use `python scripts/lookup_profile.py --axis family --id <family>` to retrieve project-specific anchors, lifecycle, practical errors and the actual vendored upstream references. Repeat for medium, genre and explicit style as needed. For example, `--axis style --id mj-dreamlike` adds a dreamlike look; it does not invent magic or a projectile.
+2. Read the original upstream art direction/physics/medium documents listed in each profile's `read_first` when craft detail is needed. Use our profiles only for the missing cinematic routing layer; preserve Copy-First.
+3. Search the original 566-atom skill-movie bank via `scripts/search_atoms.py`. The P2 `medium/genre/style` parameters on **atom search** are context, NOT real atom-specific suitability filters.
+4. For concrete **anime-style VFX** examples, optionally query `python scripts/search_cases.py --element water --form impact --limit 8` or `--paired-with water_charge_01`. These 90 records are derived from the pinned original `third_party/kanaworks-sakuga-vfx/catalog.json`, with original form, FPS, frames, tags, combination links and per-case preview URLs.
+5. **Do not misrepresent sourced examples:** all 90 imported references are 2D anime-game effects, `curation_status=metadata-only`. They are not vetted photoreal-film, Pixar-like, MJ dreamscape or generative-video model results. `source_metadata` records are verifiable metadata; `observed_strengths` and `failure_modes` are not filled by pretending to have viewed the previews.
+6. Case metadata offers visual reference and a possible effect layout, not an authorization to change the user's story, movement or look. Use medium-specific guidance to adapt any selected visual patterns; keep the original prompt untouched by default.
+
+See [visual case documentation](docs/VISUAL_CASE_LIBRARY.md) for source links, review status, exact query semantics and catalog update checks.
 
 ## P3 decision workflow: intent → effect → prompt delta
 
@@ -60,4 +73,4 @@ The first command prints the unchanged source and independent VFX delta; JSON in
 **VFX enhancement:** The moment all five fingers close around the hilt, a narrow violet energy pulse travels *along the existing blade*, subtly intensifying the edge glow. A few purple-white particles spread briefly and settle beside the weapon; light spills naturally onto her hand, sleeve, jaw and nearby surfaces. No slash, projectile, shockwave or unrelated camera move.
 
 ## Documentation
-See [Product design](docs/PRODUCT_DESIGN.md), [Implementation plan](docs/IMPLEMENTATION_PLAN.md), [P3 workflow](references/director-workflow.md), [output contract](references/output-contract.md) and [ten-shot evaluation](examples/ten-shot-validation.md).
+See [Product design](docs/PRODUCT_DESIGN.md), [Implementation plan](docs/IMPLEMENTATION_PLAN.md), [P3 workflow](references/director-workflow.md), [P4 profile routing](references/cinematic-profile-routing.md), [visual case library](docs/VISUAL_CASE_LIBRARY.md), [output contract](references/output-contract.md) and [ten-shot evaluation](examples/ten-shot-validation.md).
