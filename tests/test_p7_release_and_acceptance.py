@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import release_check
 import prepare_visual_evidence
+import check_visual_evidence
 
 
 class P7ReleaseTests(unittest.TestCase):
@@ -76,6 +77,14 @@ class P7VisualEvidenceTests(unittest.TestCase):
                 path = outdir / frame["filename"]
                 self.assertTrue(path.is_file())
                 self.assertEqual(frame["sha256"], prepare_visual_evidence.sha256(path))
+            problems, stats = check_visual_evidence.verify(outdir / "evidence-manifest.json", video)
+            self.assertEqual(problems, [])
+            self.assertEqual(stats["frames"], 5)
+            # Byte-level tampering is detected, but the tool does not inspect pixels.
+            (outdir / manifest["candidate_frames"][0]["filename"]).write_bytes(b"MODIFIED")
+            problems, _ = check_visual_evidence.verify(outdir / "evidence-manifest.json", video)
+            self.assertTrue(any("differs" in issue for issue in problems), problems)
+
 
     def test_missing_video_does_not_claim_evidence(self):
         with tempfile.TemporaryDirectory() as d:
