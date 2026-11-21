@@ -5,8 +5,8 @@
 | 上游 | URL | 拟学习/复用 | 当前处理 |
 |---|---|---|---|
 | snowfrost/skill-movie | https://github.com/snowfrost/skill-movie | cinematic-vfx-director / vfx-effect-construction-engine，因果包络、主次层级、术语索引 | 核验入口文件，参考设计 |
-| MRRengi/rng-vfx | https://github.com/MRRengi/rng-vfx | craft / elements / physics / motion / mediums 与评测 | 核验 README，参考架构 |
-| kanaworksai-hue/effekseer-vfx-skill | https://github.com/kanaworksai-hue/effekseer-vfx-skill | 特效构建过程、案例拆分与 QA | 核验仓库存在，待文件级审查 |
+| MRRengi/rng-vfx | https://github.com/MRRengi/rng-vfx | craft / elements / physics / motion / mediums 与评测 | MIT 原件已导入 13 文件（包含 LICENSE 与 SKILL） |
+| kanaworksai-hue/effekseer-vfx-skill | https://github.com/kanaworksai-hue/effekseer-vfx-skill | 特效构建过程、案例拆分与 QA | MIT 原件已导入 12 文件（包含 LICENSE、工作流与 QC） |
 | kanaworksai-hue/kanaworks-sakuga-vfx | https://github.com/kanaworksai-hue/kanaworks-sakuga-vfx | 动态案例的分类与元数据 | 核验仓库存在，暂不复制素材 |
 
 ## 复用规范
@@ -23,3 +23,8 @@
 - `kanaworksai-hue/effekseer-vfx-skill`：MIT，优先原样复制 vfx-review，并评估可复用制作规范。
 - `snowfrost/skill-movie`：暂未查到仓库级许可证，不在公开仓库直接复制源码或术语库，先参考架构并记录接口差异。
 - `kanaworksai-hue/kanaworks-sakuga-vfx`：代码和媒体授权分开，案例先存链接；不把动态素材当成 MIT 代码复制。
+
+## 实际导入记录（2026-11-21）
+- **rng-vfx** 上游 commit `4d906cff49a82aeb7c0b3a99b82b193320934fa0`：`third_party/rng-vfx/` 共 13 文件，含 MIT LICENSE、原始 SKILL、craft/elements/motion/physics/brightness 和 6 类 styles。
+- **effekseer-vfx-skill** 上游 commit `b0eea1085f2e3e0fa0b5cc77c58c9a845f0bec96`：`third_party/effekseer-vfx-skill/` 共 12 文件，含 MIT LICENSE、两份 SKILL、design/layering/review/craft/motion/realism/sequence/stylized/timing。
+- **真实接入**：主 `SKILL.md` 增加优先读取与路由规则；`adapters/upstream-routing.md` 逐场景指向原始上游文件。原件均未经修改；尚未实现代码级动态检索与自动 QC。
