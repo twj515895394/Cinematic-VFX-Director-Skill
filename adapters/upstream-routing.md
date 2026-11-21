@@ -43,10 +43,22 @@ python -m unittest discover -s tests -v
 ## 3. 尚待完成
 - **P1 已有实际原子检索与单元测试**，并通过 GitHub Actions；仍未实现自动视频画面 QC 和正式模型适配。
 - `snowfrost/skill-movie` 两个 Skill、9 篇 references、2 份 agent 元数据、1 份 566 词库及 1 份检索脚本已全部作为原始快照引入，共 15 个文件。
-- `sakuga-vfx` 的动态案例元数据和可视化尚待建立；其实际特效素材受独立许可条款约束。
+- P4 已通过原始 `catalog.json` 建立90条可检索 Sakuga 视觉案例元数据与预览外链，`scripts/search_cases.py` 可按元素、形态、标签、组合关系查询；真实视觉逐帧审核仍未进行。
+
+## 3.1 P4 视觉案例与全题材风格指导（直接复用原上游）
+
+| 用途 | 优先使用的已存在资源 | 本项目薄适配 |
+|---|---|---|
+| 14类特效家族 / 9种媒介 / 14类题材 / 9种审美风格 | skill-movie 特效家族图鉴和媒介整合、rng-vfx 运动物理、effekseer 风格化/写实指南 | `data/profiles/cinematic_profiles.json`；`scripts/lookup_profile.py` 按实际四维路由 |
+| 手绘特效动态案例、元素属性、可组合素材 | [Sakuga 原版 catalog.json](../third_party/kanaworks-sakuga-vfx/catalog.json)，原始90条元数据 | [90条来源案例](../data/catalog/cases.json) 与 `scripts/search_cases.py` |
+| 可观察的触发、组合链和音画层级 | 原目录 `contact_frame`、`pairs`、`fx` 元数据 | 源 Contact Frame 和 `paired_source_ids` 索引；未审核的视觉信息不编造 |
+| 来源索引版本与更新 | 原 catalog 与 [LICENSE](../third_party/kanaworks-sakuga-vfx/LICENSE.md) | `adapters/sakuga_catalog.py --check` 保证派生案例未漂移 |
+
+**只有 Sakuga 源案例被标记为二维动漫游戏特效**，绝不把它作为真人写实/MJ柔光/非战斗电影场景的已验证成品案例。具体的风格适配仍使用上述直接复用的专业参考资料，而不是简单给所有原子贴上 “Pixar/MJ/科幻” 标签。
 
 ## 4. 上游版本与来源
 - skill-movie: `69f6db670ecf305e84f199e418bddbf2c1d988fe`，15 文件，见 `third_party/skill-movie/`；对应原始检索与原子库均未改动。
 - rng-vfx: `4d906cff49a82aeb7c0b3a99b82b193320934fa0`，MIT，见 [LICENSE](../third_party/rng-vfx/LICENSE)
 - effekseer-vfx-skill: `b0eea1085f2e3e0fa0b5cc77c58c9a845f0bec96`，MIT，见 [LICENSE](../third_party/effekseer-vfx-skill/LICENSE)
+- kanaworks-sakuga-vfx: `7cfc9e6bd6ecc0239f3c141e9c5c42cbdc8bb365`，2个源文件（catalog.json + LICENSE.md）；对应90条已转成可查询引用，没有复制预览与游戏特效素材集合。
 - `third_party/` 原样保留上游文件，不直接做内容修改；变更集中在本地 `adapters/` 或专属 `references/`。
