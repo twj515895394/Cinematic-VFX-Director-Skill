@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "mediums": [
+    "photoreal-live-action",
+    "premium-cg",
+    "semi-realistic-japanese-cg",
+    "anime-2d",
+    "stylized-3d",
+    "toon-3d",
+    "npr-2.5d",
+    "mixed-media",
+    "unknown"
+  ],
+  "genres": [
+    "modern-action",
+    "wuxia",
+    "xianxia",
+    "mythology",
+    "science-fiction",
+    "mecha",
+    "cyberpunk",
+    "superpower",
+    "high-fantasy",
+    "dark-fantasy",
+    "natural-disaster",
+    "environmental",
+    "transformation",
+    "slice-of-life-fantasy"
+  ],
+  "style_profiles": [
+    "natural-cinematic",
+    "soft-diffused",
+    "mj-dreamlike",
+    "pixar-like-animation",
+    "anime-sakuga",
+    "graphic-ink",
+    "dark-gritty",
+    "high-energy-game-cg",
+    "user-defined"
+  ],
+  "families": [
+    "weapon",
+    "character",
+    "motion",
+    "impact",
+    "elemental",
+    "energy",
+    "ritual",
+    "spatial",
+    "technology",
+    "environment-weather",
+    "destruction-material",
+    "transformation",
+    "optical-compositing",
+    "atmospheric"
+  ],
+  "intensity_levels": [
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "lifecycle_phases": [
+    "idle",
+    "anticipation",
+    "charge",
+    "activation",
+    "release",
+    "propagation",
+    "contact",
+    "response",
+    "decay",
+    "residue",
+    "settled"
+  ],
+  "continuity_modes": [
+    "continue",
+    "reset",
+    "independent"
+  ]
+}
