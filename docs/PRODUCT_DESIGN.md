@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.4（P3 导演流程与非侵入式编译落地）｜日期：2026-11-21｜状态：P0–P3 已实施并通过结构验收；P4–P7 持续推进  
+> 版本：v1.5（P4 知识库和来源视觉案例接入）｜日期：2026-11-21｜状态：P0–P3 完成，P4核心知识与首批案例索引完成；P5–P7 待实施  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -272,3 +272,17 @@ P1 保留原创 `references/` 文档与 Schema 作为四维映射桥接层，优
 - **可使用的10张单镜头卡**：`examples/p3-ten-cards.json` 与 `examples/ten-shot-validation.md`，覆盖日系CG、武侠动作、真实环境、机甲、空间、材质变形、符文、雪暴、人物发力和水下散射。
 - **验收**：自动化测试 50项通过（GitHub Actions: https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44861128206），涵盖原文逐字保留、未授权整合拒绝、Atom 引用、Schema、十个可运行场景；这属于**结构/功能测试**，不是视频生成质量测试。
 - P4继续扩充各视觉家族和动态案例；P5处理具体视频模型适配和多镜头；P6需独立评测影片/渲染结果并给定向修复，不得将本阶段的字段校验冒称自动影视 QC。
+
+## 20. P4 已落地架构与证据边界（2026-11-21）
+
+### 20.1 46条四维指导配置
+`data/profiles/cinematic_profiles.json`：14类特效家族、9种媒介（含unknown）、14类题材与9种审美 Profile。每项包含镜头级VFX工作、材质/锚点或审美处理原则、可操作避免项和原始上游参考文件路径。`scripts/lookup_profile.py` 按明确 Axis/ID 定位所需的单个配置。原始艺术知识来自已复制的 skill-movie、rng-vfx、effekseer 原件；Profile 仅负责多来源间电影创作适配，避免重新书写同一套物理、美术和动画基础知识。
+
+### 20.2 原 Sakuga 90条动态案例目录原样复用
+原 `kanaworksai-hue/kanaworks-sakuga-vfx` 的 `catalog.json` 与 `LICENSE.md` 已作为固定版本直接复制到 `third_party/kanaworks-sakuga-vfx/`，上游commit `7cfc9e6bd6ecc0239f3c141e9c5c42cbdc8bb365`。原目录包含90条、9元素、9形态，保留 frames/fps/contact_frame、loop、tags、use_cases、pairs、FX 组件结构。由 `adapters/sakuga_catalog.py` 投影到 `data/catalog/cases.json` 的统一 Case schema；`scripts/search_cases.py` 支持基于源数据的元素/形态/标签/配对/媒体查询，源原件从不改动，`--check` 防止脱离源版本。
+
+每条记录保存来源资产目录、预览 WebP 外链、真实来源信息和版权署名、元数据来源状态。**90案例仅代表原上游动漫游戏特效库，且均为metadata-only**；不宣称每个都做过逐帧视觉审核、不把其生成方式当作大模型视频生成能力、不自动添加电影题材、MJ柔光、真人写实适用性或未验证的566条Atom对应ID。
+
+### 20.3 质量门禁与待补差距
+自动验证扩展到6类JSON Schema、全部46 Profile/关联上游参考路径、90 Case/来源完整映射及其配对关系，并以 [CI #44862387129](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44862387129) 验证67项单测全部成功。
+P4 对“视觉案例库”的**首批**承诺已实现，覆盖的是动漫游戏类参考和完整的全题材**知识路由**；写实电影、日系半写实CG、MJ审美、动画电影和非战斗灾害的真实视觉案例证据尚需增补。该扩充不应阻塞 P5 的通用模型适配和多镜头状态开发，也不应以无证据推断填充。
