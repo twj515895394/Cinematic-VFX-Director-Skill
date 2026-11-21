@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/twj515895394/Cinematic-VFX-Director-Skill/blob/main/data/schemas/atom.schema.json",
+  "title": "Cinematic VFX Atom v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name_zh",
+    "name_en",
+    "family",
+    "tags",
+    "purpose",
+    "trigger",
+    "anchor",
+    "geometry",
+    "motion",
+    "interaction",
+    "lifecycle",
+    "intensity_levels",
+    "avoid",
+    "medium_notes",
+    "compatible_with",
+    "conflicts_with",
+    "source_ids"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*\\.[a-z][a-z0-9-]*$"
+    },
+    "name_zh": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name_en": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "enum": [
+        "weapon",
+        "character",
+        "motion",
+        "impact",
+        "elemental",
+        "energy",
+        "ritual",
+        "spatial",
+        "technology",
+        "environment-weather",
+        "destruction-material",
+        "transformation",
+        "optical-compositing",
+        "atmospheric"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "trigger": {
+      "type": "string",
+      "minLength": 1
+    },
+    "anchor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geometry": {
+      "type": "string",
+      "minLength": 1
+    },
+    "motion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interaction": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "lifecycle": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "idle",
+          "anticipation",
+          "charge",
+          "activation",
+          "release",
+          "propagation",
+          "contact",
+          "response",
+          "decay",
+          "residue",
+          "settled"
+        ]
+      }
+    },
+    "intensity_levels": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "L0",
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ]
+      }
+    },
+    "avoid": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "medium_notes": {
+      "type": "object",
+      "propertyNames": {
+        "enum": [
+          "photoreal-live-action",
+          "premium-cg",
+          "semi-realistic-japanese-cg",
+          "anime-2d",
+          "stylized-3d",
+          "toon-3d",
+          "npr-2.5d",
+          "mixed-media",
+          "unknown"
+        ]
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "compatible_with": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "conflicts_with": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "visual_example": {
+      "type": "string",
+      "minLength": 1
+    },
+    "keywords_zh": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}
