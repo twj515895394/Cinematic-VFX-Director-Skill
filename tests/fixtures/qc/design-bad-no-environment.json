@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "review_id": "design-bad-no-environment",
+  "model": "seedance",
+  "shot_id": "light-no-response",
+  "medium": "premium-cg",
+  "source_prompt": "夜色中机甲护盾发出局部冷色光，附近有金属墙。",
+  "immutable_constraints": [
+    "机甲与墙体原位置不变"
+  ],
+  "reviewer": {
+    "id": "synthetic-design-review-fixture",
+    "role": "author"
+  },
+  "evidence": {
+    "kind": "design-only",
+    "description": "手写的提示词/效果卡设计检查夹具。没有输入任何渲染视频或帧图，不代表实际视觉审核。",
+    "asset_refs": [],
+    "observed_frame_ids": []
+  },
+  "scores": {
+    "causality": {
+      "score": 2,
+      "observation": "依据现有镜头文字检查来源、触发、是否擅自增加行动; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "space": {
+      "score": 2,
+      "observation": "依据镜头描述检查锚点、比例、视差与遮挡的设计逻辑; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "timing": {
+      "score": 2,
+      "observation": "依据设计节拍检查触发→接触→反应与结束的先后; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "style_intensity": {
+      "score": 1,
+      "observation": "依据指定媒介和强度判断是否过度或审美冲突; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "environment": {
+      "score": 0,
+      "observation": "依据已有光源/材质/风向判断局部环境交互; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "readability": {
+      "score": 2,
+      "observation": "依据提示词设计判断焦点是否能被保留；未实际查看成片; 案例中特别审查：错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  },
+  "hard_failures": [
+    {
+      "code": "MISSING_ENV_RESPONSE",
+      "observation": "错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "axis": "environment",
+      "problem": "错误设计：很强的护盾光束照到近墙却没有任何受光。",
+      "target": "environment VFX layer",
+      "minimal_change": "仅添加护盾照在近处金属表面上的局部反射",
+      "evidence_refs": [
+        "script-brief"
+      ],
+      "priority": 1
+    }
+  ]
+}
