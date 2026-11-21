@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "request_id": "fixture.paper-flower",
+  "model": "seedance",
+  "input": {
+    "kind": "prompt-text",
+    "user_request": "卡通电影CG中桌面纸花缓缓展开，保持固定镜头",
+    "observed_content": "文案明确：桌面、纸花、固定镜头，非战斗、无魔法",
+    "uncertain_details": [
+      "纸材质粗糙度未描述"
+    ]
+  },
+  "scene_facts": [
+    "桌上纸花逐片展开",
+    "卡通3D审美",
+    "固定机位"
+  ],
+  "immutable_constraints": [
+    "不能换成真花",
+    "不能切镜头",
+    "不能新增人物"
+  ],
+  "options": [
+    {
+      "id": "A1",
+      "title": "折痕细节逐层显露",
+      "family": "transformation",
+      "intensity": "L1",
+      "visual_result": "每一层花瓣沿原折线展开，阴影逐步改变",
+      "trigger_and_anchor": "纸花现有折痕与连接处",
+      "why_it_fits": "强化变形前沿，让纸材质更真实",
+      "possible_downside": "太多折痕会显得老旧",
+      "atom_ids": [
+        "vfx_term_176"
+      ],
+      "constraints": [
+        "不能使用闪光替代变形"
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "花瓣表面的柔和掠光",
+      "family": "optical-compositing",
+      "intensity": "L1",
+      "visual_result": "窗光沿展开中的纸片表面滑动，显出立体层次",
+      "trigger_and_anchor": "已有光照方向与纸花表面",
+      "why_it_fits": "不添加魔法、突出精致质感",
+      "possible_downside": "不能增加未出现的窗户",
+      "atom_ids": [
+        "vfx_term_488"
+      ],
+      "constraints": [
+        "不改变已有光源方向"
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "纸花周围细尘微动",
+      "family": "atmospheric",
+      "intensity": "L1",
+      "visual_result": "环境已有的细微浮尘随纸花展开轻漂",
+      "trigger_and_anchor": "桌面纸花周围的静止空气",
+      "why_it_fits": "制造轻巧、温柔的卡通电影氛围",
+      "possible_downside": "漂浮粒子太多会分散注意力",
+      "atom_ids": [
+        "vfx_term_348",
+        "vfx_term_433"
+      ],
+      "constraints": [
+        "不应生成大团魔法星光"
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "纸面珠光微闪",
+      "family": "optical-compositing",
+      "intensity": "L1",
+      "visual_result": "仅在花瓣折叠转折处出现短暂自然材质高光",
+      "trigger_and_anchor": "纸片原有材质表面",
+      "why_it_fits": "让视觉更梦幻但不修改轮廓",
+      "possible_downside": "如果纸是哑光材质，珠光会改变材质设定",
+      "atom_ids": [
+        "vfx_term_511"
+      ],
+      "constraints": [
+        "仅在用户接受材质高光时使用"
+      ]
+    }
+  ],
+  "selection_state": "awaiting-user-selection",
+  "selected_option_id": null
+}
