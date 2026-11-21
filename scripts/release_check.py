@@ -84,6 +84,27 @@ def guardrail_issues(root=ROOT):
         if not re.fullmatch(r"\d+\.\d+\.\d+-rc\.\d+", version_file.read_text(encoding="utf-8").strip()):
             problems.append("Version must describe a pre-acceptance RC")
     skill = (root / "SKILL.md").read_text(encoding="utf-8")
+    # Distinct Skill identity: don't collide with the original upstream
+    # cinematic-vfx-director Skill stored under third_party/.
+    frontmatter = re.match(r"\\A---\\r?\\n(.*?)\\r?\\n---\\r?\\n", skill, re.S)
+    if frontmatter is None:
+        problems.append("Root SKILL.md is missing valid YAML frontmatter")
+    else:
+        metadata = frontmatter.group(1)
+        if re.search(r"(?m)^name: Cinematic-VFX-Director-Skill$", metadata) is None:
+            problems.append("Root skill name must be exactly Cinematic-VFX-Director-Skill")
+        if re.search(r"(?m)^description: >-$", metadata) is None:
+            problems.append("Skill description must use bilingual YAML folded text")
+        for phrase in ("中文：", "English:"):
+            if phrase not in metadata:
+                problems.append("Missing bilingual Skill metadata description: " + phrase)
+    for phrase in ("# Cinematic-VFX-Director-Skill", "**中文简介：**", "**English overview:**"):
+        if phrase not in skill:
+            problems.append("Missing canonical bilingual root Skill intro: " + phrase)
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    for phrase in ("# Cinematic-VFX-Director-Skill", "**中文简介：**", "**English introduction:**"):
+        if phrase not in readme:
+            problems.append("Missing canonical bilingual README intro: " + phrase)
     for phrase in ("3–5", "minimax-h3", "seedance", "design-pass-pending-rendered-review"):
         if phrase not in skill:
             problems.append("Missing root Skill workflow guarantee: " + phrase)
