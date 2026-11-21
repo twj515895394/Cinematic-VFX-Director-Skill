@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "request_id": "fixture.rainy-street",
+  "model": "minimax-h3",
+  "input": {
+    "kind": "scene-text",
+    "user_request": "夜晚路灯下城市暴雨，机位固定，想让画面更有电影感",
+    "observed_content": "文字给出的路灯暴雨城市街道，不包含魔法元素",
+    "uncertain_details": [
+      "地面是否已有水坑不确定"
+    ]
+  },
+  "scene_facts": [
+    "夜晚真实路灯存在",
+    "持续暴雨",
+    "固定机位"
+  ],
+  "immutable_constraints": [
+    "保持真实天气",
+    "不增加额外镜头",
+    "不添加魔法发光"
+  ],
+  "options": [
+    {
+      "id": "A1",
+      "title": "雨落水面细密涟漪",
+      "family": "environment-weather",
+      "intensity": "L1",
+      "visual_result": "雨滴落到已有积水处，产生不规则细小波纹",
+      "trigger_and_anchor": "雨滴真实接触水面时",
+      "why_it_fits": "最自然且增强真实湿润感",
+      "possible_downside": "如果画面没有积水，需要把效果降级",
+      "atom_ids": [
+        "vfx_term_134"
+      ],
+      "constraints": [
+        "只能作用于画面中已有积水"
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "空气里的雨雾层次",
+      "family": "atmospheric",
+      "intensity": "L1",
+      "visual_result": "远雨密近雨疏，路灯前方形成轻微雨雾体积",
+      "trigger_and_anchor": "路灯与真实雨线之间",
+      "why_it_fits": "增强纵深和夜景层次",
+      "possible_downside": "雾太浓将模糊远景",
+      "atom_ids": [
+        "vfx_term_354",
+        "vfx_term_489"
+      ],
+      "constraints": [
+        "不能遮住原有车辆或人物"
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "湿路反射柔和晕染",
+      "family": "optical-compositing",
+      "intensity": "L1",
+      "visual_result": "湿路表面反射原路灯，雨纹轻微扭曲高光",
+      "trigger_and_anchor": "原路灯光照至湿路的区域",
+      "why_it_fits": "直接增强电影夜雨质感",
+      "possible_downside": "泛光过强会像人工霓虹",
+      "atom_ids": [
+        "vfx_term_488",
+        "vfx_term_506"
+      ],
+      "constraints": [
+        "只反射现有光源"
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "短阵风推动雨丝",
+      "family": "motion",
+      "intensity": "L1",
+      "visual_result": "雨丝短时倾斜形成可读风向，随后恢复",
+      "trigger_and_anchor": "既有降雨空间中一个短风势变化",
+      "why_it_fits": "有动态节奏而不需要额外人物动作",
+      "possible_downside": "若原片雨线方向明确，不能反向",
+      "atom_ids": [
+        "vfx_term_433",
+        "vfx_term_135"
+      ],
+      "constraints": [
+        "不改变固定机位"
+      ]
+    }
+  ],
+  "selection_state": "awaiting-user-selection",
+  "selected_option_id": null
+}
