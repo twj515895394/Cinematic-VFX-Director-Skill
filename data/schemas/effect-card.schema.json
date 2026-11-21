@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/twj515895394/Cinematic-VFX-Director-Skill/blob/main/data/schemas/effect-card.schema.json",
+  "title": "Cinematic VFX Effect Card v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "card_id",
+    "shot_id",
+    "intent",
+    "medium",
+    "genres",
+    "style_profiles",
+    "family",
+    "intensity",
+    "primary_read",
+    "source_prompt",
+    "immutable_constraints",
+    "editable_scope",
+    "continuity_mode",
+    "events",
+    "vfx_delta"
+  ],
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "medium": {
+      "enum": [
+        "photoreal-live-action",
+        "premium-cg",
+        "semi-realistic-japanese-cg",
+        "anime-2d",
+        "stylized-3d",
+        "toon-3d",
+        "npr-2.5d",
+        "mixed-media",
+        "unknown"
+      ]
+    },
+    "genres": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "modern-action",
+          "wuxia",
+          "xianxia",
+          "mythology",
+          "science-fiction",
+          "mecha",
+          "cyberpunk",
+          "superpower",
+          "high-fantasy",
+          "dark-fantasy",
+          "natural-disaster",
+          "environmental",
+          "transformation",
+          "slice-of-life-fantasy"
+        ]
+      }
+    },
+    "style_profiles": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "natural-cinematic",
+          "soft-diffused",
+          "mj-dreamlike",
+          "pixar-like-animation",
+          "anime-sakuga",
+          "graphic-ink",
+          "dark-gritty",
+          "high-energy-game-cg",
+          "user-defined"
+        ]
+      }
+    },
+    "family": {
+      "enum": [
+        "weapon",
+        "character",
+        "motion",
+        "impact",
+        "elemental",
+        "energy",
+        "ritual",
+        "spatial",
+        "technology",
+        "environment-weather",
+        "destruction-material",
+        "transformation",
+        "optical-compositing",
+        "atmospheric"
+      ]
+    },
+    "intensity": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "primary_read": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_prompt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "immutable_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "editable_scope": {
+      "enum": [
+        "vfx-only",
+        "explicitly-approved-integration"
+      ]
+    },
+    "continuity_mode": {
+      "enum": [
+        "continue",
+        "reset",
+        "independent"
+      ]
+    },
+    "effect_state_in": {
+      "$ref": "#/$defs/effectState"
+    },
+    "effect_state_out": {
+      "$ref": "#/$defs/effectState"
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/event"
+      }
+    },
+    "vfx_delta": {
+      "type": "string",
+      "minLength": 1
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "related_atom_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "effectState": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "color": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase",
+        "trigger",
+        "anchor",
+        "visual",
+        "response"
+      ],
+      "properties": {
+        "phase": {
+          "enum": [
+            "idle",
+            "anticipation",
+            "charge",
+            "activation",
+            "release",
+            "propagation",
+            "contact",
+            "response",
+            "decay",
+            "residue",
+            "settled"
+          ]
+        },
+        "trigger": {
+          "type": "string",
+          "minLength": 1
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "visual": {
+          "type": "string",
+          "minLength": 1
+        },
+        "response": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "primary",
+            "secondary",
+            "tertiary"
+          ]
+        },
+        "onset_anchor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relative_timing": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
