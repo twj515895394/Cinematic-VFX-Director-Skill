@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VFX multi-shot continuity and independent edit contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sequence_id",
+    "model",
+    "intended_editing",
+    "shots"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "enum": [
+        "minimax-h3",
+        "seedance"
+      ]
+    },
+    "intended_editing": {
+      "enum": [
+        "continuous-story",
+        "independent-montage",
+        "mixed"
+      ]
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "shot_id",
+          "content_summary",
+          "continuity_mode",
+          "effect_state_in",
+          "effect_state_out"
+        ],
+        "properties": {
+          "shot_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content_summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "continuity_mode": {
+            "enum": [
+              "continue",
+              "independent",
+              "reset"
+            ]
+          },
+          "effect_state_in": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "color": {
+                "type": "string",
+                "minLength": 1
+              },
+              "anchor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "scale": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "effect_state_out": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "color": {
+                "type": "string",
+                "minLength": 1
+              },
+              "anchor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "scale": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "reset_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "user_constraints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}
