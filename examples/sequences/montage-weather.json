@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "montage-weather",
+  "model": "minimax-h3",
+  "intended_editing": "independent-montage",
+  "shots": [
+    {
+      "shot_id": "M01",
+      "content_summary": "夜雨路灯地面反射",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "rain",
+        "status": "active",
+        "color": "neutral",
+        "anchor": "street",
+        "scale": "wide"
+      }
+    },
+    {
+      "shot_id": "M02",
+      "content_summary": "晴天城市街道的干燥空气",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "dry-dust",
+        "status": "floating",
+        "color": "neutral",
+        "anchor": "city",
+        "scale": "medium"
+      }
+    },
+    {
+      "shot_id": "M03",
+      "content_summary": "雪山近景雪花漂移",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "snow",
+        "status": "drifting",
+        "color": "white",
+        "anchor": "mountain",
+        "scale": "wide"
+      }
+    }
+  ]
+}
