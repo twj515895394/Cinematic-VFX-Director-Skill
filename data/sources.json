@@ -1,13 +1,24 @@
 {
   "schema_version": "1.0",
-  "note": "Copy-First: MIT upstream source files vendored unchanged; unlicensed/restricted media linked only",
+  "note": "Copy-First: exact upstream snapshots plus lightweight cinematic adapters; all source paths and commits are tracked",
   "sources": [
     {
       "id": "skill-movie",
       "url": "https://github.com/snowfrost/skill-movie",
       "reuse": "workflow inspiration",
-      "status": "upstream reviewed; no explicit repo LICENSE located, not vendored",
-      "license": "unverified"
+      "status": "vendored 15 original files and integrated primary Skill plus search adapter",
+      "license": "unverified",
+      "upstream_commit": "69f6db670ecf305e84f199e418bddbf2c1d988fe",
+      "vendor_path": "third_party/skill-movie/",
+      "vendored_file_count": 15,
+      "integration": [
+        "SKILL.md",
+        "adapters/upstream-routing.md",
+        "adapters/skill_movie_family_map.json",
+        "scripts/search_atoms.py",
+        "data/curated_atoms.json",
+        "tests/test_upstream_reuse.py"
+      ]
     },
     {
       "id": "rng-vfx",
