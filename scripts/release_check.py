@@ -56,7 +56,9 @@ def snapshot_issues(root=ROOT):
         issues.append("Expected five upstream source registrations")
     for item in sources:
         folder = root / item.get("vendor_path", "")
-        actual = sum(p.is_file() for p in folder.rglob("*")) if folder.is_dir() else 0
+        actual = sum(p.is_file() and p.suffix not in (".pyc", ".pyo")
+                     and "__pycache__" not in p.parts and ".pytest_cache" not in p.parts
+                     for p in folder.rglob("*")) if folder.is_dir() else 0
         if actual != item.get("vendored_file_count"):
             issues.append("Vendor file count differs: %s" % item.get("id", "?"))
         if len(item.get("upstream_commit", "")) != 40:
