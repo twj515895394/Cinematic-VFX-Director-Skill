@@ -1,6 +1,8 @@
-# Cinematic VFX Director Skill
+# Cinematic-VFX-Director-Skill
 
-面向个人 AI 视频创作的 **通用影视 CG 视觉特效导演与知识库**。覆盖真人写实、日系半写实 CG、2D 动漫、卡通电影、武侠仙侠、科幻机甲、梦境 MJ 审美、灾害环境、角色变形和非战斗奇幻等场景。
+**中文简介：** 面向 AI 视频创作者的通用电影级 VFX 特效导演与知识库。覆盖真人写实、日系半写实 CG、二维动漫、卡通电影、武侠仙侠、科幻机甲、MJ 梦境审美、自然灾害、环境、变形和非战斗特效。可从场景、图片、视频或分镜判断特效需求，模糊情况下先推荐 3–5 个方案供用户选择；默认 MiniMax H3，也支持明确指定 Seedance。保留原剧情、人物、动作与机位，并提供特效提示词补充和审核建议。
+
+**English introduction:** A cinematic VFX direction skill and searchable knowledge base for AI video creators. It supports live action, semi-realistic Japanese CG, 2D anime, stylized film CG, wuxia/xianxia, sci-fi and mecha, dreamlike aesthetics, weather and disasters, environmental effects, transformations, and noncombat scenes. Given a scene, image, video, or storyboard, it recommends 3–5 suitable effects when the VFX direction is unclear, waits for user selection, and then supplies causally grounded, model-aware VFX prompt additions and review guidance. MiniMax H3 is the default, with Seedance available on explicit request; the original story, characters, actions, and camera remain intact.
 
 **版本：0.1.0-rc.1（待用户实测）**。P0–P5核心模块及P6设计QC/证据合同/单问题修复已实现；P7一键验收、版本文档、实测手册与真实视频取证准备已交付。**实际MiniMax H3/Seedance出片和独立视觉验收等待用户进行**，因此当前为发布候选而非画质已验证的稳定版。现有90条动漫游戏视觉案例仅是来源元数据。
 
