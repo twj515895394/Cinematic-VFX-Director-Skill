@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "note": "P0 source index; references only, no copied upstream source code or media",
+  "sources": [
+    {
+      "id": "skill-movie",
+      "url": "https://github.com/snowfrost/skill-movie",
+      "reuse": "workflow inspiration",
+      "status": "reviewed entrypoints"
+    },
+    {
+      "id": "rng-vfx",
+      "url": "https://github.com/MRRengi/rng-vfx",
+      "reuse": "art direction and validation inspiration",
+      "status": "reviewed README"
+    },
+    {
+      "id": "effekseer-vfx-skill",
+      "url": "https://github.com/kanaworksai-hue/effekseer-vfx-skill",
+      "reuse": "production workflow reference",
+      "status": "repository verified"
+    },
+    {
+      "id": "sakuga-vfx",
+      "url": "https://github.com/kanaworksai-hue/kanaworks-sakuga-vfx",
+      "reuse": "catalog metadata reference",
+      "status": "repository verified"
+    }
+  ]
+}
