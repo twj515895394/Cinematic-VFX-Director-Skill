@@ -308,4 +308,4 @@ P4 对“视觉案例库”的**首批**承诺已实现，覆盖的是动漫游�
 `data/schemas/shot-sequence.schema.json` 与 `scripts/check_shot_states.py` 结构性校验：`continue` 明确延续同一特效的身份/颜色/锚点/尺度/状态，`reset` 需注明原因，`independent` 不强行继承上一镜头。测试包含3个连续剧情、3个独立混剪和1个明确跳时重置例；不强制轻剧情Vlog变成MV式解耦，也不让剪辑混剪被强制连续。
 
 ### 21.4 验收与能力边界
-现有 [GitHub Actions #44863374042](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863374042) 已通过 **92项自动化测试、9套Schema检查**，覆盖默认H3/显式Seedance、3–5选项/确认、图像媒体引用门禁、原稿无侵入及镜头状态矛盾。测试验证的是**Agent可执行指令与离线数据/脚本**，不等于真实图片已被脚本自动理解，也不等于已调用 MiniMax/Seedance 视频生成或完成视频画面质量评测。P6才将真实输出QC与修复放进核心目标。
+现有 [GitHub Actions #44863374042](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037) 已通过 **93项自动化测试、9套Schema检查**，覆盖默认H3/显式Seedance、3–5选项/确认、图像媒体引用门禁、原稿无侵入及镜头状态矛盾。测试验证的是**Agent可执行指令与离线数据/脚本**，不等于真实图片已被脚本自动理解，也不等于已调用 MiniMax/Seedance 视频生成或完成视频画面质量评测。P6才将真实输出QC与修复放进核心目标。
