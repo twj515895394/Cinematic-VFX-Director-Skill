@@ -29,7 +29,7 @@ class P7ReleaseTests(unittest.TestCase):
         self.assertEqual(release_check.guardrail_issues(ROOT), [])
         issues, stats = release_check.verify(ROOT)
         self.assertEqual(issues, [])
-        self.assertEqual(stats["version"], "0.1.0-rc.1")
+        self.assertEqual(stats["version"], "0.1.0-rc.2")
 
     def test_user_acceptance_has_no_misleading_render_pass_claim(self):
         text = (ROOT / "docs/USER_ACCEPTANCE.md").read_text(encoding="utf-8")
