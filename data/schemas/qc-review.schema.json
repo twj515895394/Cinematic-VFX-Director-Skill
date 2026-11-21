@@ -1,0 +1,465 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cinematic VFX P6 evidence-aware six-axis QC review",
+  "description": "Reviewer-asserted observations, not automated pixel recognition. A successful score is not independently verified render quality.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "review_id",
+    "model",
+    "shot_id",
+    "medium",
+    "source_prompt",
+    "immutable_constraints",
+    "reviewer",
+    "evidence",
+    "scores",
+    "hard_failures",
+    "findings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "review_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "enum": [
+        "minimax-h3",
+        "seedance"
+      ]
+    },
+    "shot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "medium": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_prompt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "immutable_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "enum": [
+            "author",
+            "independent"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "description",
+        "asset_refs",
+        "observed_frame_ids"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "design-only",
+            "rendered-frames",
+            "rendered-video"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "observed_frame_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "uniqueItems": true
+        },
+        "asset_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "causality",
+        "space",
+        "timing",
+        "style_intensity",
+        "environment",
+        "readability"
+      ],
+      "properties": {
+        "causality": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "space": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "timing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "style_intensity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "environment": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "readability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "score",
+            "observation",
+            "evidence_refs"
+          ],
+          "properties": {
+            "score": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "observation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "hard_failures": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "observation",
+          "evidence_refs"
+        ],
+        "properties": {
+          "code": {
+            "enum": [
+              "SOURCE_PROMPT_CHANGED",
+              "UNAUTHORIZED_ACTION",
+              "IDENTITY_DRIFT",
+              "EARLY_CONTACT",
+              "DETACHED_ANCHOR",
+              "MISSING_ENV_RESPONSE",
+              "OCCLUSION",
+              "OVEREXPOSURE",
+              "UNJUSTIFIED_INTENSITY",
+              "STATE_JUMP",
+              "UNSUPPORTED_MODEL_CONTROL",
+              "UNCONFIRMED_CHOICE",
+              "FABRICATED_REFERENCE",
+              "PHYSICS_MISMATCH"
+            ]
+          },
+          "observation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "axis",
+          "problem",
+          "target",
+          "minimal_change",
+          "evidence_refs",
+          "priority"
+        ],
+        "properties": {
+          "axis": {
+            "enum": [
+              "causality",
+              "space",
+              "timing",
+              "style_intensity",
+              "environment",
+              "readability"
+            ]
+          },
+          "problem": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minimal_change": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "rendered-frames",
+                  "rendered-video"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "evidence"
+        ]
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "asset_refs": {
+                "minItems": 1
+              },
+              "observed_frame_ids": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "asset_version"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "kind": {
+                "const": "design-only"
+              }
+            }
+          }
+        },
+        "required": [
+          "evidence"
+        ]
+      },
+      "then": {
+        "properties": {
+          "evidence": {
+            "properties": {
+              "observed_frame_ids": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
