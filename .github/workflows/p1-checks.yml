@@ -28,3 +28,10 @@ jobs:
           python scripts/compile_prompt.py --card sample.sword-activation
           python scripts/compile_prompt.py --card sample.rainy-street --json
           python scripts/compile_prompt.py --cards examples/p3-ten-cards.json --card p3.power-aura
+      - name: Smoke test P4 sourced visual case index and profile routing
+        run: |
+          python adapters/sakuga_catalog.py --check
+          python scripts/search_cases.py --element water --form impact --limit 5
+          python scripts/search_cases.py --paired-with water_charge_01 --json
+          python scripts/lookup_profile.py --axis family --id spatial
+          python scripts/lookup_profile.py --axis style --id mj-dreamlike --json
