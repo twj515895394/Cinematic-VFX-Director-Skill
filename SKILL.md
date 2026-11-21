@@ -5,7 +5,7 @@ description: Design and audit cinematic visual effects for AI video prompts and 
 
 # Cinematic VFX Director
 
-> P0 entrypoint; the deeper atom index, family references, scripts and regression suite are planned, not implemented.
+> P1 reference routing available: MIT upstream VFX art-direction and review files are vendored under `third_party/`, with a local routing guide. Atom search, automated QC and full video-model adapters are still planned.
 
 ## Mission
 Translate a VFX request into visible, causally grounded screen direction. Prioritize source → trigger → spatial anchor → trajectory/operation → target and environment response → decay / final state. Do **not** invent effects simply to make the shot busier.
@@ -17,6 +17,9 @@ Translate a VFX request into visible, causally grounded screen direction. Priori
 - Determine **medium**, **genre**, **effect family** independently; use L0–L4 as this project's relative intensity grades, not an industry standard.
 - One dominant effect/read per key beat; add subordinate environment and optical layers only if they clarify the scene.
 - Do not automatically add shockwaves, magic circles, flying energy slashes, explosions, eye glow or excessive particle storms.
+
+## Reuse mature upstream before inventing new rules
+Read [Upstream routing](adapters/upstream-routing.md) first. For animation principles, elements, physics, brightness and medium-specific VFX art direction, use the existing [rng-vfx source](third_party/rng-vfx/skills/rng-vfx/SKILL.md) and its reference files. For effect design, layering, timing and review, use the existing [effekseer-vfx source](third_party/effekseer-vfx-skill/skills/effekseer-vfx/SKILL.md) and [independent VFX review](third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md). Treat game-engine-specific steps as background, not AI video prompt instructions. Only add this project's own rules where film/video use genuinely differs; keep vendored files unchanged.
 
 ## Procedure
 1. Read the user's prompt, constraints, and deliverable: exploratory idea / existing prompt enhancement / per-shot design / repair / reference learning.
