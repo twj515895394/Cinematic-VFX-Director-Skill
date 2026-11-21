@@ -1,0 +1,558 @@
+{
+  "schema_version": "1.0",
+  "note": "P4 thin cinematic direction profiles. These are authored adaptation constraints, not claimed visual observations of all 566 atoms or Sakuga preview assets. Upstream documents remain canonical for underlying VFX craft.",
+  "upstream_primary_files": {
+    "family": "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+    "grammar": "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+    "medium": "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+    "physics": "third_party/rng-vfx/skills/rng-vfx/references/physics.md",
+    "motion": "third_party/rng-vfx/skills/rng-vfx/references/motion.md",
+    "brightness": "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+    "realism": "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+    "stylized": "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+  },
+  "profiles": {
+    "families": [
+      {
+        "id": "weapon",
+        "job": "表达武器原有状态、轨迹或能量附着",
+        "source_anchor": "剑刃表面/柄部/移动刃口",
+        "lifecycle": "握持或启动→沿刃运动→停止/残光",
+        "integration": "物体受光、持握手与衣物受力",
+        "avoid": "未挥砍就出现离体剑气；握把/剑数突变",
+        "noncombat_or_context_example": "普通演员握住古物时刀刃微光",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "character",
+        "job": "表现人物发力、力量觉醒、状态持续",
+        "source_anchor": "手掌/轮廓/服饰受力点",
+        "lifecycle": "姿态变化→局部激活→衰减",
+        "integration": "皮肤/衣料受光与风压",
+        "avoid": "改动身份五官或新增攻击动作",
+        "noncombat_or_context_example": "主角紧握手心时体表轻微辉光",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "motion",
+        "job": "强调真实运动路径、速度变化及空间方向",
+        "source_anchor": "真实移动物体的轮廓与路径",
+        "lifecycle": "运动起点→方向变化→随运动停止",
+        "integration": "空气扰动、衣物/地面反馈",
+        "avoid": "静止物体出现高速拖尾",
+        "noncombat_or_context_example": "列车穿过薄雾时形成短暂气流尾迹",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "impact",
+        "job": "让接触位置、受力方向和材料反应可读",
+        "source_anchor": "实际接触点/受体表面",
+        "lifecycle": "靠近→真实接触→局部峰值→回弹/残留",
+        "integration": "粒子与碎屑继承接触材质",
+        "avoid": "未接触先火花、粒子从未受力处出现",
+        "noncombat_or_context_example": "写实落石撞击水面形成局部水花",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "elemental",
+        "job": "表现水火冰风雷等具有明确载体的变化",
+        "source_anchor": "气流、流体、物体表面或指定能量源",
+        "lifecycle": "产生→受媒介驱动→传播→冷却/沉降",
+        "integration": "热、湿、重力、风向、表面反射",
+        "avoid": "不区分真实火焰与元素法术",
+        "noncombat_or_context_example": "冰晶在窗玻璃上从边缘慢慢扩散",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "energy",
+        "job": "表达超自然或技术能量的强度/状态",
+        "source_anchor": "手部/装置/武器/屏障轮廓",
+        "lifecycle": "源头→局部聚集→释放或稳定→消散",
+        "integration": "发光投射至邻近物体",
+        "avoid": "无能量源乱飘、每次都爆震",
+        "noncombat_or_context_example": "深海遗迹纹样在触发后缓慢发亮",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "ritual",
+        "job": "体现法阵、符文、封印等功能性空间操作",
+        "source_anchor": "符文刻痕/法阵平面/器物标记",
+        "lifecycle": "规程触发→构成→具体操作→终态",
+        "integration": "符文与几何持续对齐，接触物反馈",
+        "avoid": "只有装饰图腾没有施法/封印功能",
+        "noncombat_or_context_example": "石门符文按真实凹槽依次点亮",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "spatial",
+        "job": "让传送、折叠、空间裂缝等边界连贯",
+        "source_anchor": "门框/裂隙边缘/固定世界坐标",
+        "lifecycle": "边界显现→拓展→操作→稳定/关闭",
+        "integration": "周围空间反射、折射和遮挡",
+        "avoid": "空间门位置漂移、无目标吞没整张画",
+        "noncombat_or_context_example": "云层中的空间窗边缘随雾层折射",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "technology",
+        "job": "解释扫描、护盾、全息、机器人等科技效果",
+        "source_anchor": "实际器件/机甲缝隙/屏幕空间",
+        "lifecycle": "系统启动→扫描/运算→反馈→关闭",
+        "integration": "机壳反射、显示与材料连续性",
+        "avoid": "凭空新增零件、把扫描光做成魔法弹",
+        "noncombat_or_context_example": "维修机械臂的激光沿现有焊缝移动",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "environment-weather",
+        "job": "体现雨雪雾风等持续天气及地貌响应",
+        "source_anchor": "天气体积/地面/云层/水体",
+        "lifecycle": "持续态→阵风/雨量变化→回稳",
+        "integration": "风向、湿度、积水、植被/衣物",
+        "avoid": "自然暴雨莫名自发霓虹爆炸",
+        "noncombat_or_context_example": "街道暴雨水面反射与水花",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "destruction-material",
+        "job": "表达材质应力、开裂、碎散和残留",
+        "source_anchor": "已受力的墙、玻璃、木头、金属",
+        "lifecycle": "预应力→材料局部失效→碎片运动→堆积",
+        "integration": "碎屑材质与原表面一致",
+        "avoid": "玻璃像岩石碎裂；先破坏再受力",
+        "noncombat_or_context_example": "山体自然滑坡后碎石沿坡面滚落",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "transformation",
+        "job": "表现同一物体的可追踪形状/材质变化",
+        "source_anchor": "原物体轮廓、连接处或变形前缘",
+        "lifecycle": "明确触发→局部前缘→中间结构→新稳定形态",
+        "integration": "光照/阴影随真实新几何更新",
+        "avoid": "全局闪白取代变化、角色面容漂移",
+        "noncombat_or_context_example": "纸花从折痕逐片展开",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "optical-compositing",
+        "job": "让光学和合成效果与真实镜头深度一致",
+        "source_anchor": "实际光源/景深体积/折射界面",
+        "lifecycle": "光源或视点变化→光路变化→平稳消退",
+        "integration": "散射、Bloom、反射、遮挡、焦外",
+        "avoid": "柔光不等于满画面发糊",
+        "noncombat_or_context_example": "海底探灯透过浮尘生成体积散射",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      },
+      {
+        "id": "atmospheric",
+        "job": "营造空气、灰尘、轻雾、烟气与景深感",
+        "source_anchor": "世界空间中真实或风格化气体体积",
+        "lifecycle": "持续悬浮→局部流动→沉降/弥散",
+        "integration": "风速、空气深度、光束可见性",
+        "avoid": "粒子堆积遮挡人物表情",
+        "noncombat_or_context_example": "室内晨光下浮尘缓慢飘动",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/physics.md"
+        ]
+      }
+    ],
+    "mediums": [
+      {
+        "id": "photoreal-live-action",
+        "visual_language": "真实摄影与电影合成",
+        "integration": "光源因果、可见反射和材质一致；粒子/体积必须遵守景深与遮挡",
+        "avoid": "不可把发光术语堆成舞台灯效",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "premium-cg",
+        "visual_language": "高规格电影级写实CG",
+        "integration": "几何/体积/微表面物理连贯，细节服从主视觉层级",
+        "avoid": "不能只用巨大粒子替代受力和材质",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "semi-realistic-japanese-cg",
+        "visual_language": "日系半写实CG",
+        "integration": "脸部和服装保持细腻，能量与审美化材质共存，柔光不冲掉五官",
+        "avoid": "避免蜡像塑料感和角色五官漂移",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "anime-2d",
+        "visual_language": "二维动画",
+        "integration": "关键帧形状节奏、分层线条、速度设计与实际接触精确同步",
+        "avoid": "不强塞真实镜头运动模糊",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "stylized-3d",
+        "visual_language": "风格化三维CG",
+        "integration": "清晰三维遮挡和夸张特效形状同时成立",
+        "avoid": "不因卡通化而放弃物体身份连续性",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "toon-3d",
+        "visual_language": "动画电影式卡通CG",
+        "integration": "柔和体积与鲜明剪影，运动夸张但主体真实可读",
+        "avoid": "不要默认全屏闪爆或无依据重光晕",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "npr-2.5d",
+        "visual_language": "非真实感2.5D/水墨/插画",
+        "integration": "平面笔触与三维锚点结合，明确2D层覆盖次序",
+        "avoid": "避免图形贴片漂离主体",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "mixed-media",
+        "visual_language": "二维三维/实拍混合",
+        "integration": "明确FX所属图层、边缘/颗粒/透视/光照一致性",
+        "avoid": "禁止角色与特效呈现两种不兼容黑位",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "unknown",
+        "visual_language": "未指定媒介",
+        "integration": "保持中性物理/空间描述、只采纳确定的视觉事实",
+        "avoid": "不可虚构用户给了明确摄影或渲染类型",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/realism.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      }
+    ],
+    "genres": [
+      {
+        "id": "modern-action",
+        "world_rule": "真实受力与速度/接触清晰",
+        "visual_jobs": "地面尘土、撞击反馈、可见火花",
+        "avoid": "不要无依据加超自然能力",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "wuxia",
+        "world_rule": "身法与兵器真实路径优先",
+        "visual_jobs": "贴刃动线、地面风压、衣料运动",
+        "avoid": "武侠不等于必须释放远程剑气",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "xianxia",
+        "world_rule": "法力世界观应自有规则与代价",
+        "visual_jobs": "法阵功能、御物路径、灵力状态转化",
+        "avoid": "不要把所有法术变成同一个霓虹环",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "mythology",
+        "world_rule": "神圣/怪诞尺度需要物理环境作为参照",
+        "visual_jobs": "神兽周围云雾体积、祭仪、空间天地反应",
+        "avoid": "无源震荡铺满全屏",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "science-fiction",
+        "world_rule": "现有技术装置和时序行为可解释",
+        "visual_jobs": "扫描反馈、屏障、空间光学",
+        "avoid": "强行引入魔法阵或机甲外形更改",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "mecha",
+        "world_rule": "机械传动、部件锁止和材料受力",
+        "visual_jobs": "机械关节结构、金属反射、火花",
+        "avoid": "不能凭空换装甲和额外机械臂",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "cyberpunk",
+        "world_rule": "城市光源与技术界面有物理位置",
+        "visual_jobs": "霓虹映射雨地、透明界面、扫描",
+        "avoid": "不能把赛博朋克等于所有物体RGB灯带",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "superpower",
+        "world_rule": "力量表现需绑定人物真实动作",
+        "visual_jobs": "局部聚能、身体轮廓、受体方向",
+        "avoid": "无动作依据不得突然放大招",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "high-fantasy",
+        "world_rule": "多种元素和空间规则保持自洽",
+        "visual_jobs": "魔法材料/生物/召唤有归属",
+        "avoid": "神奇=必须附带巨大冲击波",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "dark-fantasy",
+        "world_rule": "压迫氛围和负空间优先，局部亮度受控",
+        "visual_jobs": "幽光、符文、材质腐化",
+        "avoid": "不能暗到动作和面容不可辨",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "natural-disaster",
+        "world_rule": "自然成因与环境后果清晰",
+        "visual_jobs": "雨风雪、泥石流、火山、海浪、尘埃",
+        "avoid": "把真实灾害写成游戏法术",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "environmental",
+        "world_rule": "环境本身可为镜头主角",
+        "visual_jobs": "微尘、雾化、水面波纹、透射",
+        "avoid": "所有环境都要加魔法粒子",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "transformation",
+        "world_rule": "身份/物件形态变化持续可追踪",
+        "visual_jobs": "变形前缘、连接件与新旧材质过渡",
+        "avoid": "一闪白后变成不同人",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      },
+      {
+        "id": "slice-of-life-fantasy",
+        "world_rule": "轻奇幻服务人物日常表演",
+        "visual_jobs": "日常小范围道具微光、柔和视觉惊喜",
+        "avoid": "为了戏剧性添加战争级攻击",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-family-atlas.md",
+          "third_party/skill-movie/vfx-effect-construction-engine/references/effect-construction-grammar.md"
+        ]
+      }
+    ],
+    "styles": [
+      {
+        "id": "natural-cinematic",
+        "look": "自然电影质感",
+        "vfx_treatment": "保守曝光、接触阴影、真实景深和受光层级",
+        "avoid": "泛光强到失去主体形态",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "soft-diffused",
+        "look": "低对比柔和扩散",
+        "vfx_treatment": "高光轻微 Halation；保留清晰主体边缘",
+        "avoid": "全局模糊掉五官",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "mj-dreamlike",
+        "look": "诗意梦境艺术电影审美",
+        "vfx_treatment": "体积光、低至中等对比、意境层次与重点高光",
+        "avoid": "将审美标签误作魔法法术",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "pixar-like-animation",
+        "look": "高完成度动画电影视觉语言",
+        "vfx_treatment": "柔和大体积、鲜明剪影、自然夸张",
+        "avoid": "套用特定已存在影视角色",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "anime-sakuga",
+        "look": "手绘作画感的动势强化",
+        "vfx_treatment": "形状节拍、冲击关键帧、短暂图形拖尾",
+        "avoid": "没有真实动作却先出现命中效果",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "graphic-ink",
+        "look": "水墨与平面图形",
+        "vfx_treatment": "笔触服从能量/运动路径，阴阳/线条层级",
+        "avoid": "随便撒墨点遮住角色",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "dark-gritty",
+        "look": "暗部粗粝与克制光源",
+        "vfx_treatment": "局部能量色彩/材料粗糙反射，暗部可读",
+        "avoid": "只调黑位不留视觉信息",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "high-energy-game-cg",
+        "look": "强读数的高对比技能展示",
+        "vfx_treatment": "强调源头和轮廓，辅助层服务主效果",
+        "avoid": "不加约束地堆叠屏幕特效",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      },
+      {
+        "id": "user-defined",
+        "look": "用户自定义审美",
+        "vfx_treatment": "记录原始要求与其证据，随用户镜头约束适配",
+        "avoid": "擅自替换用户风格",
+        "read_first": [
+          "third_party/skill-movie/vfx-effect-construction-engine/references/medium-integration.md",
+          "third_party/rng-vfx/skills/rng-vfx/references/brightness.md",
+          "third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/stylized.md"
+        ]
+      }
+    ]
+  }
+}
