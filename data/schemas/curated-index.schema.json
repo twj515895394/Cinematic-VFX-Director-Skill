@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cinematic curated references to original upstream atom IDs",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "description",
+    "bank_path",
+    "entries"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bank_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "atom_id",
+          "source_id",
+          "name_zh",
+          "name_en",
+          "source_family",
+          "example_scene",
+          "usage_note",
+          "tags"
+        ],
+        "properties": {
+          "atom_id": {
+            "type": "string",
+            "pattern": "^vfx_term_[0-9]{3}$"
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name_zh": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name_en": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_family": {
+            "type": "string",
+            "minLength": 1
+          },
+          "example_scene": {
+            "type": "string",
+            "minLength": 1
+          },
+          "usage_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "tags": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          }
+        }
+      }
+    }
+  }
+}
