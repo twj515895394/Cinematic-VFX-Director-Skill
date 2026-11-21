@@ -1,30 +1,40 @@
 {
   "schema_version": "1.0",
-  "note": "P0 source index; references only, no copied upstream source code or media",
+  "note": "Copy-First: MIT upstream source files vendored unchanged; unlicensed/restricted media linked only",
   "sources": [
     {
       "id": "skill-movie",
       "url": "https://github.com/snowfrost/skill-movie",
       "reuse": "workflow inspiration",
-      "status": "reviewed entrypoints"
+      "status": "upstream reviewed; no explicit repo LICENSE located, not vendored",
+      "license": "unverified"
     },
     {
       "id": "rng-vfx",
       "url": "https://github.com/MRRengi/rng-vfx",
       "reuse": "art direction and validation inspiration",
-      "status": "reviewed README"
+      "status": "vendored MIT source files and adapted routing",
+      "upstream_commit": "4d906cff49a82aeb7c0b3a99b82b193320934fa0",
+      "vendor_path": "third_party/rng-vfx/",
+      "license": "MIT",
+      "vendored_file_count": 13
     },
     {
       "id": "effekseer-vfx-skill",
       "url": "https://github.com/kanaworksai-hue/effekseer-vfx-skill",
       "reuse": "production workflow reference",
-      "status": "repository verified"
+      "status": "vendored MIT VFX and review source files",
+      "upstream_commit": "b0eea1085f2e3e0fa0b5cc77c58c9a845f0bec96",
+      "vendor_path": "third_party/effekseer-vfx-skill/",
+      "license": "MIT",
+      "vendored_file_count": 12
     },
     {
       "id": "sakuga-vfx",
       "url": "https://github.com/kanaworksai-hue/kanaworks-sakuga-vfx",
       "reuse": "catalog metadata reference",
-      "status": "repository verified"
+      "status": "reviewed; effects are separately licensed, not vendored",
+      "license": "code MIT; effects separately licensed"
     }
   ]
 }
