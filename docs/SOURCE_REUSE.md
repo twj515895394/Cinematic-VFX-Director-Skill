@@ -8,6 +8,7 @@
 | MRRengi/rng-vfx | https://github.com/MRRengi/rng-vfx | craft / elements / physics / motion / mediums 与评测 | MIT 原件已导入 13 文件（包含 LICENSE 与 SKILL） |
 | kanaworksai-hue/effekseer-vfx-skill | https://github.com/kanaworksai-hue/effekseer-vfx-skill | 特效构建过程、案例拆分与 QA | MIT 原件已导入 12 文件（包含 LICENSE、工作流与 QC） |
 | kanaworksai-hue/kanaworks-sakuga-vfx | https://github.com/kanaworksai-hue/kanaworks-sakuga-vfx | 动态案例90条原始元数据、元素分类、组合属性 | 已导入 catalog.json 与 LICENSE（2文件），派生90条可查索引；不复制实际图像素材包 |
+| MiniMax-AI/MiniMax-H3 | https://github.com/MiniMax-AI/MiniMax-H3 | 官方H3视频提示词Skill、T2VA/I2VA/FL2VA/L2VA/Ref2VA原版规范 | **3个原始文件已复制**，P5模型适配路由直接引用 |
 
 ## 复用规范
 1. **公开代码与媒体有不同的许可条件**，不能因个人非商业用途就忽略。当前目标仓库为公开仓库。
@@ -46,3 +47,9 @@
 - 原目录统计 90条、9种元素、9种形态；`adapters/sakuga_catalog.py` 转换为 `data/catalog/cases.json`。可运行 `python adapters/sakuga_catalog.py --check` 检测派生索引变化。
 - 所有案例标记 `metadata-only`，保留原始 source tags 和 use_cases（含重复词标签），保留源帧率、接触帧和配对关系。
 - 上述资产数据与代码采用不同许可；具体署名按 vendored LICENSE。当前没有将实际媒体文件复制成素材包。
+
+## P5 官方模型知识来源与复用（2026-11-21）
+- **MiniMax H3（默认）**：上游官方 `MiniMax-AI/MiniMax-H3` commit `199b7d0e1fd95e7b3eafa8c15eca692534142427`；原始 `skills/h3-prompt-writing/SKILL.md`、`references/base-en.txt`、`references/ref-en.txt` 共3文件复制到 `third_party/minimax-h3/`，本地 `data/model_profiles.json` 只映射输入模式，不重写官方详细规范。
+- **Seedance（用户明确选择时）**：直接引用字节跳动官方 [Seedance 2.0 介绍](https://seed.bytedance.com/en/blog/seedance-2-0-official-launch) 与 [Seedance 2.5 介绍](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5)。当前不绑定到特定小版本的时长、API参数或特效能力；按实际可使用的渠道再确认。
+- **无第三模型**：H3 与 Seedance 是唯一视频模型输出目的地；其他源项目仍作为VFX艺术知识，不代表本产品提供其它视频生成器。
+- **自有差异化**：`references/choice-first-workflow.md` 面向非专业用户的3–5方案先选后写；`scripts/recommend_options.py` 结构/选择门禁；`scripts/adapt_prompt.py` 在P3编译基础上产生两模型的VFX-only补充；`scripts/check_shot_states.py` 只校验用户明确要求的跨镜头延续与重置。
