@@ -2,7 +2,26 @@
 
 面向个人 AI 视频创作的 **通用影视 CG 视觉特效导演与知识库**。覆盖真人写实、日系半写实 CG、2D 动漫、卡通电影、武侠仙侠、科幻机甲、梦境 MJ 审美、灾害环境、角色变形和非战斗奇幻等场景。
 
-**项目状态（2026-11-21）**：P0–P5核心模块已实现；P6的**六维设计QC/证据审核合同/单问题修复**与16个正反向回归案例已实现，真实 MiniMax H3/Seedance 成片的独立视觉审查仍待实际视频素材。P7文档收敛与发布未进行。现有90条视觉案例主要是动漫游戏元数据，不冒充真实电影镜头。
+**版本：0.1.0-rc.1（待用户实测）**。P0–P5核心模块及P6设计QC/证据合同/单问题修复已实现；P7一键验收、版本文档、实测手册与真实视频取证准备已交付。**实际MiniMax H3/Seedance出片和独立视觉验收等待用户进行**，因此当前为发布候选而非画质已验证的稳定版。现有90条动漫游戏视觉案例仅是来源元数据。
+
+## 从这里开始（使用与实测）
+
+把完整仓库作为 Agent Skill 读取根 [SKILL.md](SKILL.md)。新手给场景/图片只说“加点VFX”时先收到**3–5个推荐方案**，选定后才拿到 VFX-only 提示词；默认 **MiniMax H3**，用户明确选择 Seedance 时才切换。
+
+```bash
+# 在仓库根目录：Windows / macOS / Linux
+python -m pip install -r requirements-dev.txt
+python scripts/verify_all.py
+```
+
+`verify_all.py` 一次完成数据完整性、全量单元测试、外链元数据一致性、模型/用户确认保护、QC回归以及来源和文档检查。**不需要 GPU，也不会调用付费视频模型。** 如需实际从生成视频中抽帧取证（独立的可选能力），本地安装 `ffmpeg`/`ffprobe` 后：
+
+```bash
+python scripts/prepare_visual_evidence.py --video my_h3_clip.mp4 --shot-id S01 --model minimax-h3
+python scripts/prepare_visual_evidence.py --video my_seedance_clip.mp4 --shot-id S02 --model seedance
+```
+
+帧和 SHA-256 记录将写入忽略提交的 `reviews/S01`、`reviews/S02`，**采样成功不代表视觉评分通过**。拿到真实视频后请按 [10项用户实测手册](docs/USER_ACCEPTANCE.md) 实际播放、对照原稿、记录问题与帧号。参见 [RC发布说明](docs/RELEASE_NOTES.md) / [变更记录](CHANGELOG.md)。
 
 ## 为什么不重复造轮子
 目前已经**实际复制并引用**五个成熟上游项目的45个源文件：
@@ -157,11 +176,14 @@ python -m unittest discover -s tests -v
 - [P5 多镜头状态校验](scripts/check_shot_states.py)
 - [P6 六维QC与一轮一修](scripts/review_vfx.py)
 - [P6 设计/视觉证据审核规范](references/qc-review-workflow.md)
+- [P7 本地一键完整验收](scripts/verify_all.py)
+- [P7 10项用户实测手册](docs/USER_ACCEPTANCE.md)
+- [P7 发布候选说明](docs/RELEASE_NOTES.md)
 - [数据验证脚本](scripts/validate_data.py)
 - [P2 检索与完整性校验说明](docs/SEARCH_AND_VALIDATION.md)
 - [GitHub Actions 成功运行](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037)
 
 ## 仍待完成
-P4持续补充真人电影/CG/MJ等真实动态案例；P6待使用实际 MiniMax H3/Seedance 视频和独立审核者做视觉验证与修复前后对照；P7文档收敛与稳定发布。
+P4可以持续补充真人电影/CG/MJ动态案例；P6实测还需真实 MiniMax H3/Seedance 视频及独立审核者的修复前后验证；正式稳定版需用户实测批准。其余代码、文档、自动化预验收工具已进入发布候选。
 
 **原则：能用成熟上游就直接复用并做薄适配；只对真正缺失的能力开发新模块。**
