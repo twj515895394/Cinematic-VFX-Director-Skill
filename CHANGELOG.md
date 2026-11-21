@@ -13,7 +13,7 @@
 - 566 原始VFX原子检索、46条四维专业 Profile、90条来源可追溯但未视觉审核的二维动漫案例元数据。
 - 10张可编译效果卡、7组多镜头示例、3个新手推荐包（12个方案）。
 - 六维 0–2 分 QC、14个硬失败、16个合成的正反向设计审核夹具；每轮只建议1个局部VFX修复。
-- `scripts/prepare_visual_evidence.py`：可从用户真实本地视频用ffmpeg/ffprobe抽取候选帧、记录 SHA-256、帧率和版本，默认未审片状态。
+- `scripts/prepare_visual_evidence.py`：可从用户真实本地视频用ffmpeg/ffprobe抽取候选帧、记录 SHA-256、帧率和版本，默认未审片状态；新增 `scripts/check_visual_evidence.py` 检查原视频与抽帧哈希一致性。
 - `scripts/verify_all.py` 与 `scripts/release_check.py`：跨平台离线一键测试、文档本地链接检查和上游快照来源检查。
 - `docs/USER_ACCEPTANCE.md`：10项实际交互/模型/连续性/视觉验收测试流程。
 - `docs/RELEASE_NOTES.md`：预验收候选说明、能力边界和上游追溯。
