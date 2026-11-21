@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "montage-style",
+  "model": "minimax-h3",
+  "intended_editing": "independent-montage",
+  "shots": [
+    {
+      "shot_id": "M01",
+      "content_summary": "2D动漫剑刃撞击闪帧",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "impact",
+        "status": "decay",
+        "color": "white",
+        "anchor": "blade-contact",
+        "scale": "small"
+      }
+    },
+    {
+      "shot_id": "M02",
+      "content_summary": "3DCG纸花逐片展开",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "paper",
+        "status": "settled",
+        "color": "paper",
+        "anchor": "flower",
+        "scale": "small"
+      }
+    },
+    {
+      "shot_id": "M03",
+      "content_summary": "电影写实水下光学散射",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "caustics",
+        "status": "active",
+        "color": "blue",
+        "anchor": "underwater",
+        "scale": "wide"
+      }
+    }
+  ]
+}
