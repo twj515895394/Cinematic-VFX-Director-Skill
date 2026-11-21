@@ -8,12 +8,16 @@ Run: python -m pip install -r requirements-dev.txt
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
 from jsonschema.exceptions import SchemaError
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from adapters.sakuga_catalog import build_catalog  # unchanged source -> index
+
 BANK = ROOT / "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json"
 TAXONOMY = ROOT / "data/taxonomy.json"
 MAPPING = ROOT / "adapters/skill_movie_family_map.json"
@@ -21,6 +25,8 @@ CURATED = ROOT / "data/curated_atoms.json"
 CARDS = ROOT / "examples/effect-cards.json"
 CATALOG = ROOT / "data/catalog/cases.json"
 SOURCES = ROOT / "data/sources.json"
+PROFILES = ROOT / "data/profiles/cinematic_profiles.json"
+SAKUGA_BANK = ROOT / "third_party/kanaworks-sakuga-vfx/catalog.json"
 SCHEMAS = ROOT / "data/schemas"
 
 
@@ -44,11 +50,12 @@ def verify(*, overrides=None):
         "taxonomy": load(TAXONOMY), "bank": load(BANK), "mapping": load(MAPPING),
         "curated": load(CURATED), "cards": load(CARDS),
         "catalog": load(CATALOG), "sources": load(SOURCES),
+        "profiles": load(PROFILES),
     }
     data.update(overrides)
-    taxonomy, bank, mapping, curated, cards, catalog, sources = (
+    taxonomy, bank, mapping, curated, cards, catalog, sources, profiles = (
         data[k] for k in ("taxonomy", "bank", "mapping", "curated",
-                         "cards", "catalog", "sources")
+                         "cards", "catalog", "sources", "profiles")
     )
     problems = []
     schemas = {}
@@ -62,6 +69,7 @@ def verify(*, overrides=None):
 
     _check(bank, schemas["upstream-bank.schema.json"], "upstream bank", problems)
     _check(curated, schemas["curated-index.schema.json"], "curated index", problems)
+    _check(profiles, schemas["cinematic-profiles.schema.json"], "cinematic profiles", problems)
 
     # Native upstream atoms have six fields; do not force the richer project
     # atom schema on them. Validate only future local rich atom instances.
@@ -157,6 +165,33 @@ def verify(*, overrides=None):
                 by_id[rid].get("zh"), by_id[rid].get("en"), by_id[rid].get("family")):
             problems.append("Curated metadata differs from original upstream " + rid)
 
+    # P4 profiles are thin cinematic adapters, each with a verifiable source path.
+    profile_axes = {"families": "families", "mediums": "mediums",
+                    "genres": "genres", "styles": "style_profiles"}
+    for key, domain in profile_axes.items():
+        items = profiles.get("profiles", {}).get(key, [])
+        keys = [p.get("id") for p in items]
+        if len(keys) != len(set(keys)) or set(keys) != set(taxonomy.get(domain, [])):
+            problems.append("P4 %s coverage/duplicate profile IDs differ from taxonomy.%s" % (key, domain))
+        for p in items:
+            for ref in p.get("read_first", []):
+                target = ROOT / ref
+                if not target.is_file() or not target.resolve().is_relative_to(ROOT.resolve()):
+                    problems.append("Missing upstream P4 reference: " + ref)
+    for ref in profiles.get("upstream_primary_files", {}).values():
+        if not (ROOT / ref).is_file():
+            problems.append("P4 primary source reference missing: " + ref)
+
+    # The 90 cases must stay a projection of the original pinned metadata.
+    sakuga_source = load(SAKUGA_BANK)
+    if len(sakuga_source.get("assets", [])) != 90:
+        problems.append("Pinned Sakuga catalog must contain 90 assets")
+    case_map = {a.get("id"): a for a in sakuga_source.get("assets", [])}
+    if len(case_map) != len(sakuga_source.get("assets", [])):
+        problems.append("Duplicate Sakuga source asset IDs")
+    if catalog != build_catalog(sakuga_source):
+        problems.append("Normalized case index drifted from original Sakuga metadata")
+
     all_atom_ids = set(ids)
     card_ids = set()
     for i, card in enumerate(cards.get("cards", [])):
@@ -190,6 +225,17 @@ def verify(*, overrides=None):
         for aid in case.get("atom_ids", []):
             if aid not in all_atom_ids:
                 problems.append("Unknown atom ID %s on case %s" % (aid, cid))
+        meta = case.get("source_metadata")
+        if case.get("source_id") == "sakuga-vfx":
+            aid = case.get("source_asset_id")
+            if aid not in case_map:
+                problems.append("Missing Sakuga asset ID for " + cid)
+            if not isinstance(meta, dict):
+                problems.append("Missing source metadata for " + cid)
+            elif not set(meta.get("paired_source_ids", [])).issubset(set(case_map)):
+                problems.append("Broken Sakuga paired effect link for " + cid)
+            if case.get("curation_status") != "metadata-only":
+                problems.append("Unreviewed Sakuga case mislabelled as visually-reviewed: " + cid)
         times = [m["time_seconds"] for m in case.get("time_markers", [])
                  if "time_seconds" in m]
         if times != sorted(times):
@@ -203,6 +249,8 @@ def verify(*, overrides=None):
         "effect_cards": len(cards.get("cards", [])),
         "catalog_cases": len(catalog.get("cases", [])),
         "families": len(source_families), "schemas_checked": len(schemas),
+        "p4_profiles": sum(len(p) for p in profiles.get("profiles", {}).values()),
+        "sakuga_elements": len({x.get("element") for x in sakuga_source.get("assets", [])}),
     }
     return problems, stats
 
