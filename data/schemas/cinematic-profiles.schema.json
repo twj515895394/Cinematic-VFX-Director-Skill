@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cinematic VFX Profile Library P4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "note",
+    "upstream_primary_files",
+    "profiles"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upstream_primary_files": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "families",
+        "mediums",
+        "genres",
+        "styles"
+      ],
+      "properties": {
+        "families": {
+          "type": "array",
+          "minItems": 14,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "job",
+              "source_anchor",
+              "lifecycle",
+              "integration",
+              "avoid",
+              "noncombat_or_context_example",
+              "read_first"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "job": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source_anchor": {
+                "type": "string",
+                "minLength": 1
+              },
+              "lifecycle": {
+                "type": "string",
+                "minLength": 1
+              },
+              "integration": {
+                "type": "string",
+                "minLength": 1
+              },
+              "avoid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "noncombat_or_context_example": {
+                "type": "string",
+                "minLength": 1
+              },
+              "read_first": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "mediums": {
+          "type": "array",
+          "minItems": 9,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "visual_language",
+              "integration",
+              "avoid",
+              "read_first"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "visual_language": {
+                "type": "string",
+                "minLength": 1
+              },
+              "integration": {
+                "type": "string",
+                "minLength": 1
+              },
+              "avoid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "read_first": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "genres": {
+          "type": "array",
+          "minItems": 14,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "world_rule",
+              "visual_jobs",
+              "avoid",
+              "read_first"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "world_rule": {
+                "type": "string",
+                "minLength": 1
+              },
+              "visual_jobs": {
+                "type": "string",
+                "minLength": 1
+              },
+              "avoid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "read_first": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          }
+        },
+        "styles": {
+          "type": "array",
+          "minItems": 9,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "look",
+              "vfx_treatment",
+              "avoid",
+              "read_first"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "look": {
+                "type": "string",
+                "minLength": 1
+              },
+              "vfx_treatment": {
+                "type": "string",
+                "minLength": 1
+              },
+              "avoid": {
+                "type": "string",
+                "minLength": 1
+              },
+              "read_first": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
