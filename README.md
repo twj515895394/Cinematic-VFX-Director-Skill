@@ -2,7 +2,7 @@
 
 面向个人 AI 视频创作的 **通用影视 CG 视觉特效导演与知识库**。覆盖真人写实、日系半写实 CG、2D 动漫、卡通电影、武侠仙侠、科幻机甲、梦境 MJ 审美、灾害环境、角色变形和非战斗奇幻等场景。
 
-**项目状态（2026-11-21）：P1～P3完成；P4知识体系与首批动态案例库已完成；**P5只支持MiniMax H3（默认）/Seedance，新增非专业用户3–5方案推荐与多镜头状态检查**；93项自动化测试已通过。P6～P7待推进（跨媒介真实视频案例仍可扩充）。** 不把基础数据检索误认为完整的模型适配或自动特效审核。
+**项目状态（2026-11-21）**：P0–P5核心模块已实现；P6的**六维设计QC/证据审核合同/单问题修复**与16个正反向回归案例已实现，真实 MiniMax H3/Seedance 成片的独立视觉审查仍待实际视频素材。P7文档收敛与发布未进行。现有90条视觉案例主要是动漫游戏元数据，不冒充真实电影镜头。
 
 ## 为什么不重复造轮子
 目前已经**实际复制并引用**五个成熟上游项目的45个源文件：
@@ -117,6 +117,28 @@ python scripts/check_shot_states.py --file examples/sequences/montage-weather.js
 
 详见：[新手3–5特效方案流程](references/choice-first-workflow.md) · [两模型适配](references/model-adapters.md) · [连续/独立镜头](references/multishot-states.md)
 
+## P6 六维 VFX 审核：设计检查与成片视觉检查分开
+
+优先直接复用已复制的 [effekseer独立特效审核Skill](third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md) 及 [review](third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/review.md)、[rng-vfx物理规则](third_party/rng-vfx/skills/rng-vfx/references/physics.md)。本项目的薄层适配使用**六维0–2分**：因果、空间、时序、风格强度、环境交互、可读性。
+
+**通过设计评分**需：总分≥10/12、全部维度≥1、没有任何硬性失败。14类硬性失败包括未授权改动作、人物变脸、提前出现碰撞、特效漂移、过曝遮挡、未确认用户特效选项以及跨镜头状态跳变。**每轮只建议一个最优先修复点**；不会自动修改人物、动作、构图或原剧本。
+
+```bash
+python -m pip install -r requirements-dev.txt
+
+# 两个是手写的设计审核夹具，绝不是已生成视频证据
+python scripts/review_vfx.py --review tests/fixtures/qc/design-good-sword.json
+python scripts/review_vfx.py --review tests/fixtures/qc/design-bad-early-contact.json --json
+
+# 设计审核完整性与回归
+python scripts/validate_data.py
+python -m unittest discover -s tests -v
+```
+
+已提供16个跨媒介/题材设计案例（7个达标、9个必须拦截）。**没有生成视频时只能说“设计审核通过、等待真实成片审核”**。真实出片要由能打开实际视频/帧的审核者查看并记录来源和帧号；此Python脚本只能检查证据字段与汇总评分，不能自动识别画面、证明真实视频质量或独立审核身份。
+
+参见：[六维Rubric](references/qc-rubric.md) · [独立审核流程](references/qc-review-workflow.md) · [16个正反例](examples/qc-regression.md)
+
 ## 关键文件
 - [产品详细设计 v1.6](docs/PRODUCT_DESIGN.md)
 - [分阶段实施计划](docs/IMPLEMENTATION_PLAN.md)
@@ -133,11 +155,13 @@ python scripts/check_shot_states.py --file examples/sequences/montage-weather.js
 - [P5 新手3–5方案优先](references/choice-first-workflow.md)
 - [P5 两个视频模型](data/model_profiles.json)
 - [P5 多镜头状态校验](scripts/check_shot_states.py)
+- [P6 六维QC与一轮一修](scripts/review_vfx.py)
+- [P6 设计/视觉证据审核规范](references/qc-review-workflow.md)
 - [数据验证脚本](scripts/validate_data.py)
 - [P2 检索与完整性校验说明](docs/SEARCH_AND_VALIDATION.md)
 - [GitHub Actions 成功运行](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037)
 
 ## 仍待完成
-P4持续补充真人电影/CG/MJ等真实动态案例（现有90条以动漫游戏素材为主）；P6：真实视觉QC与定向修复；P7：文档收敛与稳定发布。
+P4持续补充真人电影/CG/MJ等真实动态案例；P6待使用实际 MiniMax H3/Seedance 视频和独立审核者做视觉验证与修复前后对照；P7文档收敛与稳定发布。
 
 **原则：能用成熟上游就直接复用并做薄适配；只对真正缺失的能力开发新模块。**
