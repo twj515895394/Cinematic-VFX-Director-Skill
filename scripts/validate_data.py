@@ -135,7 +135,9 @@ def verify(*, overrides=None):
             vendor = ROOT / source["vendor_path"]
             if not vendor.is_dir() or not vendor.resolve().is_relative_to(ROOT.resolve()):
                 problems.append("Vendor path missing or outside root: " + sid)
-            elif source.get("vendored_file_count") != len([p for p in vendor.rglob("*") if p.is_file()]):
+            elif source.get("vendored_file_count") != len([p for p in vendor.rglob("*")
+                    if p.is_file() and "__pycache__" not in p.parts
+                    and p.suffix not in (".pyc", ".pyo")]):
                 problems.append("Vendored file count drift: " + sid)
         for integration in source.get("integration", []):
             if not (ROOT / integration).is_file():
