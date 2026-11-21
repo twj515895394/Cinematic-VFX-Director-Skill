@@ -62,3 +62,11 @@ python -m unittest discover -s tests -v
 - effekseer-vfx-skill: `b0eea1085f2e3e0fa0b5cc77c58c9a845f0bec96`，MIT，见 [LICENSE](../third_party/effekseer-vfx-skill/LICENSE)
 - kanaworks-sakuga-vfx: `7cfc9e6bd6ecc0239f3c141e9c5c42cbdc8bb365`，2个源文件（catalog.json + LICENSE.md）；对应90条已转成可查询引用，没有复制预览与游戏特效素材集合。
 - `third_party/` 原样保留上游文件，不直接做内容修改；变更集中在本地 `adapters/` 或专属 `references/`。
+
+## P5 只接入 MiniMax H3 与 Seedance（不做第三模型）
+
+- 原版 MiniMax H3 上游 Skill：`third_party/minimax-h3/skills/h3-prompt-writing/SKILL.md`，原始 `references/base-en.txt`、`ref-en.txt`。上游 `MiniMax-AI/MiniMax-H3` commit `199b7d0e1fd95e7b3eafa8c15eca692534142427`，3文件原样复制。Agent 需按真实媒体输入选择 T2VA/I2VA/FL2VA/L2VA/Ref2VA，不重新发明其提示词字段。
+- Seedance：参考字节跳动官方 [2.0发布](https://seed.bytedance.com/en/blog/seedance-2-0-official-launch) 和 [2.5发布](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5)，采用不限定小版本的参考与可见因果规则；不复制不可证实的 API 参数。
+- `data/model_profiles.json` 只有 `minimax-h3`、`seedance` 两个条目，默认 `minimax-h3`；`scripts/adapt_prompt.py` 复用现有 P3 编译器，只输出模型专属 **VFX-only 插入**，不重写故事。
+- 模糊场景/图片输入先调用 [新手3–5推荐流程](../references/choice-first-workflow.md)，Agent 读原文和原始566原子后产出备选；用户明确确认后才出 Effect Card。
+- 多镜头状态 `scripts/check_shot_states.py`：只检查连续镜头的同一个VFX在剪辑点的字段，不强制混剪镜头互相承接。
