@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "review_id": "design-bad-detached-anchor",
+  "model": "minimax-h3",
+  "shot_id": "sword-floating-light",
+  "medium": "semi-realistic-japanese-cg",
+  "source_prompt": "少女握住剑，不挥舞。",
+  "immutable_constraints": [
+    "剑外形不变",
+    "不能挥砍"
+  ],
+  "reviewer": {
+    "id": "synthetic-design-review-fixture",
+    "role": "author"
+  },
+  "evidence": {
+    "kind": "design-only",
+    "description": "手写的提示词/效果卡设计检查夹具。没有输入任何渲染视频或帧图，不代表实际视觉审核。",
+    "asset_refs": [],
+    "observed_frame_ids": []
+  },
+  "scores": {
+    "causality": {
+      "score": 1,
+      "observation": "依据现有镜头文字检查来源、触发、是否擅自增加行动; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "space": {
+      "score": 0,
+      "observation": "依据镜头描述检查锚点、比例、视差与遮挡的设计逻辑; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "timing": {
+      "score": 1,
+      "observation": "依据设计节拍检查触发→接触→反应与结束的先后; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "style_intensity": {
+      "score": 1,
+      "observation": "依据指定媒介和强度判断是否过度或审美冲突; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "environment": {
+      "score": 1,
+      "observation": "依据已有光源/材质/风向判断局部环境交互; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    },
+    "readability": {
+      "score": 2,
+      "observation": "依据提示词设计判断焦点是否能被保留；未实际查看成片; 案例中特别审查：错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  },
+  "hard_failures": [
+    {
+      "code": "DETACHED_ANCHOR",
+      "observation": "错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "evidence_refs": [
+        "script-brief"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "axis": "space",
+      "problem": "错误设计：剑刃明明静止，粒子附着点突然漂到画面外。",
+      "target": "space VFX layer",
+      "minimal_change": "将流光贴合剑刃表面及其真实空间坐标",
+      "evidence_refs": [
+        "script-brief"
+      ],
+      "priority": 1
+    }
+  ]
+}
