@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "montage-magic",
+  "model": "seedance",
+  "intended_editing": "independent-montage",
+  "shots": [
+    {
+      "shot_id": "M01",
+      "content_summary": "神庙暗金封印符纹亮起",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "rune",
+        "status": "active",
+        "color": "gold",
+        "anchor": "stone",
+        "scale": "thin"
+      }
+    },
+    {
+      "shot_id": "M02",
+      "content_summary": "云海白龙身侧体积光",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "volume",
+        "status": "ambient",
+        "color": "white",
+        "anchor": "cloud",
+        "scale": "wide"
+      }
+    },
+    {
+      "shot_id": "M03",
+      "content_summary": "水墨夜景的山峦雾气",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "mist-ink",
+        "status": "ambient",
+        "color": "gray",
+        "anchor": "hills",
+        "scale": "wide"
+      }
+    }
+  ]
+}
