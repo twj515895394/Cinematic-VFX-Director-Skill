@@ -54,6 +54,22 @@
         "data/catalog/cases.json",
         "scripts/search_cases.py"
       ]
+    },
+    {
+      "id": "minimax-h3-official",
+      "url": "https://github.com/MiniMax-AI/MiniMax-H3",
+      "reuse": "original official H3 prompt-writing Skill and T2VA/I2VA/FL2VA/L2VA/Ref2VA guides",
+      "status": "vendored 3 original text files, integrated only through model-specific routing; source texts unchanged",
+      "license": "as recorded by the upstream MiniMax-H3 repository; retain original source and revision",
+      "upstream_commit": "199b7d0e1fd95e7b3eafa8c15eca692534142427",
+      "vendor_path": "third_party/minimax-h3/",
+      "vendored_file_count": 3,
+      "integration": [
+        "SKILL.md",
+        "data/model_profiles.json",
+        "scripts/adapt_prompt.py",
+        "references/model-adapters.md"
+      ]
     }
   ]
 }
