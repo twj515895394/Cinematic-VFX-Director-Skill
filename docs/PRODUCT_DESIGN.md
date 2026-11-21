@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.3（P1 上游直接复用接入）｜日期：2026-11-21｜状态：设计基线已落地；P1 已实施，P2–P7 逐步推进  
+> 版本：v1.4（P3 导演流程与非侵入式编译落地）｜日期：2026-11-21｜状态：P0–P3 已实施并通过结构验收；P4–P7 持续推进  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -263,3 +263,12 @@ P1 保留原创 `references/` 文档与 Schema 作为四维映射桥接层，优
 - `scripts/search_atoms.py` 复用上游 `query_terms/score` 函数并增补影视分类过滤；`data/curated_atoms.json` 提供31条跨战斗/非战斗的上游 ID 索引；`examples/effect-cards.json` 提供六种应用。
 - 原始导演 Skill 提及的动作、摄影、材质、声音和模型适配等其他 Skill **均属于可选集成**；在本仓库不是强制依赖。主 Skill 保持独立运行。
 - 自动化 CI：`python scripts/validate_data.py` 与 `python -m unittest discover -s tests -v` 已在 GitHub Actions 通过（8项单元测试），但不等于已完成模型效果实测或自动视频 QC。
+
+## 19. P3 实际交付与边界（2026-11-21）
+- **六类请求路由**（knowledge/explore/augment/design/repair/multi-shot）与四维风格判断：`references/director-workflow.md`，根 `SKILL.md` 负责指挥 Agent 按已有上游规范作特效判断。
+- **组合与保护边界**：`references/combination-gates.md`，强调事件存在性、真实接触、来源锚点、一节拍一个 Primary Read、禁止默认冲击波/脱体剑气及覆盖人物与镜头。
+- **输出契约**：`references/output-contract.md`，默认原稿 + 独立 VFX delta；用户授权且 Effect Card 同时标记批准范围时才能追加式整合，禁止隐式重写原有提示词章节。
+- **可执行编译**：`scripts/compile_prompt.py` 将已由导演或创作者确认的 `vfx_delta` 编成可复制文本；复用 JSON Schema 来验证卡片及上游 atom ID。工具不会根据镜头文字凭空生成 Effect Card，也不会自动识别画面或判断视觉美学。
+- **可使用的10张单镜头卡**：`examples/p3-ten-cards.json` 与 `examples/ten-shot-validation.md`，覆盖日系CG、武侠动作、真实环境、机甲、空间、材质变形、符文、雪暴、人物发力和水下散射。
+- **验收**：自动化测试 50项通过（GitHub Actions: https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44861128206），涵盖原文逐字保留、未授权整合拒绝、Atom 引用、Schema、十个可运行场景；这属于**结构/功能测试**，不是视频生成质量测试。
+- P4继续扩充各视觉家族和动态案例；P5处理具体视频模型适配和多镜头；P6需独立评测影片/渲染结果并给定向修复，不得将本阶段的字段校验冒称自动影视 QC。
