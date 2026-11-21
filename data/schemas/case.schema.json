@@ -280,8 +280,7 @@
           "items": {
             "type": "string",
             "minLength": 1
-          },
-          "uniqueItems": true
+          }
         },
         "paired_source_ids": {
           "type": "array",
