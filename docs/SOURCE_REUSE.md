@@ -53,3 +53,9 @@
 - **Seedance（用户明确选择时）**：直接引用字节跳动官方 [Seedance 2.0 介绍](https://seed.bytedance.com/en/blog/seedance-2-0-official-launch) 与 [Seedance 2.5 介绍](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5)。当前不绑定到特定小版本的时长、API参数或特效能力；按实际可使用的渠道再确认。
 - **无第三模型**：H3 与 Seedance 是唯一视频模型输出目的地；其他源项目仍作为VFX艺术知识，不代表本产品提供其它视频生成器。
 - **自有差异化**：`references/choice-first-workflow.md` 面向非专业用户的3–5方案先选后写；`scripts/recommend_options.py` 结构/选择门禁；`scripts/adapt_prompt.py` 在P3编译基础上产生两模型的VFX-only补充；`scripts/check_shot_states.py` 只校验用户明确要求的跨镜头延续与重置。
+
+## P6 审核机制直接复用记录（2026-11-21）
+- **上游原版无需再复制一次**：`third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md` 是原样导入的独立审片Skill，明确规定先看全时序帧图和关键帧，再出 `read/timing/layering/shape_change/motion/placement/tail/identity/coherence` 等九项评分，最弱问题每轮只修一个，观察过的帧须列出。
+- **项目薄适配边界**：影视通用场景采用六维 `0–2` 规则（因果、空间、时序、风格强度、环境、可读性），阈值 `>=10/12`、无零分和硬失败。**这不是把上游九维原始 rubric 冒充成六维**，而是针对视频成片保留独立证据、单项修复原则后自有的评分封装，细节见 `references/qc-rubric.md`、`scripts/review_vfx.py`。
+- `third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/review.md` 的亮度、脱锚、末尾死区和接触时序检测原则，以及 `third_party/rng-vfx/skills/rng-vfx/references/physics.md` 的材质物理规则，可由Agent按需阅读；游戏引擎60FPS固定阈值不能直接套用 H3 或 Seedance。
+- **不虚构运行能力**：16个文字/设计审核夹具不是已生成视频，Python层只能检查记录字段和计算评分；真实 MiniMax H3/Seedance 视频须由能查看原素材的 Reviewer 逐帧审核和核对素材版本才能构成真实视觉证据。
