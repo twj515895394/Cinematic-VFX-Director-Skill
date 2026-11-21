@@ -1,0 +1,286 @@
+{
+  "version": "1.0",
+  "description": "P1 curated original upstream IDs. Do not duplicate 566 atom text or create a parallel bank.",
+  "bank_path": "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json",
+  "entries": [
+    {
+      "atom_id": "vfx_term_001",
+      "source_id": "skill-movie",
+      "name_zh": "能量凝聚",
+      "name_en": "Energy Gathering",
+      "source_family": "energy",
+      "example_scene": "人物蓄力",
+      "usage_note": "聚拢能量的起始状态"
+    },
+    {
+      "atom_id": "vfx_term_007",
+      "source_id": "skill-movie",
+      "name_zh": "逐层点亮",
+      "name_en": "Layer-by-Layer Illumination",
+      "source_family": "energy",
+      "example_scene": "武器激活",
+      "usage_note": "沿器物逐段点亮"
+    },
+    {
+      "atom_id": "vfx_term_101",
+      "source_id": "skill-movie",
+      "name_zh": "魔法阵旋转",
+      "name_en": "Rotating Magic Circle",
+      "source_family": "magic-ritual",
+      "example_scene": "仙侠法阵",
+      "usage_note": "阵纹结构旋转"
+    },
+    {
+      "atom_id": "vfx_term_102",
+      "source_id": "skill-movie",
+      "name_zh": "符文点亮",
+      "name_en": "Rune Illumination",
+      "source_family": "magic-ritual",
+      "example_scene": "神话封印",
+      "usage_note": "符文按序点亮"
+    },
+    {
+      "atom_id": "vfx_term_121",
+      "source_id": "skill-movie",
+      "name_zh": "风能流动",
+      "name_en": "Wind Flow",
+      "source_family": "elemental-natural",
+      "example_scene": "风压与环境",
+      "usage_note": "气流有方向"
+    },
+    {
+      "atom_id": "vfx_term_122",
+      "source_id": "skill-movie",
+      "name_zh": "火焰升腾",
+      "name_en": "Rising Flames",
+      "source_family": "elemental-natural",
+      "example_scene": "火焰场景",
+      "usage_note": "火焰向上卷升"
+    },
+    {
+      "atom_id": "vfx_term_123",
+      "source_id": "skill-movie",
+      "name_zh": "水流旋转",
+      "name_en": "Water Swirl",
+      "source_family": "elemental-natural",
+      "example_scene": "水元素",
+      "usage_note": "沿路径形成水涡"
+    },
+    {
+      "atom_id": "vfx_term_124",
+      "source_id": "skill-movie",
+      "name_zh": "冰晶凝结",
+      "name_en": "Ice Crystal Formation",
+      "source_family": "elemental-natural",
+      "example_scene": "冰雪奇幻",
+      "usage_note": "冰晶附着与生成"
+    },
+    {
+      "atom_id": "vfx_term_125",
+      "source_id": "skill-movie",
+      "name_zh": "雷电游走",
+      "name_en": "Lightning Crawling",
+      "source_family": "elemental-natural",
+      "example_scene": "科幻雷电",
+      "usage_note": "电流沿物体表面爬行"
+    },
+    {
+      "atom_id": "vfx_term_131",
+      "source_id": "skill-movie",
+      "name_zh": "云雾翻腾",
+      "name_en": "Cloud Motion",
+      "source_family": "elemental-natural",
+      "example_scene": "环境云雾",
+      "usage_note": "大尺度体积云雾运动"
+    },
+    {
+      "atom_id": "vfx_term_134",
+      "source_id": "skill-movie",
+      "name_zh": "雨滴扩散",
+      "name_en": "Raindrop Ripple",
+      "source_family": "elemental-natural",
+      "example_scene": "暴雨场景",
+      "usage_note": "雨点接触水面扩散"
+    },
+    {
+      "atom_id": "vfx_term_135",
+      "source_id": "skill-movie",
+      "name_zh": "雪花飘落",
+      "name_en": "Snow Drift",
+      "source_family": "elemental-natural",
+      "example_scene": "雪夜环境",
+      "usage_note": "雪花运动节奏"
+    },
+    {
+      "atom_id": "vfx_term_143",
+      "source_id": "skill-movie",
+      "name_zh": "激光扫描",
+      "name_en": "Laser Scan",
+      "source_family": "technology",
+      "example_scene": "科幻技术",
+      "usage_note": "激光扫描沿装置运行"
+    },
+    {
+      "atom_id": "vfx_term_145",
+      "source_id": "skill-movie",
+      "name_zh": "能量护盾",
+      "name_en": "Energy Shield",
+      "source_family": "technology",
+      "example_scene": "机甲护盾",
+      "usage_note": "限定表面力场"
+    },
+    {
+      "atom_id": "vfx_term_176",
+      "source_id": "skill-movie",
+      "name_zh": "变身释放",
+      "name_en": "Transformation Cast",
+      "source_family": "skill",
+      "example_scene": "角色变化",
+      "usage_note": "变化/释放节拍"
+    },
+    {
+      "atom_id": "vfx_term_222",
+      "source_id": "skill-movie",
+      "name_zh": "光刃斩击",
+      "name_en": "Light Slash",
+      "source_family": "weapon-motion",
+      "example_scene": "动作斩击",
+      "usage_note": "刀刃运动弧光"
+    },
+    {
+      "atom_id": "vfx_term_227",
+      "source_id": "skill-movie",
+      "name_zh": "连续剑气",
+      "name_en": "Rapid Slashes",
+      "source_family": "weapon-motion",
+      "example_scene": "动画多段斩击",
+      "usage_note": "多个动作节拍对应不同弧光"
+    },
+    {
+      "atom_id": "vfx_term_265",
+      "source_id": "skill-movie",
+      "name_zh": "空间撕裂",
+      "name_en": "Space Rift",
+      "source_family": "space-time",
+      "example_scene": "空间裂口",
+      "usage_note": "空间边界变化"
+    },
+    {
+      "atom_id": "vfx_term_269",
+      "source_id": "skill-movie",
+      "name_zh": "传送门开启",
+      "name_en": "Portal Opening",
+      "source_family": "space-time",
+      "example_scene": "空间门",
+      "usage_note": "从边界向外开启"
+    },
+    {
+      "atom_id": "vfx_term_297",
+      "source_id": "skill-movie",
+      "name_zh": "机械召唤",
+      "name_en": "Mecha Deployment",
+      "source_family": "summoning",
+      "example_scene": "机械显现",
+      "usage_note": "机甲结构揭示的候选原子"
+    },
+    {
+      "atom_id": "vfx_term_314",
+      "source_id": "skill-movie",
+      "name_zh": "撞击火花",
+      "name_en": "Impact Sparks",
+      "source_family": "impact",
+      "example_scene": "金属接触",
+      "usage_note": "火星出现在真实接触点"
+    },
+    {
+      "atom_id": "vfx_term_336",
+      "source_id": "skill-movie",
+      "name_zh": "能量消散",
+      "name_en": "Energy Dissipation",
+      "source_family": "lifecycle",
+      "example_scene": "能量消散",
+      "usage_note": "特效峰值过后终止"
+    },
+    {
+      "atom_id": "vfx_term_343",
+      "source_id": "skill-movie",
+      "name_zh": "烟雾消散",
+      "name_en": "Smoke Dissolve",
+      "source_family": "lifecycle",
+      "example_scene": "环境烟雾",
+      "usage_note": "烟雾余韵衰减"
+    },
+    {
+      "atom_id": "vfx_term_348",
+      "source_id": "skill-movie",
+      "name_zh": "灰尘粒子",
+      "name_en": "Dust Particles",
+      "source_family": "particle",
+      "example_scene": "室内光束",
+      "usage_note": "微尘空间深度提示"
+    },
+    {
+      "atom_id": "vfx_term_354",
+      "source_id": "skill-movie",
+      "name_zh": "雾气粒子",
+      "name_en": "Mist Particles",
+      "source_family": "particle",
+      "example_scene": "晨雾",
+      "usage_note": "柔和体积雾气粒子"
+    },
+    {
+      "atom_id": "vfx_term_486",
+      "source_id": "skill-movie",
+      "name_zh": "粒子拖尾",
+      "name_en": "Particle Trails",
+      "source_family": "particle-presentation",
+      "example_scene": "高速运动",
+      "usage_note": "轨迹附属粒子拖尾"
+    },
+    {
+      "atom_id": "vfx_term_488",
+      "source_id": "skill-movie",
+      "name_zh": "辉光泛光",
+      "name_en": "Glow Bloom",
+      "source_family": "particle-presentation",
+      "example_scene": "柔光审美",
+      "usage_note": "保守的泛光参数描述"
+    },
+    {
+      "atom_id": "vfx_term_489",
+      "source_id": "skill-movie",
+      "name_zh": "体积光尘",
+      "name_en": "Volumetric Light Dust",
+      "source_family": "particle-presentation",
+      "example_scene": "电影空气",
+      "usage_note": "光束中的微尘"
+    },
+    {
+      "atom_id": "vfx_term_506",
+      "source_id": "skill-movie",
+      "name_zh": "彩虹折射",
+      "name_en": "Prismatic Refraction",
+      "source_family": "color-light",
+      "example_scene": "棱镜效果",
+      "usage_note": "折射与彩色干涉"
+    },
+    {
+      "atom_id": "vfx_term_511",
+      "source_id": "skill-movie",
+      "name_zh": "珠光质感",
+      "name_en": "Pearlescent Finish",
+      "source_family": "color-light",
+      "example_scene": "梦境CG",
+      "usage_note": "珠光材质高光"
+    },
+    {
+      "atom_id": "vfx_term_433",
+      "source_id": "skill-movie",
+      "name_zh": "缓慢漂移",
+      "name_en": "Slow Drift",
+      "source_family": "motion-curve",
+      "example_scene": "漂浮氛围",
+      "usage_note": "慢漂移，避免全画面剧烈运动"
+    }
+  ]
+}
