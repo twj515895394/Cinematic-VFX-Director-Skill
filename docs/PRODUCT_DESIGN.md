@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.2（Copy-First 复用优先基线）｜日期：2026-11-21｜状态：设计已起草，功能待实现  
+> 版本：v1.3（P1 上游直接复用接入）｜日期：2026-11-21｜状态：设计基线已落地；P1 已实施，P2–P7 逐步推进  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -125,6 +125,13 @@ Cinematic-VFX-Director-Skill/
 │   ├── IMPLEMENTATION_PLAN.md    # 任务与验收
 │   ├── SOURCE_REUSE.md           # 上游来源与修改边界
 │   └── ADR/                      # 重大设计决策
+├── third_party/                 # 原样复制的上游 Skill、词库、脚本、专业参考
+│   ├── skill-movie/             # 两个 VFX Skill + 566 双语原子 + 检索脚本
+│   ├── rng-vfx/                 # 专业特效美术/物理/风格资料
+│   └── effekseer-vfx-skill/     # 特效设计/分层/时序/QC
+├── adapters/                    # 薄适配层，不重写上游原件
+│   ├── upstream-routing.md
+│   └── skill_movie_family_map.json
 ├── references/
 │   ├── taxonomy.md               # 四维分类、风格路由和术语
 │   ├── effect-grammar.md         # 来源→触发→路径→反馈→消散
@@ -163,7 +170,7 @@ Cinematic-VFX-Director-Skill/
 可独立使用或被分镜、动作、剪辑、声音 Skill 调用。主 Skill 接收「已确定的动作/镜头事实」并返回 VFX 效果卡和提示词增量；不修改上游业务对象。多镜头可传递 effect_state_in/effect_state_out，镜头解耦时不强制衔接。音效建议单列为可选，不替声音 Skill 完成设计。
 
 ## 11. 上游复用策略与来源
-- `snowfrost/skill-movie`：参考 `cinematic-vfx-director` 的事件因果/信息层级、`vfx-effect-construction-engine` 的原子检索与阶段构造；是否拷贝词库须先确认各文件授权和依赖。
+- `snowfrost/skill-movie`：已直接导入原始 `cinematic-vfx-director` 与 `vfx-effect-construction-engine` 两个 Skill、完整 566 条原子库、上游 Python 搜索脚本及配套 references；通过薄适配层统一四维分类，详见上游复用记录。
 - `MRRengi/rng-vfx`：参考 craft/elements/motion/physics/styles、测试范式；需将游戏引擎实现与视频提示词逻辑分离。
 - `kanaworksai-hue/effekseer-vfx-skill`：参考案例流程、质量审核、分层方案。
 - `kanaworksai-hue/kanaworks-sakuga-vfx`：仅建立分类和案例**链接**，素材二次分发须分别核对授权。
@@ -194,7 +201,7 @@ Cinematic-VFX-Director-Skill/
 | 上游 | 借鉴/复用对象 | 放入本项目 | 改造与排除 |
 |---|---|---|---|
 | snowfrost/skill-movie: cinematic-vfx-director | 意图识别、主信息/次信息、事件因果、媒介适配、因果诊断 | SKILL.md、references/effect-grammar.md、组合规范 | 不复制其对其他影片子 Skill 的硬依赖 |
-| snowfrost/skill-movie: vfx-effect-construction-engine | 特效家族选择、原子检索、卡片、阶段拼装 | data/atoms、data/schemas、scripts、references/lifecycle.md | 566 词库属于上游数据，不默认整库复制；独立核对许可和字段 |
+| snowfrost/skill-movie: vfx-effect-construction-engine | 特效家族选择、566条原子、原始检索脚本、阶段拼装 | third_party/skill-movie/、adapters/skill_movie_family_map.json、scripts/search_atoms.py | 566词库/搜索代码已原样导入，项目只做映射与调用 |
 | MRRengi/rng-vfx | animation craft、elements、physics、motion、brightness、styles、评测思路 | references/physics-and-optics.md、styles、mediums、tests | 游戏引擎代码与 AI 视频提示词职责分离 |
 | kanaworksai-hue/effekseer-vfx-skill | 设计→分层→审核→修复工作流、正反例 | references/qc-rubric.md、tests、examples | 不复用 Effekseer/Unity 可执行资产链 |
 | kanaworksai-hue/kanaworks-sakuga-vfx | 视觉案例编目、元素属性、组合映射、动画演示 | data/catalog、data/schemas/case.schema.json | 保留外链、出处、预览说明；不未经许可再分发视觉素材 |
@@ -225,7 +232,7 @@ Effect Card 的事件可用相对动作锚点（at grip / on actual contact / af
 QC 不仅打分，还分类诊断：CAUSALITY（来源/因果）、TIMING（提前/拖延）、SPATIAL（错位/遮挡）、LOOK（过曝/廉价）、CONTINUITY（颜色/形态跳变）、COMPOSITION（主次失焦）、MODEL_RISK（语义过载/变形风险）、SCOPE（越权修改）。每项返回 evidence、severity、affected_beat、minimal_fix、protected_constraints。优先局部修复而非全篇重写。
 
 ## 16. P1 首批交付范围（设计门禁）
-P1 必须落地：四维分类 `taxonomy.md`、事件语法 `effect-grammar.md`、`lifecycle.md`、`intensity-and-hierarchy.md`、`composition-rules.md`、两个可解析 JSON Schema、至少 16 条精选原子（横跨战斗与非战斗）、至少 5 个跨风格代表性 Effect Card 示例。还应明确定义 Case schema（可先实现空案例集）。P1 只交付数据与设计语法；脚本检索、自动校验及全面 QC 落在 P2/P6，不提前声称已实现。
+P1 必须落地：四维分类 `taxonomy.md`、事件语法 `effect-grammar.md`、`lifecycle.md`、`intensity-and-hierarchy.md`、`composition-rules.md`、两个可解析 JSON Schema、至少 16 条精选原子（横跨战斗与非战斗）、至少 5 个跨风格代表性 Effect Card 示例。还应明确定义 Case schema（可先实现空案例集）。P1 以设计语法、数据模型和上游复用为主要范围；原始检索与薄适配检索已提前落地，P2 继续完善查询、自动校验与回归；自动视觉 QC 落在 P6。
 
 ## 17. Copy-First / Adapt-Second：上游优先复用（2026-11-21 决策）
 **最高优先级：上游已有成熟实现，能直接复制复用再调整适配，就不要重新造轮子或重写。** 此原则适用 P1～P7 全阶段，包括专业特效知识、术语数据、检索工具、Skill 工作流、案例元数据与 QC。
@@ -243,8 +250,16 @@ P1 必须落地：四维分类 `taxonomy.md`、事件语法 `effect-grammar.md`�
 |---|---|---|
 | rng-vfx | craft、elements、motion、physics、brightness、styles 等 MIT 原件 | 四维风格路由、效果卡字段与中文使用说明 |
 | effekseer-vfx-skill | vfx-review、可复用规则与样例（MIT，逐文件确认） | 视频/镜头特效 QC 输出结构与原稿保护 |
-| skill-movie | 特效导演、特效构建、原子检索思路 | 先建适配接口与外链；当前未核实可复制授权，避免公开仓库直接搬运 |
+| skill-movie | 特效导演、特效构建、566条原子与原搜索脚本 | 15个原始文件已导入；项目通过映射与薄封装调用原件，而非重写 |
 | kanaworks-sakuga-vfx | MIT 代码/工具（需要才复制） | 动态案例首先链接与元数据映射，特效媒体遵循单独许可 |
 
 ### 17.2 P1 调整
-P1 原创 `references/` 文档和 Schema 作为本项目契约与桥接层保留；不再以“手工重写大量特效原子”作为优先目标。先导入授权明确的上游成熟艺术知识和 QC 能力，再定义适配清单。若有无法复用的原子索引才针对缺口单独实现。
+P1 保留原创 `references/` 文档与 Schema 作为四维映射桥接层，优先使用已导入的上游 566 原子和原始检索逻辑。31条精选原子是指向上游 ID 的索引，不复制或重写它们。只对确实不存在的影视特效原子增量补充。
+
+## 18. P1 实际落地与兼容契约（2026-11-21）
+- 已固定 `skill-movie` 上游 commit：`69f6db670ecf305e84f199e418bddbf2c1d988fe`；15 个原始文件置于 `third_party/skill-movie/`。
+- 566 原子原生字段为 `id/category/role/family/zh/en`，**不要直接声称它们满足本项目扩展的 rich Atom schema**。`data/schemas/atom.schema.json` 为新增原子模板；原有 566 条始终保留其原生格式。
+- `adapters/skill_movie_family_map.json` 将上游 20 个家族映射为本项目效果家族候选；不强行将视觉媒介或题材写入原子。样式、媒介、题材属于查询上下文，须由主 Skill 在结合具体镜头后决策。
+- `scripts/search_atoms.py` 复用上游 `query_terms/score` 函数并增补影视分类过滤；`data/curated_atoms.json` 提供31条跨战斗/非战斗的上游 ID 索引；`examples/effect-cards.json` 提供六种应用。
+- 原始导演 Skill 提及的动作、摄影、材质、声音和模型适配等其他 Skill **均属于可选集成**；在本仓库不是强制依赖。主 Skill 保持独立运行。
+- 自动化 CI：`python scripts/validate_data.py` 与 `python -m unittest discover -s tests -v` 已在 GitHub Actions 通过（8项单元测试），但不等于已完成模型效果实测或自动视频 QC。
