@@ -46,6 +46,13 @@ python scripts/prepare_visual_evidence.py --video my_video.mp4 --shot-id S01 --m
 python scripts/prepare_visual_evidence.py --video seedance_video.mp4 --shot-id S02 --model seedance
 ```
 
+在审核前，建议对真实视频和帧图运行哈希完整性验证（不对画质打分）：
+
+```bash
+python scripts/check_visual_evidence.py --manifest reviews/S01/evidence-manifest.json --video my_video.mp4
+python scripts/check_visual_evidence.py --manifest reviews/S02/evidence-manifest.json --video seedance_video.mp4
+```
+
 结果写到被 `.gitignore` 忽略的 `reviews/S01/`、`reviews/S02/`，包含：
 - `frame_*.png`：起点、中段、结尾等真实候选画面；采样由原视频时长和帧率确定，**不是固定24 FPS**。
 - `evidence-manifest.json`：原视频 SHA-256、FPS、宽高、时间戳、各候选帧SHA-256与采样帧号；状态为 `not-reviewed`，`actually_inspected_frame_ids=[]`。
