@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "description": "P1 curated original upstream IDs. Do not duplicate 566 atom text or create a parallel bank.",
+  "description": "P2 curated upstream ID index with authored applicability tags; tags apply only to these entries and are not claims about every upstream atom.",
   "bank_path": "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json",
   "entries": [
     {
@@ -10,7 +10,13 @@
       "name_en": "Energy Gathering",
       "source_family": "energy",
       "example_scene": "人物蓄力",
-      "usage_note": "聚拢能量的起始状态"
+      "usage_note": "聚拢能量的起始状态",
+      "tags": [
+        "energy",
+        "charge",
+        "character",
+        "power-up"
+      ]
     },
     {
       "atom_id": "vfx_term_007",
@@ -19,7 +25,13 @@
       "name_en": "Layer-by-Layer Illumination",
       "source_family": "energy",
       "example_scene": "武器激活",
-      "usage_note": "沿器物逐段点亮"
+      "usage_note": "沿器物逐段点亮",
+      "tags": [
+        "energy",
+        "activation",
+        "weapon",
+        "glow"
+      ]
     },
     {
       "atom_id": "vfx_term_101",
@@ -28,7 +40,13 @@
       "name_en": "Rotating Magic Circle",
       "source_family": "magic-ritual",
       "example_scene": "仙侠法阵",
-      "usage_note": "阵纹结构旋转"
+      "usage_note": "阵纹结构旋转",
+      "tags": [
+        "ritual",
+        "magic-circle",
+        "xianxia",
+        "rotation"
+      ]
     },
     {
       "atom_id": "vfx_term_102",
@@ -37,7 +55,13 @@
       "name_en": "Rune Illumination",
       "source_family": "magic-ritual",
       "example_scene": "神话封印",
-      "usage_note": "符文按序点亮"
+      "usage_note": "符文按序点亮",
+      "tags": [
+        "ritual",
+        "rune",
+        "seal",
+        "glow"
+      ]
     },
     {
       "atom_id": "vfx_term_121",
@@ -46,7 +70,13 @@
       "name_en": "Wind Flow",
       "source_family": "elemental-natural",
       "example_scene": "风压与环境",
-      "usage_note": "气流有方向"
+      "usage_note": "气流有方向",
+      "tags": [
+        "wind",
+        "environment",
+        "motion",
+        "pressure"
+      ]
     },
     {
       "atom_id": "vfx_term_122",
@@ -55,7 +85,12 @@
       "name_en": "Rising Flames",
       "source_family": "elemental-natural",
       "example_scene": "火焰场景",
-      "usage_note": "火焰向上卷升"
+      "usage_note": "火焰向上卷升",
+      "tags": [
+        "fire",
+        "elemental",
+        "environment"
+      ]
     },
     {
       "atom_id": "vfx_term_123",
@@ -64,7 +99,12 @@
       "name_en": "Water Swirl",
       "source_family": "elemental-natural",
       "example_scene": "水元素",
-      "usage_note": "沿路径形成水涡"
+      "usage_note": "沿路径形成水涡",
+      "tags": [
+        "water",
+        "elemental",
+        "motion"
+      ]
     },
     {
       "atom_id": "vfx_term_124",
@@ -73,7 +113,13 @@
       "name_en": "Ice Crystal Formation",
       "source_family": "elemental-natural",
       "example_scene": "冰雪奇幻",
-      "usage_note": "冰晶附着与生成"
+      "usage_note": "冰晶附着与生成",
+      "tags": [
+        "ice",
+        "crystal",
+        "elemental",
+        "transformation"
+      ]
     },
     {
       "atom_id": "vfx_term_125",
@@ -82,7 +128,13 @@
       "name_en": "Lightning Crawling",
       "source_family": "elemental-natural",
       "example_scene": "科幻雷电",
-      "usage_note": "电流沿物体表面爬行"
+      "usage_note": "电流沿物体表面爬行",
+      "tags": [
+        "lightning",
+        "electric",
+        "elemental",
+        "technology"
+      ]
     },
     {
       "atom_id": "vfx_term_131",
@@ -91,7 +143,13 @@
       "name_en": "Cloud Motion",
       "source_family": "elemental-natural",
       "example_scene": "环境云雾",
-      "usage_note": "大尺度体积云雾运动"
+      "usage_note": "大尺度体积云雾运动",
+      "tags": [
+        "cloud",
+        "fog",
+        "environment",
+        "volume"
+      ]
     },
     {
       "atom_id": "vfx_term_134",
@@ -100,7 +158,14 @@
       "name_en": "Raindrop Ripple",
       "source_family": "elemental-natural",
       "example_scene": "暴雨场景",
-      "usage_note": "雨点接触水面扩散"
+      "usage_note": "雨点接触水面扩散",
+      "tags": [
+        "rain",
+        "weather",
+        "water",
+        "environment",
+        "non-combat"
+      ]
     },
     {
       "atom_id": "vfx_term_135",
@@ -109,7 +174,13 @@
       "name_en": "Snow Drift",
       "source_family": "elemental-natural",
       "example_scene": "雪夜环境",
-      "usage_note": "雪花运动节奏"
+      "usage_note": "雪花运动节奏",
+      "tags": [
+        "snow",
+        "weather",
+        "environment",
+        "non-combat"
+      ]
     },
     {
       "atom_id": "vfx_term_143",
@@ -118,7 +189,13 @@
       "name_en": "Laser Scan",
       "source_family": "technology",
       "example_scene": "科幻技术",
-      "usage_note": "激光扫描沿装置运行"
+      "usage_note": "激光扫描沿装置运行",
+      "tags": [
+        "laser",
+        "scan",
+        "technology",
+        "mecha"
+      ]
     },
     {
       "atom_id": "vfx_term_145",
@@ -127,7 +204,13 @@
       "name_en": "Energy Shield",
       "source_family": "technology",
       "example_scene": "机甲护盾",
-      "usage_note": "限定表面力场"
+      "usage_note": "限定表面力场",
+      "tags": [
+        "shield",
+        "technology",
+        "mecha",
+        "activation"
+      ]
     },
     {
       "atom_id": "vfx_term_176",
@@ -136,7 +219,12 @@
       "name_en": "Transformation Cast",
       "source_family": "skill",
       "example_scene": "角色变化",
-      "usage_note": "变化/释放节拍"
+      "usage_note": "变化/释放节拍",
+      "tags": [
+        "transformation",
+        "character",
+        "release"
+      ]
     },
     {
       "atom_id": "vfx_term_222",
@@ -145,7 +233,13 @@
       "name_en": "Light Slash",
       "source_family": "weapon-motion",
       "example_scene": "动作斩击",
-      "usage_note": "刀刃运动弧光"
+      "usage_note": "刀刃运动弧光",
+      "tags": [
+        "weapon",
+        "slash",
+        "motion",
+        "combat"
+      ]
     },
     {
       "atom_id": "vfx_term_227",
@@ -154,7 +248,13 @@
       "name_en": "Rapid Slashes",
       "source_family": "weapon-motion",
       "example_scene": "动画多段斩击",
-      "usage_note": "多个动作节拍对应不同弧光"
+      "usage_note": "多个动作节拍对应不同弧光",
+      "tags": [
+        "weapon",
+        "slash",
+        "sword-aura",
+        "combat"
+      ]
     },
     {
       "atom_id": "vfx_term_265",
@@ -163,7 +263,13 @@
       "name_en": "Space Rift",
       "source_family": "space-time",
       "example_scene": "空间裂口",
-      "usage_note": "空间边界变化"
+      "usage_note": "空间边界变化",
+      "tags": [
+        "space",
+        "rift",
+        "distortion",
+        "fantasy"
+      ]
     },
     {
       "atom_id": "vfx_term_269",
@@ -172,7 +278,13 @@
       "name_en": "Portal Opening",
       "source_family": "space-time",
       "example_scene": "空间门",
-      "usage_note": "从边界向外开启"
+      "usage_note": "从边界向外开启",
+      "tags": [
+        "space",
+        "portal",
+        "opening",
+        "fantasy"
+      ]
     },
     {
       "atom_id": "vfx_term_297",
@@ -181,7 +293,13 @@
       "name_en": "Mecha Deployment",
       "source_family": "summoning",
       "example_scene": "机械显现",
-      "usage_note": "机甲结构揭示的候选原子"
+      "usage_note": "机甲结构揭示的候选原子",
+      "tags": [
+        "mecha",
+        "summoning",
+        "technology",
+        "transformation"
+      ]
     },
     {
       "atom_id": "vfx_term_314",
@@ -190,7 +308,13 @@
       "name_en": "Impact Sparks",
       "source_family": "impact",
       "example_scene": "金属接触",
-      "usage_note": "火星出现在真实接触点"
+      "usage_note": "火星出现在真实接触点",
+      "tags": [
+        "impact",
+        "contact",
+        "spark",
+        "combat"
+      ]
     },
     {
       "atom_id": "vfx_term_336",
@@ -199,7 +323,12 @@
       "name_en": "Energy Dissipation",
       "source_family": "lifecycle",
       "example_scene": "能量消散",
-      "usage_note": "特效峰值过后终止"
+      "usage_note": "特效峰值过后终止",
+      "tags": [
+        "energy",
+        "decay",
+        "dissipation"
+      ]
     },
     {
       "atom_id": "vfx_term_343",
@@ -208,7 +337,12 @@
       "name_en": "Smoke Dissolve",
       "source_family": "lifecycle",
       "example_scene": "环境烟雾",
-      "usage_note": "烟雾余韵衰减"
+      "usage_note": "烟雾余韵衰减",
+      "tags": [
+        "smoke",
+        "decay",
+        "environment"
+      ]
     },
     {
       "atom_id": "vfx_term_348",
@@ -217,7 +351,13 @@
       "name_en": "Dust Particles",
       "source_family": "particle",
       "example_scene": "室内光束",
-      "usage_note": "微尘空间深度提示"
+      "usage_note": "微尘空间深度提示",
+      "tags": [
+        "dust",
+        "particles",
+        "atmosphere",
+        "non-combat"
+      ]
     },
     {
       "atom_id": "vfx_term_354",
@@ -226,7 +366,14 @@
       "name_en": "Mist Particles",
       "source_family": "particle",
       "example_scene": "晨雾",
-      "usage_note": "柔和体积雾气粒子"
+      "usage_note": "柔和体积雾气粒子",
+      "tags": [
+        "fog",
+        "mist",
+        "particles",
+        "atmosphere",
+        "non-combat"
+      ]
     },
     {
       "atom_id": "vfx_term_486",
@@ -235,7 +382,13 @@
       "name_en": "Particle Trails",
       "source_family": "particle-presentation",
       "example_scene": "高速运动",
-      "usage_note": "轨迹附属粒子拖尾"
+      "usage_note": "轨迹附属粒子拖尾",
+      "tags": [
+        "motion",
+        "trail",
+        "particles",
+        "speed"
+      ]
     },
     {
       "atom_id": "vfx_term_488",
@@ -244,7 +397,13 @@
       "name_en": "Glow Bloom",
       "source_family": "particle-presentation",
       "example_scene": "柔光审美",
-      "usage_note": "保守的泛光参数描述"
+      "usage_note": "保守的泛光参数描述",
+      "tags": [
+        "glow",
+        "bloom",
+        "optics",
+        "soft-diffused"
+      ]
     },
     {
       "atom_id": "vfx_term_489",
@@ -253,7 +412,13 @@
       "name_en": "Volumetric Light Dust",
       "source_family": "particle-presentation",
       "example_scene": "电影空气",
-      "usage_note": "光束中的微尘"
+      "usage_note": "光束中的微尘",
+      "tags": [
+        "volumetric-light",
+        "dust",
+        "atmosphere",
+        "optics"
+      ]
     },
     {
       "atom_id": "vfx_term_506",
@@ -262,7 +427,13 @@
       "name_en": "Prismatic Refraction",
       "source_family": "color-light",
       "example_scene": "棱镜效果",
-      "usage_note": "折射与彩色干涉"
+      "usage_note": "折射与彩色干涉",
+      "tags": [
+        "refraction",
+        "prism",
+        "optics",
+        "color"
+      ]
     },
     {
       "atom_id": "vfx_term_511",
@@ -271,7 +442,13 @@
       "name_en": "Pearlescent Finish",
       "source_family": "color-light",
       "example_scene": "梦境CG",
-      "usage_note": "珠光材质高光"
+      "usage_note": "珠光材质高光",
+      "tags": [
+        "pearlescent",
+        "material",
+        "mj-dreamlike",
+        "optics"
+      ]
     },
     {
       "atom_id": "vfx_term_433",
@@ -280,7 +457,13 @@
       "name_en": "Slow Drift",
       "source_family": "motion-curve",
       "example_scene": "漂浮氛围",
-      "usage_note": "慢漂移，避免全画面剧烈运动"
+      "usage_note": "慢漂移，避免全画面剧烈运动",
+      "tags": [
+        "drift",
+        "motion",
+        "atmosphere",
+        "non-combat"
+      ]
     }
   ]
 }
