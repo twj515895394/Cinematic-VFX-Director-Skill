@@ -23,3 +23,7 @@ jobs:
           python scripts/search_atoms.py "雨滴" --family environment-weather --json
           python scripts/search_atoms.py "雨滴" --tag rain --tag weather --json
           python scripts/search_atoms.py "辉光" --medium semi-realistic-japanese-cg --style mj-dreamlike --json
+      - name: Smoke test P3 approved-card prompt compilation
+        run: |
+          python scripts/compile_prompt.py --card sample.sword-activation
+          python scripts/compile_prompt.py --card sample.rainy-street --json
