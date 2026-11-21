@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "request_id": "fixture.sword-image",
+  "model": "minimax-h3",
+  "input": {
+    "kind": "image",
+    "user_request": "给这张图片中的人和剑增加一些特效",
+    "observed_content": "模拟图片观察摘要：半写实CG人物握住深色剑柄，剑处在原位，人物未攻击（这只是测试输入描述，不是实际图片识别）",
+    "uncertain_details": [
+      "图片未提供动作时间线",
+      "剑是否本来会发光未知"
+    ]
+  },
+  "scene_facts": [
+    "镜头中只有人物和手中长剑",
+    "原有持剑动作未发生攻击"
+  ],
+  "immutable_constraints": [
+    "保持人脸身份与衣服",
+    "剑外形和数量不变",
+    "不增加挥砍与远程攻击"
+  ],
+  "options": [
+    {
+      "id": "A1",
+      "title": "剑刃沿线渐次点亮",
+      "family": "weapon",
+      "intensity": "L2",
+      "visual_result": "细窄紫光沿现有剑刃依次掠过，手指得到真实色光",
+      "trigger_and_anchor": "握紧现有剑柄时，锚定剑刃",
+      "why_it_fits": "动作触发明确，视觉焦点集中",
+      "possible_downside": "过亮可能遮住剑刃细节",
+      "atom_ids": [
+        "vfx_term_007",
+        "vfx_term_488"
+      ],
+      "constraints": [
+        "不得发射剑气",
+        "不改变剑柄外形"
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "剑周空气轻微流动",
+      "family": "atmospheric",
+      "intensity": "L1",
+      "visual_result": "近剑薄雾随气流轻推并很快消散",
+      "trigger_and_anchor": "人物握剑附近的空气空间",
+      "why_it_fits": "适合神秘感且不强迫角色战斗",
+      "possible_downside": "雾过多会遮挡手部",
+      "atom_ids": [
+        "vfx_term_354",
+        "vfx_term_433"
+      ],
+      "constraints": [
+        "不得遮挡手指动作"
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "剑身表面的能量凝聚",
+      "family": "energy",
+      "intensity": "L2",
+      "visual_result": "小范围流光在剑身纹理中凝聚并短暂停驻",
+      "trigger_and_anchor": "剑刃原表面，无离体弹体",
+      "why_it_fits": "有力量苏醒感但不改变动作",
+      "possible_downside": "可能使材质看起来太科幻",
+      "atom_ids": [
+        "vfx_term_001",
+        "vfx_term_336"
+      ],
+      "constraints": [
+        "保持原材料轮廓"
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "克制的柔光反射",
+      "family": "optical-compositing",
+      "intensity": "L1",
+      "visual_result": "剑边微光映到指节、袖口、下颌，无新增光柱",
+      "trigger_and_anchor": "已有剑刃光源及附近人物表面",
+      "why_it_fits": "适合梦幻柔光/半写实镜头",
+      "possible_downside": "过度柔光会损失五官清晰度",
+      "atom_ids": [
+        "vfx_term_488",
+        "vfx_term_511"
+      ],
+      "constraints": [
+        "人物脸部必须清楚"
+      ]
+    }
+  ],
+  "selection_state": "awaiting-user-selection",
+  "selected_option_id": null
+}
