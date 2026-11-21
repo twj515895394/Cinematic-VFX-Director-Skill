@@ -1,9 +1,9 @@
 ---
-name: cinematic-vfx-director
+name: Cinematic-VFX-Director-Skill
 description: Design and audit cinematic visual effects for AI video prompts and CG shots across live action, stylized CG, anime, fantasy, sci-fi, environmental effects, transformations, and action sequences. Use for VFX choice, timed effect behavior, weapon/character/environment effects, lighting response, prompt enhancement, or fixing detached and unreadable effects. Preserve user-specified shots, choreography and story.
 ---
 
-# Cinematic VFX Director
+# Cinematic-VFX-Director-Skill
 
 > P6 adds a six-axis evidence-aware QC and one-issue repair layer to the established P5 option-first workflow (MiniMax H3 default, Seedance only alternate). The original upstream independent reviewer rules remain vendored. **A design review is never a video review; scripts aggregate reviewer observations, but do NOT inspect pixels or independently verify footage.**
 
