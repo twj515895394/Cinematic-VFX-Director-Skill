@@ -7,6 +7,7 @@
     "schema_version",
     "request_id",
     "model",
+    "model_selection_source",
     "input",
     "scene_facts",
     "immutable_constraints",
@@ -185,6 +186,12 @@
         {
           "type": "null"
         }
+      ]
+    },
+    "model_selection_source": {
+      "enum": [
+        "default",
+        "user-explicit"
       ]
     }
   },
