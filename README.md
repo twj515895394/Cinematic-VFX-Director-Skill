@@ -4,7 +4,7 @@
 
 **English introduction:** A cinematic VFX direction skill and searchable knowledge base for AI video creators. It supports live action, semi-realistic Japanese CG, 2D anime, stylized film CG, wuxia/xianxia, sci-fi and mecha, dreamlike aesthetics, weather and disasters, environmental effects, transformations, and noncombat scenes. Given a scene, image, video, or storyboard, it recommends 3–5 suitable effects when the VFX direction is unclear, waits for user selection, and then supplies causally grounded, model-aware VFX prompt additions and review guidance. MiniMax H3 is the default, with Seedance available on explicit request; the original story, characters, actions, and camera remain intact.
 
-**版本：0.1.0-rc.1（待用户实测）**。P0–P5核心模块及P6设计QC/证据合同/单问题修复已实现；P7一键验收、版本文档、实测手册与真实视频取证准备已交付。**实际MiniMax H3/Seedance出片和独立视觉验收等待用户进行**，因此当前为发布候选而非画质已验证的稳定版。现有90条动漫游戏视觉案例仅是来源元数据。
+**版本：0.1.0-rc.2（待用户实测）**。P0–P5核心模块及P6设计QC/证据合同/单问题修复已实现；P7一键验收、版本文档、实测手册与真实视频取证准备已交付。**实际MiniMax H3/Seedance出片和独立视觉验收等待用户进行**，因此当前为发布候选而非画质已验证的稳定版。现有90条动漫游戏视觉案例仅是来源元数据。
 
 ## 从这里开始（使用与实测）
 
