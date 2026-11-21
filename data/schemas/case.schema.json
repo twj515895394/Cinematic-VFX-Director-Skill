@@ -207,6 +207,99 @@
         "original-work",
         "licensed-local"
       ]
+    },
+    "curation_status": {
+      "enum": [
+        "metadata-only",
+        "visually-reviewed",
+        "verified-render"
+      ]
+    },
+    "source_asset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upstream_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "element",
+        "form",
+        "frames",
+        "fps",
+        "loop",
+        "anchor",
+        "orientation",
+        "source_tags",
+        "source_use_cases",
+        "paired_source_ids",
+        "fx_components"
+      ],
+      "properties": {
+        "element": {
+          "type": "string",
+          "minLength": 1
+        },
+        "form": {
+          "type": "string",
+          "minLength": 1
+        },
+        "frames": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fps": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "anchor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "orientation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "source_use_cases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "paired_source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "fx_components": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
     }
   }
 }
