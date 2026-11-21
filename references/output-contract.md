@@ -1,4 +1,9 @@
-# P3 · 通用 VFX 提示词输出契约
+# P3/P5 · 通用 VFX 提示词输出契约
+
+## 0. 先确认效果：P5 的选项门禁
+若用户只提供场景、图片、参考视频或“帮我加点特效”等模糊需求，**禁止直接输出下面的最终提示词**。先按 [choice-first-workflow](choice-first-workflow.md) 给出3–5个有差异的VFX方案并等用户明确选择。用户选定前不创建被视为已确认的 Effect Card；用户已经明确指定具体效果的情况无需额外菜单。
+
+后续仅支持两种目标模型：未指明时默认 MiniMax H3；明确指定 Seedance 时使用 Seedance。见 [model-adapters.md](model-adapters.md)。
 
 ## 1. 默认：非侵入式输出（delta）
 有原提示词时，必须保留逐字一致的原文，包括换行、标点、对白、原镜头时长和已有负面限制。**默认只有两块：**
@@ -45,4 +50,4 @@ python scripts/compile_prompt.py --cards examples/p3-ten-cards.json --card p3.da
 python scripts/compile_prompt.py --card sample.sword-activation --integrated --approved
 # 最后一条会拒绝：该样例仍标记为 vfx-only；只有用户明确批准并同步更新Card才允许整合。
 ```
-编译脚本是**Effect Card → 文本的确定性转换**，不是 AI 自动理解原始提示词的替代品，也不是视频像素级 QC。人工/Agent 完成镜头意图、原子选型与光学因果判断后才能交给它编译。
+编译脚本是**Effect Card → 文本的确定性转换**，不是 AI 自动理解原始提示词的替代品，也不是视频像素级 QC。P5 的 `scripts/adapt_prompt.py` 调用此编译器并给出 MiniMax H3 / Seedance 的镜头 VFX 插入文本，但并非完整的有声模型提示词。只有 Agent 已分析场景并获用户方案确认，完成镜头意图、原子选型与因果判断后才能交给它编译。
