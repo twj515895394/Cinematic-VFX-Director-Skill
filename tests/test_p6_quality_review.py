@@ -35,6 +35,8 @@ def fake_render_report(name="design-good-sword", role="independent"):
     }
     for d in x["scores"].values():
         d["evidence_refs"] = ["frame:12"]
+    for issue in x["hard_failures"] + x["findings"]:
+        issue["evidence_refs"] = ["frame:12"]
     return x
 
 
