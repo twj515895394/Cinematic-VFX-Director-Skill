@@ -2,7 +2,7 @@
 
 面向个人 AI 视频创作的 **通用影视 CG 视觉特效导演与知识库**。覆盖真人写实、日系半写实 CG、2D 动漫、卡通电影、武侠仙侠、科幻机甲、梦境 MJ 审美、灾害环境、角色变形和非战斗奇幻等场景。
 
-**项目状态（2026-11-21）：P1～P3完成；P4知识体系与首批动态案例库已完成；**P5只支持MiniMax H3（默认）/Seedance，新增非专业用户3–5方案推荐与多镜头状态检查**；92项自动化测试已通过。P6～P7待推进（跨媒介真实视频案例仍可扩充）。** 不把基础数据检索误认为完整的模型适配或自动特效审核。
+**项目状态（2026-11-21）：P1～P3完成；P4知识体系与首批动态案例库已完成；**P5只支持MiniMax H3（默认）/Seedance，新增非专业用户3–5方案推荐与多镜头状态检查**；93项自动化测试已通过。P6～P7待推进（跨媒介真实视频案例仍可扩充）。** 不把基础数据检索误认为完整的模型适配或自动特效审核。
 
 ## 为什么不重复造轮子
 目前已经**实际复制并引用**五个成熟上游项目的45个源文件：
@@ -135,7 +135,7 @@ python scripts/check_shot_states.py --file examples/sequences/montage-weather.js
 - [P5 多镜头状态校验](scripts/check_shot_states.py)
 - [数据验证脚本](scripts/validate_data.py)
 - [P2 检索与完整性校验说明](docs/SEARCH_AND_VALIDATION.md)
-- [GitHub Actions 成功运行](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863374042)
+- [GitHub Actions 成功运行](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037)
 
 ## 仍待完成
 P4持续补充真人电影/CG/MJ等真实动态案例（现有90条以动漫游戏素材为主）；P6：真实视觉QC与定向修复；P7：文档收敛与稳定发布。
