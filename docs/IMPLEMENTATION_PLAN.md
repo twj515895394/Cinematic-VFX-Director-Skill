@@ -6,7 +6,7 @@
 ## 阶段概览
 | 阶段 | 任务 | 交付成果 | 验收标准 | 状态 |
 |---|---|---|---|---|
-| P0 | 文档与入口骨架 | 产品设计、实施计划、README、SKILL.md、来源登记 | 文件可访问、Skill 正确触发、边界明确 | 进行中 |
+| P0 | 文档与入口骨架 | 产品设计、实施计划、README、SKILL.md、来源登记 | 文件可访问、Skill 入口与边界明确（真实触发待集成测试） | 已完成文档验收 |
 | P1 | 核心知识与数据模型 | 分类体系、生命周期、Effect Card/Atom schema、10~20 精选原子 | schema 有效；跨类型检索可用 | 未开始 |
 | P2 | 检索与校验脚本 | search_atoms.py、validate_data.py、unit tests | 脱网运行；中文/英文搜索；稳定排序；重复 ID 阻断 | 未开始 |
 | P3 | VFX 设计与提示词工作流 | SKILL 完整工作流、组合规范、输出契约、样例 | 能非侵入式增强已有提示词并保留硬约束 | 未开始 |
@@ -15,14 +15,14 @@
 | P6 | QC 与回归评测 | 质量评分表、反例、测试集、修复建议 | 10+多题材场景通过；约束违规可识别 | 未开始 |
 | P7 | 文档收敛与发布 | README、案例索引、变更记录、发布说明 | 本地一键验证通过，来源审计无待处理项 | 未开始 |
 
-## P0 文档与骨架（本轮执行）
+## P0 文档与骨架（已完成）
 - [x] P0.1 阅读目标仓库状态，确认默认分支与写权限（空仓库）。
 - [x] P0.2 核验上游至少两个核心模块，记录复用依据。
 - [x] P0.3 提交 `docs/PRODUCT_DESIGN.md`。
 - [x] P0.4 提交本实施计划。
-- [ ] P0.5 建立 README 和初始 SKILL.md。
-- [ ] P0.6 建立 docs/SOURCE_REUSE.md、data/sources.json。
-- [ ] P0.7 验收 GitHub 路径、入口 Frontmatter 以及文档互相引用。
+- [x] P0.5 建立 README 和初始 SKILL.md。
+- [x] P0.6 建立 docs/SOURCE_REUSE.md、data/sources.json。
+- [x] P0.7 验收 GitHub 路径、入口 Frontmatter 以及文档互相引用。
 
 ## P1 详细任务
 - [ ] P1.1 三轴 taxonomy 和标准命名、同义词。
