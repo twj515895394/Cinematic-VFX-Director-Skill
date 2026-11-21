@@ -56,3 +56,8 @@ jobs:
             echo "ERROR: a hard-failed QC report was incorrectly accepted"
             exit 1
           fi
+      - name: P7 release readiness and one-command offline preflight
+        run: |
+          python scripts/release_check.py --json
+          python scripts/verify_all.py --fast
+          python scripts/prepare_visual_evidence.py --help
