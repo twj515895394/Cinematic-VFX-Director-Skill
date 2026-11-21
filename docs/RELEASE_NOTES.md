@@ -10,7 +10,7 @@
 - **Only two video-model output targets**: MiniMax H3 (default), Seedance on explicit choice. Use official H3 prompt Skill, version-agnostic Seedance rules; output additive VFX text by default, not fabricated model/video API controls.
 - **Prompt safety/continuity**: approved Effect Cards, unmodified original, authorisation gate for integrated output; explicit continue/reset/independent multi-shot VFX state checks.
 - **Review**: six 0–2 QC dimensions, 14 hard-failure categories, one top-issue fix per iteration; sixteen **synthetic design** positive/negative fixtures. `review_vfx.py` aggregates annotated reviews, **does not inspect pixels**.
-- **Local user-acceptance tooling**: one-command offline check, source/link audit, video extraction candidate frame tool with SHA-256 provenance and explicit `not-reviewed` metadata.
+- **Local user-acceptance tooling**: one-command offline check, source/link audit, video extraction candidate frame tool and `scripts/check_visual_evidence.py` source/frame SHA-256 integrity check and explicit `not-reviewed` metadata.
 
 ## Installation & one-command preflight
 
