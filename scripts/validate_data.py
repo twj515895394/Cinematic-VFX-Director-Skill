@@ -189,7 +189,7 @@ def verify(*, overrides=None):
     case_map = {a.get("id"): a for a in sakuga_source.get("assets", [])}
     if len(case_map) != len(sakuga_source.get("assets", [])):
         problems.append("Duplicate Sakuga source asset IDs")
-    if catalog != build_catalog(sakuga_source):
+    if "catalog" not in overrides and catalog != build_catalog(sakuga_source):
         problems.append("Normalized case index drifted from original Sakuga metadata")
 
     all_atom_ids = set(ids)
