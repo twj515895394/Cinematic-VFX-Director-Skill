@@ -1,6 +1,6 @@
 # Cinematic-VFX-Director-Skill — 分阶段实施计划
 
-> 日期 2026-11-21｜版本 v1.9｜状态：发布候选准备完成，等待用户真实视频验收  
+> 日期 2026-11-21｜版本 v2.0｜状态：发布候选准备完成，等待用户真实视频验收  
 > 原则：产品设计与覆盖差距审查 → 实施计划 → 分批开发 → 单元/案例测试 → 更新验收记录；逐步推进；成熟上游优先直接复用，保留原件并在薄适配层补差异。
 
 ## 阶段概览
@@ -89,7 +89,7 @@
 - [x] P7.1 文档、命令、示例一致性与本地链接检查：`scripts/release_check.py` 对项目拥有的Markdown链接、五个已复制上游快照、明确的H3默认与Seedance适配、说明文档进行校验；第三方原件保持不改动。
 - [x] P7.2 跨平台一键离线验收：`python -m pip install -r requirements-dev.txt` 后 `python scripts/verify_all.py` 运行全部测试/Schema/上游索引/推荐/编译/多镜头/QC/门禁；`--fast` 仅用于快速smoke。
 - [x] P7.3 真实视频QC实测准备：`scripts/prepare_visual_evidence.py` 可在用户本地有`ffmpeg/ffprobe`时抽取H3/Seedance视频真实帧、计算源和候选帧SHA-256、保存`not-reviewed`清单；不伪称脚本已视觉审核。
-- [x] P7.4 发布材料：`VERSION=0.1.0-rc.1`、`CHANGELOG.md`、`docs/RELEASE_NOTES.md`、`docs/USER_ACCEPTANCE.md` 十项实测矩阵、`.gitignore` 防止私人视频帧被提交。
+- [x] P7.4 发布材料：`VERSION=0.1.0-rc.2`、`CHANGELOG.md`、`docs/RELEASE_NOTES.md`、`docs/USER_ACCEPTANCE.md` 十项实测矩阵、`.gitignore` 防止私人视频帧被提交。
 - [ ] P7.5 用户真实模型出片及独立视觉QC后，再明确批准正式版tag/release；**当前只发布可验收RC，不将真实画质未测标记为稳定验收通过**。
 
 **P7验收范围**：代码、数据、Agent使用规范、一键离线测试、发布说明及手动视频测试路径；剩余的不确定性必须由用户真实H3/Seedance出片、实际图片/视频输入和人工/多模态Reviewer实测验证。RC可在测试前交付，不构成稳定版发布或模型实际画质的背书。
@@ -105,6 +105,7 @@ P1→P2→P3 的顺序不可颠倒；P4 可按需扩充；P5 依赖 P3 稳定的
 5. **状态如实**：计划中的空白模块不是已实现，不宣称具备尚未实测的功能。
 
 ## 实施记录
+- 2026-11-21：RC2 根据用户要求统一主 Skill 为 `Cinematic-VFX-Director-Skill`，YAML description、Skill 开头与 README 中英文版并存；发布候选更新为 `0.1.0-rc.2`，旧 RC1 保留历史快照；新增名称与双语说明自动检查。
 - 2026-11-21：P7候选发布材料和测试入口落地，补充`VERSION 0.1.0-rc.1`、一键离线全量校验、来源/文档链接一致性、真实视频候选帧SHA-256取证、10项用户实测清单、CHANGELOG及候选版说明。保留P6真实视觉QC和稳定版tag为用户验收后处理。
 - 2026-11-21：P6六维设计/证据报告检查与局部修复引擎完成；直接复用effekseer独立Review和rng物理参考；16个合成设计QC正反例（7过/9拦）、14个硬失败、评论/证据Schema及CI；真实H3/Seedance画面审核独立列入P6.5未完成。
 - 2026-11-21：P5已完成离线结构与工作流验收：仅MiniMax H3/Seedance（默认H3）、官方H3原始Skill三文件优先复用、面向非专业用户的场景/图片分析后3–5候选方案确认门禁、双模型VFX插入适配、跨镜头连续/独立/重置状态检查；CI #44863649037 93项通过。真实性能/视觉出片QC归P6。
