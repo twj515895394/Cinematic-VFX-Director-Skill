@@ -47,3 +47,12 @@ jobs:
           python scripts/check_shot_states.py --file examples/sequences/continuous-mecha.json --json
           python scripts/check_shot_states.py --file examples/sequences/montage-weather.json
           python scripts/check_shot_states.py --file examples/sequences/mixed-explicit-reset.json
+      - name: Smoke test P6 evidence-aware QC and targeted single-issue repair
+        run: |
+          python scripts/review_vfx.py --review tests/fixtures/qc/design-good-sword.json --json
+          python scripts/review_vfx.py --review tests/fixtures/qc/design-good-snow.json --fail-on-blocked
+          python scripts/review_vfx.py --review tests/fixtures/qc/design-bad-early-contact.json --json
+          if python scripts/review_vfx.py --review tests/fixtures/qc/design-bad-no-choice.json --fail-on-blocked; then
+            echo "ERROR: a hard-failed QC report was incorrectly accepted"
+            exit 1
+          fi
