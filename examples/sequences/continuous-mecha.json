@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "continuous-mecha",
+  "model": "seedance",
+  "intended_editing": "continuous-story",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "content_summary": "原装甲表面护盾渐次启动",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan",
+        "anchor": "armor-shell",
+        "scale": "thin"
+      }
+    },
+    {
+      "shot_id": "S02",
+      "content_summary": "护盾跨切镜保持相同厚度和颜色",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan",
+        "anchor": "armor-shell",
+        "scale": "thin"
+      },
+      "effect_state_out": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan",
+        "anchor": "armor-shell",
+        "scale": "thin"
+      }
+    },
+    {
+      "shot_id": "S03",
+      "content_summary": "接近护盾边缘局部接触涟漪",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan",
+        "anchor": "armor-shell",
+        "scale": "thin"
+      },
+      "effect_state_out": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan",
+        "anchor": "armor-shell",
+        "scale": "thin"
+      }
+    }
+  ]
+}
