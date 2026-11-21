@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/twj515895394/Cinematic-VFX-Director-Skill/blob/main/data/schemas/case.schema.json",
+  "title": "Cinematic VFX Reference Case v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "title",
+    "medium",
+    "genres",
+    "style_profiles",
+    "family_ids",
+    "atom_ids",
+    "description",
+    "source_url",
+    "source_id",
+    "license_notes",
+    "static_preview_url",
+    "motion_preview_url",
+    "time_markers",
+    "observed_strengths",
+    "failure_modes",
+    "reproduction_notes"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "medium": {
+      "enum": [
+        "photoreal-live-action",
+        "premium-cg",
+        "semi-realistic-japanese-cg",
+        "anime-2d",
+        "stylized-3d",
+        "toon-3d",
+        "npr-2.5d",
+        "mixed-media",
+        "unknown"
+      ]
+    },
+    "genres": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "modern-action",
+          "wuxia",
+          "xianxia",
+          "mythology",
+          "science-fiction",
+          "mecha",
+          "cyberpunk",
+          "superpower",
+          "high-fantasy",
+          "dark-fantasy",
+          "natural-disaster",
+          "environmental",
+          "transformation",
+          "slice-of-life-fantasy"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "style_profiles": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "natural-cinematic",
+          "soft-diffused",
+          "mj-dreamlike",
+          "pixar-like-animation",
+          "anime-sakuga",
+          "graphic-ink",
+          "dark-gritty",
+          "high-energy-game-cg",
+          "user-defined"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "family_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "enum": [
+          "weapon",
+          "character",
+          "motion",
+          "impact",
+          "elemental",
+          "energy",
+          "ritual",
+          "spatial",
+          "technology",
+          "environment-weather",
+          "destruction-material",
+          "transformation",
+          "optical-compositing",
+          "atmospheric"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "atom_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "static_preview_url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "motion_preview_url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "time_markers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "description"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "time_seconds": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "observed_strengths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "failure_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "reproduction_notes": {
+      "type": "string",
+      "minLength": 1
+    },
+    "asset_distribution": {
+      "enum": [
+        "external-link-only",
+        "original-work",
+        "licensed-local"
+      ]
+    }
+  }
+}
