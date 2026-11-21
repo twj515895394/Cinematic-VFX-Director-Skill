@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VFX option-first recommendation pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "model",
+    "input",
+    "scene_facts",
+    "immutable_constraints",
+    "options",
+    "selection_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "model": {
+      "enum": [
+        "minimax-h3",
+        "seedance"
+      ]
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "user_request",
+        "observed_content",
+        "uncertain_details"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "scene-text",
+            "prompt-text",
+            "image",
+            "video",
+            "storyboard"
+          ]
+        },
+        "user_request": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uncertain_details": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "scene_facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "immutable_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "options": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "family",
+          "intensity",
+          "visual_result",
+          "trigger_and_anchor",
+          "why_it_fits",
+          "possible_downside",
+          "atom_ids",
+          "constraints"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z][0-9]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "family": {
+            "enum": [
+              "weapon",
+              "character",
+              "motion",
+              "impact",
+              "elemental",
+              "energy",
+              "ritual",
+              "spatial",
+              "technology",
+              "environment-weather",
+              "destruction-material",
+              "transformation",
+              "optical-compositing",
+              "atmospheric"
+            ]
+          },
+          "intensity": {
+            "enum": [
+              "L0",
+              "L1",
+              "L2",
+              "L3",
+              "L4"
+            ]
+          },
+          "visual_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trigger_and_anchor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "why_it_fits": {
+            "type": "string",
+            "minLength": 1
+          },
+          "possible_downside": {
+            "type": "string",
+            "minLength": 1
+          },
+          "atom_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^vfx_term_[0-9]{3}$"
+            },
+            "uniqueItems": true
+          },
+          "constraints": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "selection_state": {
+      "enum": [
+        "awaiting-user-selection",
+        "user-selected"
+      ]
+    },
+    "selected_option_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Z][0-9]+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "selection_state": {
+            "const": "awaiting-user-selection"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "selected_option_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "selection_state": {
+            "const": "user-selected"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "selected_option_id"
+        ],
+        "properties": {
+          "selected_option_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}
