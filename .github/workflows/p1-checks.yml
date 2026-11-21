@@ -61,3 +61,4 @@ jobs:
           python scripts/release_check.py --json
           python scripts/verify_all.py --fast
           python scripts/prepare_visual_evidence.py --help
+          python scripts/check_visual_evidence.py --help
