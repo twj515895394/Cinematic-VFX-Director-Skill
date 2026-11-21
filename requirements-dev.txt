@@ -1,0 +1,2 @@
+# Development-only validation dependency; runtime search remains Python stdlib.
+jsonschema>=4.23,<5
