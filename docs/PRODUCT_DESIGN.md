@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.6（P5 双视频模型与面向新手的方案选择）｜日期：2026-11-21｜状态：P0–P3完成，P4首批知识案例索引完成，P5新手方案门禁/双模型适配/多镜头状态已完成结构测试；P6–P7待实施  
+> 版本：v1.7（P6 六维质量审核与证据分级）｜日期：2026-11-21｜状态：P0–P3完成，P4首批知识案例索引完成，P5新手方案门禁/双模型适配/多镜头状态已完成结构测试；P6设计QC与结构报告已落地、实际出片视觉审核待验证；P7待实施  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -308,4 +308,27 @@ P4 对“视觉案例库”的**首批**承诺已实现，覆盖的是动漫游�
 `data/schemas/shot-sequence.schema.json` 与 `scripts/check_shot_states.py` 结构性校验：`continue` 明确延续同一特效的身份/颜色/锚点/尺度/状态，`reset` 需注明原因，`independent` 不强行继承上一镜头。测试包含3个连续剧情、3个独立混剪和1个明确跳时重置例；不强制轻剧情Vlog变成MV式解耦，也不让剪辑混剪被强制连续。
 
 ### 21.4 验收与能力边界
-现有 [GitHub Actions #44863374042](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037) 已通过 **93项自动化测试、9套Schema检查**，覆盖默认H3/显式Seedance、3–5选项/确认、图像媒体引用门禁、原稿无侵入及镜头状态矛盾。测试验证的是**Agent可执行指令与离线数据/脚本**，不等于真实图片已被脚本自动理解，也不等于已调用 MiniMax/Seedance 视频生成或完成视频画面质量评测。P6才将真实输出QC与修复放进核心目标。
+现有 [GitHub Actions #44863649037](https://github.com/twj515895394/Cinematic-VFX-Director-Skill/actions/runs/44863649037) 已通过 **93项自动化测试、9套Schema检查**，覆盖默认H3/显式Seedance、3–5选项/确认、图像媒体引用门禁、原稿无侵入及镜头状态矛盾。测试验证的是**Agent可执行指令与离线数据/脚本**，不等于真实图片已被脚本自动理解，也不等于已调用 MiniMax/Seedance 视频生成或完成视频画面质量评测。P6已加入审核报告结构与定向修复；真实输出QC需实际视频素材和独立审片证据才能完成。
+
+## 22. P6 影视 VFX 六维 QC 设计与实施边界（2026-11-21）
+
+### 22.1 复制上游独立审片方法，不重写基础评分理论
+`third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md` 已在P1复制，提供**独立Reviewer先审真实filmstrip，打分、最弱问题只修一项、观察帧来源追踪**的成熟方法。其原始审核是九维0–3，不能误传为本项目六维0–2；本项目依据具体AI电影需求构造薄层 `references/qc-rubric.md` 与 `scripts/review_vfx.py`，以 `third_party/effekseer-vfx-skill/skills/effekseer-vfx/references/review.md`、`third_party/rng-vfx/skills/rng-vfx/references/physics.md`、`skill-movie` 的因果媒介规则作为证据依据。原文件保持不变。
+
+### 22.2 六维0–2，三道总判定门槛
+六维：`causality`、`space`、`timing`、`style_intensity`、`environment`、`readability`，分别0/1/2，合计12。通过条件是**≥10/12、六维无0、无硬失败**。14种硬失败类型覆盖擅自改变动作/人物、提前接触、特效漂移、过曝/遮挡、环境物理、模型/参考虚构、未确认选择和多镜头状态跳变。
+
+对非战斗雨雪、光学柔光、机械变形等特效不强制引入魔法闪白或攻击接触峰值；按用户真实情节和媒介判断。
+
+### 22.3 两种证据、三类能力边界
+1. `design-only`：Agent/审核者只依据**真实用户输入与设计卡**评估特效结构。合格只返回 `design-pass-pending-rendered-review`；无实际生成画面时不得说“视频已通过审核”。
+2. `rendered-frames/rendered-video`：使用真实 MiniMax H3/Seedance 出片的完整视频与相关帧，审核者**亲自查看**后记载资产版本、来源、帧编号、各维度观察和引用。尽量用独立Reviewer（不是视频作者）。
+3. Python工具只验证结构、帧引用和报告汇总，不能打开实际视频、做视觉特征识别、自动判断眼睛是否被遮挡、证明 Reviewer 独立或确认素材版本最新。因此任何渲染QC评估在工具中只称 `reviewer-reported-visual-pass` 或未通过，不称机器已验证。最终由真实审核流程对原素材及版本做人工确认。
+
+### 22.4 单问题修复与不可侵入边界
+遇硬失败时先修最严重硬性问题；无硬失败但评分不达标则针对最弱维度，**一轮只建议一个局部特效变更**。原提示词逐字保留、不可改项同样保留，防止通过改人物、动作、镜头、声音、剪辑来掩饰特效问题。
+
+自动化执行：`scripts/review_vfx.py` 对符合 `data/schemas/qc-review.schema.json` 的审核记录生成汇总与 `next_fix`。根 `SKILL.md` 已提供P6设计/视觉路由；16个**合成的设计审核正反例**在 `tests/fixtures/qc/`（7达标/9拦截）。这些回归验证不等于真实视频效果判断。
+
+### 22.5 未完成实证
+要完成真实视觉QC，需要对实际生成的 H3 和 Seedance 成片分别采样、找独立审核者记录观察帧/版本、对照修复前后变化并复测。当前并未生成视频、并未使用真实视频QC素材，P6以**结构工具和回归验收完成，真实视觉实证待办**来标记；P7也不能把缺失实证写成完全发布级质量认证。
