@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "upstream_path": "third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atoms.json",
+  "notes": "Thin, non-destructive mapping. Tags are applicability candidates, not a claim that every original atom inherently has this narrative use.",
+  "family_map": {
+    "energy": [
+      "energy"
+    ],
+    "impact-energy": [
+      "impact"
+    ],
+    "magic-ritual": [
+      "ritual"
+    ],
+    "elemental-natural": [
+      "elemental",
+      "environment-weather"
+    ],
+    "technology": [
+      "technology"
+    ],
+    "skill": [
+      "energy",
+      "character",
+      "transformation"
+    ],
+    "impact": [
+      "impact"
+    ],
+    "weapon-motion": [
+      "weapon",
+      "motion"
+    ],
+    "projectile": [
+      "motion"
+    ],
+    "space-time": [
+      "spatial"
+    ],
+    "summoning": [
+      "ritual"
+    ],
+    "ultimate": [
+      "energy"
+    ],
+    "sustained-field": [
+      "energy"
+    ],
+    "lifecycle": [],
+    "particle": [
+      "atmospheric"
+    ],
+    "particle-depth": [
+      "atmospheric"
+    ],
+    "particle-motion": [
+      "motion"
+    ],
+    "motion-curve": [
+      "motion"
+    ],
+    "particle-presentation": [
+      "atmospheric"
+    ],
+    "color-light": [
+      "optical-compositing"
+    ]
+  }
+}
