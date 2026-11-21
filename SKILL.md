@@ -1,9 +1,15 @@
 ---
 name: Cinematic-VFX-Director-Skill
-description: Design and audit cinematic visual effects for AI video prompts and CG shots across live action, stylized CG, anime, fantasy, sci-fi, environmental effects, transformations, and action sequences. Use for VFX choice, timed effect behavior, weapon/character/environment effects, lighting response, prompt enhancement, or fixing detached and unreadable effects. Preserve user-specified shots, choreography and story.
+description: >-
+  中文：面向 AI 视频与影视 CG 创作的电影级视觉特效导演 Skill。支持真人写实、日系半写实 CG、动漫、武侠仙侠、奇幻科幻、环境灾害、变形及动作特效；分析文字场景、图片、视频或分镜，推荐 3–5 个适合的特效方案，待用户确认后设计特效时序、空间锚点、光照与环境反馈，并提供 MiniMax H3（默认）或 Seedance 的提示词补充和质量审核建议。保持原有剧情、人物、动作和镜头不变。
+  English: A cinematic VFX direction skill for AI video and film CG. Covers photorealistic footage, semi-realistic Japanese CG, anime, wuxia/xianxia, fantasy, sci-fi, weather and disaster effects, transformation, and action. Analyze scenes, images, videos, or storyboards; offer 3–5 suitable VFX options for user approval; then design causal effect timing, spatial anchors, lighting and environmental responses, and provide model-aware prompt additions and quality-review guidance for MiniMax H3 (default) or Seedance while preserving the original story, characters, actions, and camera.
 ---
 
 # Cinematic-VFX-Director-Skill
+
+**中文简介：** Cinematic-VFX-Director-Skill 是面向 AI 视频与电影 CG 的专业视觉特效导演技能。可根据用户提供的场景、图片、视频或分镜，分析特效需求；当特效方向不明确时，先给出 **3–5 个合适方案**供用户选择，确认后再设计特效事件、时序、空间锚点、材质/光照交互与模型提示词。仅支持 **MiniMax H3（默认）与 Seedance**；默认保留原剧情、人物、动作、机位和剪辑，并提供分级 QC 与定向修复建议。
+
+**English overview:** Cinematic-VFX-Director-Skill directs visual effects for AI video and cinematic CG. Given a scene, image, video, or storyboard, it evaluates the VFX needs and—when the desired effect is unclear—presents **3–5 tailored options** for user approval before drafting event timing, spatial anchors, material and lighting interactions, and video-model prompt additions. It supports **MiniMax H3 (default) and Seedance** only, preserves the user's story, characters, action, camera, and editing by default, and provides evidence-aware QC and targeted repair guidance.
 
 > P6 adds a six-axis evidence-aware QC and one-issue repair layer to the established P5 option-first workflow (MiniMax H3 default, Seedance only alternate). The original upstream independent reviewer rules remain vendored. **A design review is never a video review; scripts aggregate reviewer observations, but do NOT inspect pixels or independently verify footage.**
 
