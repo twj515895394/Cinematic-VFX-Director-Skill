@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "sequence_id": "continuous-sword",
+  "model": "minimax-h3",
+  "intended_editing": "continuous-story",
+  "shots": [
+    {
+      "shot_id": "S01",
+      "content_summary": "固定剑刃初次点亮",
+      "continuity_mode": "independent",
+      "effect_state_in": null,
+      "effect_state_out": {
+        "id": "violet-blade",
+        "status": "active",
+        "color": "violet",
+        "anchor": "blade-surface",
+        "scale": "thin"
+      }
+    },
+    {
+      "shot_id": "S02",
+      "content_summary": "特写继续观察剑刃微光",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "violet-blade",
+        "status": "active",
+        "color": "violet",
+        "anchor": "blade-surface",
+        "scale": "thin"
+      },
+      "effect_state_out": {
+        "id": "violet-blade",
+        "status": "active",
+        "color": "violet",
+        "anchor": "blade-surface",
+        "scale": "thin"
+      }
+    },
+    {
+      "shot_id": "S03",
+      "content_summary": "剑上微光沿剑锋消散",
+      "continuity_mode": "continue",
+      "effect_state_in": {
+        "id": "violet-blade",
+        "status": "active",
+        "color": "violet",
+        "anchor": "blade-surface",
+        "scale": "thin"
+      },
+      "effect_state_out": {
+        "id": "violet-blade",
+        "status": "settled",
+        "color": "violet",
+        "anchor": "blade-surface",
+        "scale": "thin"
+      }
+    }
+  ]
+}
