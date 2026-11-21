@@ -5,7 +5,7 @@ description: Design and audit cinematic visual effects for AI video prompts and 
 
 # Cinematic VFX Director
 
-> P1/P2 implemented and tested: two original skill-movie VFX skills, 566 upstream bilingual atoms and original search scoring are reused via an annotated, cinematic search adapter. JSON Schema and regression checks are available. Automatic VFX prompt compilation, model adapters and video-frame QC remain future stages.
+> P3: the original skill-movie director/construction knowledge, 566-atom search and P2 data validation are integrated with a non-invasive VFX workflow and an Effect Card → copyable text compiler. **The compiler does not itself interpret new scripts, understand image frames, select effects, or provide model-specific rendering guarantees.** Full model adapters and rendered-video QC are later stages.
 
 ## Mission
 Translate a VFX request into visible, causally grounded screen direction. Prioritize source → trigger → spatial anchor → trajectory/operation → target and environment response → decay / final state. Do **not** invent effects simply to make the shot busier.
@@ -30,20 +30,34 @@ Translate a VFX request into visible, causally grounded screen direction. Priori
 ## Reuse mature upstream before inventing new rules
 Read [Upstream routing](adapters/upstream-routing.md) first. For animation principles, elements, physics, brightness and medium-specific VFX art direction, use the existing [rng-vfx source](third_party/rng-vfx/skills/rng-vfx/SKILL.md) and its reference files. For effect design, layering, timing and review, use the existing [effekseer-vfx source](third_party/effekseer-vfx-skill/skills/effekseer-vfx/SKILL.md) and [independent VFX review](third_party/effekseer-vfx-skill/skills/vfx-review/SKILL.md). Treat game-engine-specific steps as background, not AI video prompt instructions. Only add this project's own rules where film/video use genuinely differs; keep vendored files unchanged.
 
-## Procedure
-1. Read the user's prompt, constraints, and deliverable: exploratory idea / existing prompt enhancement / per-shot design / repair / reference learning.
-2. Preserve concrete facts. Identify the intended visual information and whether a VFX addition is necessary.
-3. Choose medium and genre separately, set a sensible intensity if unspecified, and select a dominant family.
-4. Describe the causal **effect card**: visible owner, specific trigger, form/material, path, depth/occlusion, effect on object/environment/light, peak, fade and endpoint. Include only visible phases.
-5. Bind onset and peak to actual actions and contacts; avoid early hit flashes or inconsistent hand/weapon location.
-6. Provide a concise **separate VFX enhancement paragraph** by default. Offer an integrated rewrite only when asked or clearly approved, while preserving the original.
-7. Audit for causal errors, disconnected overlays, overbrightness, obstruction, anatomy/identity changes, exaggerated particles and unexplained new powers.
-8. For multi-shot sequences, distinguish continuity (`effect_state_in/out`) from intentionally disconnected montage; never force one mode.
-9. Never pretend the planned scripts or reference files already exist. Use normal knowledge until the indexed library is implemented.
+## P3 decision workflow: intent → effect → prompt delta
+
+Read [director workflow](references/director-workflow.md), [combination gates](references/combination-gates.md) and [output contract](references/output-contract.md) as the **local adaptation** of the two upstream VFX skills. Use the established upstream source documents first; do not rewrite their technical foundations.
+
+1. **Classify the user request**: knowledge/terminology, explore, augment an existing prompt, design an effect, repair a failed effect, or multi-shot planning. For terminology queries, answer the question without inventing a shot.
+2. **Lock the original** before changing anything: original `source_prompt` verbatim, identity, count, costume, object shape, contact, choreography, timing, camera, composition, existing editing rhythm and negative constraints. Unknown input is unknown, not permission to add actions.
+3. **Separate four axes**: medium (rendering), genre (world), style_profiles (aesthetic), and dominant VFX family (effect function). "MJ-like" belongs to aesthetic direction; it does **not** imply magic or energy effects. Choose conservative intensity L0–L4. If VFX adds no readable information, recommend none.
+4. **Assign an effect job**: one `primary_read` per beat (e.g. activation, speed, contact, spatial boundary, transformation frontier). Use causal source → visible trigger → fixed anchor → form/path → receiver/environment/light response → decay/settled state. Only include observable phases, not a forced charge/explosion lifecycle.
+5. **Reuse the upstream construction engine**: read its original grammar and family atlas, retrieve a small set of unique-task atom IDs via `scripts/search_atoms.py` (original score function preserved), optionally consult `rng-vfx` for physics/styles and `effekseer-vfx-skill` for layering/review. Avoid piling on synonyms or default shockwaves, spells, trails or debris.
+6. **Run composition gates**: actual grip before weapon activation, actual contact before hit flash, motion path before trail, visible deformation front before transformation. One dominant effect per beat; secondary light/wind/debris only as warranted. Never change body motion, camera, editing or identity to justify a VFX idea.
+7. **Prepare an approved Effect Card**: use `data/schemas/effect-card.schema.json` and examples in `examples/effect-cards.json` and `tests/fixtures/p3_scenarios.json`. The card's `vfx_delta` is a concise **human/Agent-reviewed** text addition, not auto-invented by the compiler.
+8. **Default output**: show the original prompt unchanged and a separate VFX delta. The user may paste it into their prompt. If the user explicitly approves integration, and the card scope is `explicitly-approved-integration`, the compiler may **append** a new VFX section while retaining every original character. It does not insert text into existing user sections or rewrite the script.
+9. **Editorial QC and repair**: check trigger/contact order, screen-space anchoring, medium-specific light/occlusion, intensity, subject readability and constraints. For defects, suggest the smallest directional fix and preserve the rest. P3 structural checks are not visual video QC (P6).
+10. **Multi-shot**: decide continuity vs independence from user story, not a blanket preference. Detailed state propagation/automatic checks belong to P5. For every shot, keep the planned start and end effect state consistent.
+
+### CLI (optional deterministic compilation of an approved card)
+
+```bash
+python -m pip install -r requirements-dev.txt
+python scripts/compile_prompt.py --card sample.sword-activation
+python scripts/compile_prompt.py --card sample.sword-activation --json
+```
+
+The first command prints the unchanged source and independent VFX delta; JSON includes audit-only internal atom IDs. To append, both explicit `--integrated --approved` and the Card's integrated scope are required. Never claim that approval was received solely because the CLI can append. **Do not put internal IDs, rejected effect variants or technical QC labels into the copyable prompt.**
 
 ## Quick example
 **Request:** A semi-realistic CG woman firmly grips a floating violet sword; no attack.
 **VFX enhancement:** The moment all five fingers close around the hilt, a narrow violet energy pulse travels *along the existing blade*, subtly intensifying the edge glow. A few purple-white particles spread briefly and settle beside the weapon; light spills naturally onto her hand, sleeve, jaw and nearby surfaces. No slash, projectile, shockwave or unrelated camera move.
 
 ## Documentation
-See [Product design](docs/PRODUCT_DESIGN.md) and [Implementation plan](docs/IMPLEMENTATION_PLAN.md).
+See [Product design](docs/PRODUCT_DESIGN.md), [Implementation plan](docs/IMPLEMENTATION_PLAN.md), [P3 workflow](references/director-workflow.md), [output contract](references/output-contract.md) and [ten-shot evaluation](examples/ten-shot-validation.md).
