@@ -21,7 +21,7 @@ python scripts/prepare_visual_evidence.py --video my_h3_clip.mp4 --shot-id S01 -
 python scripts/prepare_visual_evidence.py --video my_seedance_clip.mp4 --shot-id S02 --model seedance
 ```
 
-帧和 SHA-256 记录将写入忽略提交的 `reviews/S01`、`reviews/S02`，**采样成功不代表视觉评分通过**。拿到真实视频后请按 [10项用户实测手册](docs/USER_ACCEPTANCE.md) 实际播放、对照原稿、记录问题与帧号。参见 [RC发布说明](docs/RELEASE_NOTES.md) / [变更记录](CHANGELOG.md)。
+帧和 SHA-256 记录将写入忽略提交的 `reviews/S01`、`reviews/S02`。可用 `python scripts/check_visual_evidence.py --manifest reviews/S01/evidence-manifest.json --video my_h3_clip.mp4` 验证素材版本及抽帧哈希，**采样或哈希通过都不代表视觉评分通过**。拿到真实视频后请按 [10项用户实测手册](docs/USER_ACCEPTANCE.md) 实际播放、对照原稿、记录问题与帧号。参见 [RC发布说明](docs/RELEASE_NOTES.md) / [变更记录](CHANGELOG.md)。
 
 ## 为什么不重复造轮子
 目前已经**实际复制并引用**五个成熟上游项目的45个源文件：
