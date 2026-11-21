@@ -4,7 +4,7 @@
   "model": "seedance",
   "input": {
     "kind": "prompt-text",
-    "user_request": "卡通电影CG中桌面纸花缓缓展开，保持固定镜头",
+    "user_request": "请使用 Seedance：卡通电影CG中桌面纸花缓缓展开，保持固定镜头。帮我推荐可以添加的视觉特效。",
     "observed_content": "文案明确：桌面、纸花、固定镜头，非战斗、无魔法",
     "uncertain_details": [
       "纸材质粗糙度未描述"
