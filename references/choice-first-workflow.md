@@ -16,7 +16,7 @@
 2. **定位四维**：medium、genre、style、vfx family。先查 `data/profiles/cinematic_profiles.json` 和 `scripts/lookup_profile.py`，再读取 upstream 的原始效果、物理、分层、亮度与媒介规则；必要时使用 `scripts/search_atoms.py` 在566条原始 VFX 原子中检索。动漫游戏动态案例仅对匹配的二维动效可用，不能直接拿来冒充真人电影特效。
 3. **列候选而不是术语堆叠**：选择3–5个有不同视觉目标的候选，避免同一个“辉光”的五种同义说法。每个候选讲清：**看到的画面、为什么适合当前镜头、能量/空间锚点与触发、相对强度、可能的副作用**。至少保留一个克制方案；强烈奇幻方案仅在用户设定允许时出现。用户明确禁止的效果一律不推荐。
 4. **排序但不替用户做决定**：在最合适的一项旁标“推荐”，但不预先选中。结尾说“你选 A1/A2/...，也可以要求组合或选择不加特效”。如果可能，展示小范围组合选项（例如剑表面能量 + 手部受光），但不要两个 Primary 同时抢焦点。
-5. **停在选择阶段**：第一次回复不得假装 Agent 已拿到批准，也不生成最终 MiniMax H3/Seedance 成片提示词。可将候选输出为 `data/schemas/recommendation-package.schema.json` 契约，其中 `selection_state=awaiting-user-selection`。
+5. **停在选择阶段**：第一次回复不得假装 Agent 已拿到批准，也不生成最终 MiniMax H3/Seedance 成片提示词。可将候选输出为 `data/schemas/recommendation-package.schema.json` 契约，其中 `model_selection_source=default` 时必须为 MiniMax H3；Seedance 必须标记 `user-explicit`。未选择前 `selection_state=awaiting-user-selection`。
 6. **用户选择后**（例如“选A2”“A1+A3，A1为主”“按推荐的来”）才结合选中的方案编写/审核 Effect Card，补具体动作时间点、接触与环境反馈，按 `references/combination-gates.md` 做最小变动。若用户选多个，明确主次，检查冲突与人物/道具变形风险。
 7. **模型适配**：用户没说就 MiniMax H3；用户明确要 Seedance 才走 Seedance。参考 `references/model-adapters.md` 输出模型定向 VFX 增量。已有原稿默认逐字保留，整合稿仍须遵循 P3 授权双门禁。
 8. **后续反馈**：用户可能选择“太夸张”“再微弱一点”“能不能换成光学效果”，此时只调整已选方案对应的 VFX 强度与组合，不重写原剧本/剪辑。
