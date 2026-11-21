@@ -92,5 +92,6 @@
     }
   ],
   "selection_state": "awaiting-user-selection",
-  "selected_option_id": null
+  "selected_option_id": null,
+  "model_selection_source": "default"
 }
