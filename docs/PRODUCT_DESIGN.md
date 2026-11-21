@@ -1,6 +1,6 @@
 # Cinematic VFX Director Skill — 产品详细设计文档
 
-> 版本：v1.0（设计基线）｜日期：2026-11-21｜状态：设计已起草，功能待实现  
+> 版本：v1.1（设计补充与 P1 基线）｜日期：2026-11-21｜状态：设计已起草，功能待实现  
 > 项目定位：通用影视 CG / AI 视频视觉特效导演 Skill 和可检索知识库，而非游戏战斗特效生成器。
 
 ## 1. 产品背景与目标
@@ -23,11 +23,11 @@
 6. **模型输出**：通用稿优先；按明确模型标记适配约束，不凭空宣称模型支持的功能。
 7. **跨场景**：非战斗环境（风雨、灾害、粉尘、火焰、水、破坏、变形）、超自然、科幻、科幻 UI 与空间异常、梦境、写实合成等。
 
-## 3. 覆盖范围（题材 ≠ 视觉媒介）
-**媒介 / 渲染轴**：photoreal-live-action、premium-cg、semi-realistic-japanese-cg、anime-2d、stylized-3d、toon-pixar-like（仅风格描述，不仿制特定受保护资产）、npr-2.5d、mj-dreamlike（审美方向）、mixed-media。
-**题材轴**：modern-action、wuxia、xianxia、mythology、science-fiction、mecha、cyberpunk、superpower、high-fantasy、dark-fantasy、natural-disaster、environmental、transformation、slice-of-life-fantasy。
+## 3. 覆盖范围（四维独立：视觉媒介 × 题材 × 审美风格 × 特效家族）
+**媒介 / 渲染轴**：photoreal-live-action、premium-cg、semi-realistic-japanese-cg、anime-2d、stylized-3d、toon-3d、npr-2.5d、mixed-media、unknown。
+**题材轴**：modern-action、wuxia、xianxia、mythology、science-fiction、mecha、cyberpunk、superpower、high-fantasy、dark-fantasy、natural-disaster、environmental、transformation、slice-of-life-fantasy。**审美风格 / 风格修饰轴（style profile）**：natural-cinematic、soft-diffused、mj-dreamlike、pixar-like-animation、anime-sakuga、graphic-ink、dark-gritty、high-energy-game-cg、user-defined；允许复合选择、顺序优先级和用户自定义。注意“Pixar-like”只描述通用卡通电影视觉语言、不复刻特定角色或受保护画面；MJ 是美术语汇，不是引擎或特效类别。
 **效果家族轴**：weapon、character、motion、impact、elemental、energy、ritual、spatial、technology、environment-weather、destruction-material、transformation、optical-compositing、atmospheric。
-三轴正交；例如“真人写实 + 东方武侠 + 武器拖尾”与“日系半写实 CG + 校园奇幻 + 武器激活”不应该调用同一套强度与材质描写。
+四维独立；例如“真人写实 + 东方武侠 + 武器拖尾”与“日系半写实 CG + 校园奇幻 + 武器激活”不应该调用同一套强度与材质描写。
 
 ## 4. 非目标
 - 不生成真实 VFX 素材或依赖 Unreal/Unity/Effekseer 引擎。
@@ -126,21 +126,23 @@ Cinematic-VFX-Director-Skill/
 │   ├── SOURCE_REUSE.md           # 上游来源与修改边界
 │   └── ADR/                      # 重大设计决策
 ├── references/
-│   ├── taxonomy.md               # 三轴分类和术语
+│   ├── taxonomy.md               # 四维分类、风格路由和术语
 │   ├── effect-grammar.md         # 来源→触发→路径→反馈→消散
 │   ├── lifecycle.md              # 时序和跨镜头状态
 │   ├── intensity-and-hierarchy.md
 │   ├── composition-rules.md      # 分层/禁配/组合
 │   ├── physics-and-optics.md     # 物理与光照合成
 │   ├── qc-rubric.md
+│   ├── styles/                   # MJ柔光/动画电影审美/写实调色等修饰配置
 │   ├── families/                 # weapon/character/motion/impact/... 各类
 │   ├── mediums/                  # photoreal/cg/anime/npr/mixed ...
 │   ├── genres/                   # wuxia/xianxia/sci-fi/mythology...
 │   └── model-adapters/           # generic/minimax-h3/seedance/...
 ├── data/
 │   ├── atoms/                    # JSONL 分类数据集，默认精选而非整库
-│   ├── catalog/                  # 引用案例元数据，不默认复制素材
-│   ├── schemas/                  # atom/effect-card JSON Schema
+│   ├── catalog/                  # 静态/动态视觉案例元数据、来源链接与帧时序
+│   ├── profiles/                 # 媒介×题材×审美风格组合规则
+│   ├── schemas/                  # atom/effect-card/case/profile JSON Schema
 │   └── sources.json              # 上游来源登记
 ├── scripts/
 │   ├── search_atoms.py           # Python 标准库检索
@@ -184,3 +186,43 @@ Cinematic-VFX-Director-Skill/
 
 ## 14. 开发方式与里程碑
 以 `docs/IMPLEMENTATION_PLAN.md` 为唯一任务状态来源；先做可运行最小核心，再增量引入上游知识、扩展覆盖面和模型适配器。任何“已完成”必须对应实际提交与验收记录。
+
+## 15. 对原始整合方案的差距修订（v1.1）
+本节为 P1 的输入规格，P1 前先修订设计，再开发。四维轴中 **medium 是呈现载体**、**genre 是世界观/题材**、**style_profile 是审美渲染方向**、**family 是特效形态/功能**，不能将“MJ 风格”误判为魔法粒子，亦不能将“科幻”误判为“蓝色全息”。
+
+### 15.1 四个上游项目的模块级复用地图
+| 上游 | 借鉴/复用对象 | 放入本项目 | 改造与排除 |
+|---|---|---|---|
+| snowfrost/skill-movie: cinematic-vfx-director | 意图识别、主信息/次信息、事件因果、媒介适配、因果诊断 | SKILL.md、references/effect-grammar.md、组合规范 | 不复制其对其他影片子 Skill 的硬依赖 |
+| snowfrost/skill-movie: vfx-effect-construction-engine | 特效家族选择、原子检索、卡片、阶段拼装 | data/atoms、data/schemas、scripts、references/lifecycle.md | 566 词库属于上游数据，不默认整库复制；独立核对许可和字段 |
+| MRRengi/rng-vfx | animation craft、elements、physics、motion、brightness、styles、评测思路 | references/physics-and-optics.md、styles、mediums、tests | 游戏引擎代码与 AI 视频提示词职责分离 |
+| kanaworksai-hue/effekseer-vfx-skill | 设计→分层→审核→修复工作流、正反例 | references/qc-rubric.md、tests、examples | 不复用 Effekseer/Unity 可执行资产链 |
+| kanaworksai-hue/kanaworks-sakuga-vfx | 视觉案例编目、元素属性、组合映射、动画演示 | data/catalog、data/schemas/case.schema.json | 保留外链、出处、预览说明；不未经许可再分发视觉素材 |
+
+复用等级：A. 仅参考原理；B. 改写为原创数据模型；C. 符合逐文件授权条件后复制代码/数据；D. 仅外链素材。每个条目记录 source_ids、来源 URL、访问日期、类型、复用级别、可用授权状态及上游 commit（获取后填写）；不得将个人非商用等同于可公开分发。
+
+### 15.2 风格自动路由与歧义规则
+按 **用户明确约束 > 原视频/参考中可见信息 > 剧情语境 > 预置默认** 的优先级选择效果。风格识别分别产生 medium、genre、style_profiles[]、family_candidates[]、intensity、confidence、assumptions；未知项标记 unknown，不能给用户虚构确定性。只说“MJ 风格”时，保留柔光梦境/艺术电影/精致奇幻等可选风格路线，视场景选择相对保守默认，必要时只澄清最影响结果的一项。**电影感≠Bloom 越高越好**；光学特性受材质、曝光、景深与场景逻辑约束。
+
+### 15.3 意图、自动选型与组合约束
+先判断是否真正需要 VFX（若不需要可建议不加）。之后识别信息功能（速度/状态/接触/规模/转变/空间/气象），选择一个主家族与必要的辅助家族。每个节拍指定 1 个 Primary Read；依据 anchor、trigger、path、receiver、environment、intensity 选择原子；不可用多个强主效果彼此争夺焦点。组合记录 compatible_with、conflicts_with、conditional_requirements、reason；禁止武器附着光因“挥动”自动升级为独立远程能量弹。独立场景、连续分镜与混剪按原剧本决定是否传递状态。
+
+### 15.4 动作同步与真实空间反馈
+Effect Card 的事件可用相对动作锚点（at grip / on actual contact / after impact / upon completion）和可选相对时间，不强制给用户未提供的秒数。激活、蓄力、释放、传播、碰撞、衰减只选镜头实际看得到的阶段。优先计算视觉上可理解的方向、接触点、前后景遮挡、反射/光照投射、受体的变化；超自然事件需自洽的世界观规则，而不是强行真实物理。
+
+### 15.5 可检索的视觉案例库（不只是术语）
+一个 `Case` 至少需要：case_id、title、medium、genres、style_profiles、family_ids、atom_ids、description、source_url、source_id、license_notes、static_preview_url（可空）、motion_preview_url（可空）、time_markers（可空）、observed_strengths、failure_modes、reproduction_notes；对任何无法证实的视觉/许可证信息必须标注 unknown。
+- 支持**静态参考**（封面/截图的外部 URL）、**动态参考**（GIF/视频外链）、**分镜关键阶段**（标明时间段与效果变化），不默认打包外部文件。
+- 基于静态或动态案例分析特效怎样出现、运动、交互和消散，而不只是列「火球」「剑气」等名称。
+- 案例可关联多个原子及其组合角色（primary/secondary/tertiary），支持以场景、媒介、风格、家族及模型风险过滤。
+- 第一期仅定义 schema 和字段规范；案例检索及预览接口依 P4/P5 演进。**不把外链图或视频误写为已经本地验证可播放。**
+
+### 15.6 通用提示词输出和模型适配层
+先由导演输出模型无关 `Effect Card` 和最小必要的 VFX Prompt Delta；模型适配器只负责翻译/压缩表述与风险提示，不可擅自增加第二套特效概念。模型适配元数据：adapter_id、supported_scenarios、prompt_pattern、known_limitations、evidence_date、evidence_url、confidence；没有验证过的能力不写为确定事实。目标可包括 MiniMax H3、Seedance、Kling、Veo、Wan；P1 只保留通用接口，具体适配晚于 P3。
+
+### 15.7 非侵入式协议与 QC 定向修复
+输入保留 `source_prompt`（原始文本）、`immutable_constraints`、`editable_scope` 和镜头事实；默认输出 `vfx_delta`，不覆写 `source_prompt`。可选 integrated_prompt 必须基于用户允许的范围，并列出 `changes`，禁止暗改镜头数量、动作先后、机位、服装、身份或时长。
+QC 不仅打分，还分类诊断：CAUSALITY（来源/因果）、TIMING（提前/拖延）、SPATIAL（错位/遮挡）、LOOK（过曝/廉价）、CONTINUITY（颜色/形态跳变）、COMPOSITION（主次失焦）、MODEL_RISK（语义过载/变形风险）、SCOPE（越权修改）。每项返回 evidence、severity、affected_beat、minimal_fix、protected_constraints。优先局部修复而非全篇重写。
+
+## 16. P1 首批交付范围（设计门禁）
+P1 必须落地：四维分类 `taxonomy.md`、事件语法 `effect-grammar.md`、`lifecycle.md`、`intensity-and-hierarchy.md`、`composition-rules.md`、两个可解析 JSON Schema、至少 16 条精选原子（横跨战斗与非战斗）、至少 5 个跨风格代表性 Effect Card 示例。还应明确定义 Case schema（可先实现空案例集）。P1 只交付数据与设计语法；脚本检索、自动校验及全面 QC 落在 P2/P6，不提前声称已实现。
