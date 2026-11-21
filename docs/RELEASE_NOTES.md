@@ -1,6 +1,10 @@
-# Release Candidate 0.1.0-rc.1 — Ready for User Acceptance
+# Cinematic-VFX-Director-Skill — Release Candidate 0.1.0-rc.2
 
 > Date: 2026-11-21. Status: **offline functionality released for user testing; actual MiniMax H3/Seedance video visual acceptance not yet performed**. GitHub `main` and a separately pinned release-candidate snapshot are distribution channels; no stable final tag until real acceptance.
+
+**中文简介：** 这是面向 AI 视频与电影 CG 的视觉特效导演 Skill。可基于场景、图片、视频与分镜推荐 3–5 个适合的特效方案，用户确认后生成特效设计与提示词补充；默认 MiniMax H3，也可明确选择 Seedance，保留原剧本、角色动作与镜头，并提供证据分级 QC。
+
+**English introduction:** This cinematic VFX direction skill evaluates scenes, images, videos and storyboards, offers 3–5 tailored VFX choices for approval, then supplies model-aware effect directions and prompt additions. It defaults to MiniMax H3, supports Seedance on request, preserves existing story, characters and camera, and provides evidence-aware QC guidance.
 
 ## What works now
 
@@ -38,7 +42,7 @@ This creates private, ignored `reviews/S01` frame candidates, **not** a QC pass 
 
 ## Release policy
 
-This is a **pre-acceptance candidate** (`0.1.0-rc.1`), not a stable quality-certified release. Keep this snapshot fixed during manual testing. After receiving the user's actual test findings, address reproducible defects, rerun all automated checks, then tag a stable version only if user accepts it.
+This is a **pre-acceptance candidate** (`0.1.0-rc.2`), not a stable quality-certified release. Keep this snapshot fixed during manual testing. After receiving the user's actual test findings, address reproducible defects, rerun all automated checks, then tag a stable version only if user accepts it.
 
 ## Documentation index
 
