@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "note": "Six original example cards; atom IDs point to unchanged 566-entry upstream bank.",
+  "cards": [
+    {
+      "card_id": "sample.sword-activation",
+      "shot_id": "S01",
+      "intent": "握紧剑柄时冷紫色能量苏醒，不加入战斗",
+      "medium": "semi-realistic-japanese-cg",
+      "genres": [
+        "slice-of-life-fantasy"
+      ],
+      "style_profiles": [
+        "soft-diffused",
+        "mj-dreamlike"
+      ],
+      "family": "weapon",
+      "intensity": "L2",
+      "primary_read": "weapon-activation",
+      "source_prompt": "女主右手握住原位置悬浮的紫色长剑，5秒一镜到底。",
+      "immutable_constraints": [
+        "原角色",
+        "原姿势",
+        "镜头不变",
+        "5秒",
+        "不得攻击"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "idle",
+          "trigger": "剑仍悬浮",
+          "anchor": "剑刃表面",
+          "visual": "微弱紫色辉光沿剑刃细流",
+          "response": "紫色局部反射在握剑手指",
+          "role": "secondary"
+        },
+        {
+          "phase": "activation",
+          "trigger": "五指完整收紧",
+          "anchor": "剑柄及剑刃",
+          "visual": "细窄紫色流光沿剑刃快速窜过",
+          "response": "袖口与下颌被短暂照亮",
+          "role": "primary"
+        },
+        {
+          "phase": "decay",
+          "trigger": "能量脉冲结束",
+          "anchor": "剑刃周围",
+          "visual": "少量粒子就近散开后沉静",
+          "response": "背景柔和逆光维持",
+          "role": "tertiary"
+        }
+      ],
+      "vfx_delta": "握紧剑柄时流光沿原剑刃快速掠过，周围仅有少量紫白粒子短暂散开，冷紫色光自然映在手指袖口和下颌。无挥剑、无剑气、无大范围冲击波。",
+      "related_atom_ids": [
+        "vfx_term_007",
+        "vfx_term_336",
+        "vfx_term_488"
+      ],
+      "changes": [],
+      "effect_state_out": {
+        "id": "sword-violet",
+        "status": "active-glow",
+        "color": "violet"
+      }
+    },
+    {
+      "card_id": "sample.rainy-street",
+      "shot_id": "S02",
+      "intent": "真实暴雨中的湿地反射与雨滴反馈",
+      "medium": "photoreal-live-action",
+      "genres": [
+        "environmental",
+        "natural-disaster"
+      ],
+      "style_profiles": [
+        "natural-cinematic"
+      ],
+      "family": "environment-weather",
+      "intensity": "L0",
+      "primary_read": "weather-force-and-response",
+      "source_prompt": "夜晚街道暴雨，摄影机固定。",
+      "immutable_constraints": [
+        "固定机位",
+        "真实自然天气",
+        "禁止魔法光"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "idle",
+          "trigger": "暴雨已开始",
+          "anchor": "天空到地面",
+          "visual": "倾斜雨丝由同一风向驱动",
+          "response": "地面积水反射原有路灯",
+          "role": "primary"
+        },
+        {
+          "phase": "response",
+          "trigger": "雨丝击中水坑",
+          "anchor": "水面接触点",
+          "visual": "不同尺度水纹向外扩散",
+          "response": "反射随涟漪轻微扰动",
+          "role": "secondary"
+        }
+      ],
+      "vfx_delta": "雨滴朝同一风向倾斜，落在积水上形成细密真实涟漪，湿地反射现有灯光，禁止凭空发光的粒子与魔法色彩。",
+      "related_atom_ids": [
+        "vfx_term_134",
+        "vfx_term_348"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "sample.sakuga-clash",
+      "shot_id": "S03",
+      "intent": "二人刀刃真实接触时的二维动感爆发",
+      "medium": "anime-2d",
+      "genres": [
+        "wuxia"
+      ],
+      "style_profiles": [
+        "anime-sakuga"
+      ],
+      "family": "impact",
+      "intensity": "L2",
+      "primary_read": "contact-location",
+      "source_prompt": "两位剑客近身对刀，刀刃在画面中央相交。",
+      "immutable_constraints": [
+        "刀剑轨迹不变",
+        "先接触后闪光",
+        "不发射剑气"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "anticipation",
+          "trigger": "两刀相互靠近",
+          "anchor": "真实刀刃轨迹",
+          "visual": "短促清晰的刀刃运动光迹",
+          "response": "背景保持动作方向",
+          "role": "secondary"
+        },
+        {
+          "phase": "contact",
+          "trigger": "两刀刃确实相接",
+          "anchor": "中央刀刃交点",
+          "visual": "接触位置出现金属火星及极短命中闪帧",
+          "response": "双方有对应受力停顿",
+          "role": "primary"
+        }
+      ],
+      "vfx_delta": "刀刃交点出现瞬间金属火星，闪帧与实际碰撞同步，短促拖尾仅跟随真实刀刃运动；不得先闪再碰，也不发射离体剑气。",
+      "related_atom_ids": [
+        "vfx_term_222",
+        "vfx_term_314"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "sample.mecha-sequence",
+      "shot_id": "S04",
+      "intent": "机甲表面扫描与能量护盾启动",
+      "medium": "premium-cg",
+      "genres": [
+        "mecha",
+        "science-fiction"
+      ],
+      "style_profiles": [
+        "dark-gritty"
+      ],
+      "family": "technology",
+      "intensity": "L2",
+      "primary_read": "activation-system",
+      "source_prompt": "机甲在仓库停机状态下完成扫描并启动护盾。",
+      "immutable_constraints": [
+        "机甲外形不改变",
+        "不移动机位",
+        "不得凭空新增机械臂"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "continue",
+      "events": [
+        {
+          "phase": "anticipation",
+          "trigger": "系统启动前",
+          "anchor": "机甲现有外壳",
+          "visual": "细窄的扫描线沿既定机身结构滑过",
+          "response": "局部结构产生短时反射",
+          "role": "primary"
+        },
+        {
+          "phase": "activation",
+          "trigger": "扫描完成",
+          "anchor": "机甲外壳外缘",
+          "visual": "贴合机身轮廓的薄层护盾逐段形成",
+          "response": "护盾色光映到现有金属表面",
+          "role": "primary"
+        }
+      ],
+      "vfx_delta": "激光扫描沿已有装甲连接线运动，扫描完成后薄层半透明护盾依照机身轮廓出现；与真实材质产生一致反射，不凭空增加构件。",
+      "related_atom_ids": [
+        "vfx_term_143",
+        "vfx_term_145"
+      ],
+      "changes": [],
+      "effect_state_in": {
+        "id": "mecha-shield",
+        "status": "off"
+      },
+      "effect_state_out": {
+        "id": "mecha-shield",
+        "status": "active",
+        "color": "cyan"
+      }
+    },
+    {
+      "card_id": "sample.mythic-portal",
+      "shot_id": "S05",
+      "intent": "东方神话场景中的空间裂口展开",
+      "medium": "stylized-3d",
+      "genres": [
+        "mythology",
+        "high-fantasy"
+      ],
+      "style_profiles": [
+        "mj-dreamlike",
+        "soft-diffused"
+      ],
+      "family": "spatial",
+      "intensity": "L3",
+      "primary_read": "opening-boundary",
+      "source_prompt": "云海上空出现一道固定位置的空间门。",
+      "immutable_constraints": [
+        "空间门锚点固定",
+        "主体轮廓清晰",
+        "不吞没全画面"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "anticipation",
+          "trigger": "空间边界开始不稳定",
+          "anchor": "云海中央固定位置",
+          "visual": "空气局部折射，形成细长边界",
+          "response": "附近云层保持原有形态",
+          "role": "secondary"
+        },
+        {
+          "phase": "propagation",
+          "trigger": "空间门开始张开",
+          "anchor": "同一位置边界",
+          "visual": "空间裂缝从中心向外连续展开",
+          "response": "附近冷光沿云雾层漫射",
+          "role": "primary"
+        },
+        {
+          "phase": "settled",
+          "trigger": "开门完成",
+          "anchor": "稳定门户边缘",
+          "visual": "裂口停在一致形态，不再无限扩张",
+          "response": "云海保留背景层次",
+          "role": "primary"
+        }
+      ],
+      "vfx_delta": "空间裂纹沿固定边界渐次展开，内部空间折射与周围云雾形成真实深度，柔和冷光照亮近处云层；不随意增大到全屏。",
+      "related_atom_ids": [
+        "vfx_term_265",
+        "vfx_term_269",
+        "vfx_term_488"
+      ],
+      "changes": []
+    },
+    {
+      "card_id": "sample.transformation",
+      "shot_id": "S06",
+      "intent": "非战斗中的舞台布景形态过渡",
+      "medium": "stylized-3d",
+      "genres": [
+        "transformation"
+      ],
+      "style_profiles": [
+        "pixar-like-animation"
+      ],
+      "family": "transformation",
+      "intensity": "L1",
+      "primary_read": "material-change-frontier",
+      "source_prompt": "房间里的纸艺花苞自然展开为花朵；镜头固定。",
+      "immutable_constraints": [
+        "保留原有花苞身份",
+        "镜头不变",
+        "不添加爆炸魔法"
+      ],
+      "editable_scope": "vfx-only",
+      "continuity_mode": "independent",
+      "events": [
+        {
+          "phase": "anticipation",
+          "trigger": "花瓣边缘出现伸展",
+          "anchor": "花苞原有连接面",
+          "visual": "花瓣沿真实折线开始打开",
+          "response": "纸材质仍可辨认",
+          "role": "primary"
+        },
+        {
+          "phase": "propagation",
+          "trigger": "花瓣依次展开",
+          "anchor": "每一层花瓣铰接点",
+          "visual": "展开前缘按结构逐步推进",
+          "response": "局部折痕光影随几何变化",
+          "role": "primary"
+        },
+        {
+          "phase": "settled",
+          "trigger": "花瓣展开完成",
+          "anchor": "成形花朵表面",
+          "visual": "纸张重新稳定，无额外飘散粒子",
+          "response": "柔和室内光保持一致",
+          "role": "primary"
+        }
+      ],
+      "vfx_delta": "纸质花瓣从原有折痕处逐片展开、形状连续变化，局部阴影随曲面更新，完成后自然停稳；不以闪光遮掩变形过程。",
+      "related_atom_ids": [
+        "vfx_term_176",
+        "vfx_term_433"
+      ],
+      "changes": []
+    }
+  ]
+}
