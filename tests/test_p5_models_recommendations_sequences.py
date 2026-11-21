@@ -174,6 +174,20 @@ class P5RecommendationTests(unittest.TestCase):
         m = {p["request_id"]: p["model"] for p in self.packs}
         self.assertEqual(m["fixture.paper-flower"], "seedance")
         self.assertEqual(m["fixture.sword-image"], "minimax-h3")
+        for p in self.packs:
+            if p["model"] == "minimax-h3":
+                self.assertEqual(p["model_selection_source"], "default")
+            else:
+                self.assertEqual(p["model_selection_source"], "user-explicit")
+                self.assertIn("Seedance", p["input"]["user_request"])
+
+    def test_default_origin_cannot_choose_seedance(self):
+        p = deepcopy(self.packs[0])
+        p["model"] = "seedance"
+        p["model_selection_source"] = "default"
+        with self.assertRaisesRegex(ValueError, "must default to MiniMax H3"):
+            recommend_options.validate_pack(p)
+
 
 
 class P5MultiShotTests(unittest.TestCase):
