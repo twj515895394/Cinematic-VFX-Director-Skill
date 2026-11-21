@@ -1,0 +1,7 @@
+# Private local video outputs and extracted review frames
+reviews/
+*.pyc
+__pycache__/
+.pytest_cache/
+.venv/
+venv/
