@@ -27,3 +27,4 @@ jobs:
         run: |
           python scripts/compile_prompt.py --card sample.sword-activation
           python scripts/compile_prompt.py --card sample.rainy-street --json
+          python scripts/compile_prompt.py --cards examples/p3-ten-cards.json --card p3.power-aura
