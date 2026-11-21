@@ -53,6 +53,10 @@ def compile_card(card, *, mode="delta", approved=False):
     """
     if mode not in ("delta", "integrated"):
         raise ValueError("Unknown output mode: %s" % mode)
+    if isinstance(card, dict) and isinstance(card.get("related_atom_ids"), list):
+        selected = card["related_atom_ids"]
+        if all(isinstance(atom_id, str) for atom_id in selected) and len(selected) != len(set(selected)):
+            raise ValueError("Duplicate selected atom IDs")
     schema = load_json(SCHEMA_FILE)
     errors = sorted(Draft202012Validator(schema).iter_errors(card),
                     key=lambda e: (list(map(str, e.absolute_path)), e.message))
