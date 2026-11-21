@@ -41,6 +41,24 @@
 4. `premium-cg + mecha + [dark-gritty] + technology` → 金属构件变形、锁定、机械火花，不能变为无来源光球。
 5. `stylized-3d + high-fantasy + [mj-dreamlike] + spatial` → 空间边界折射与周围光照，控制空间锚点。
 
+## 中文/英文别名与非等价词
+| 用户常用描述 | 归一化目标 | 解释与边界 |
+|---|---|---|
+| 真人电影 / 真实摄影 / live action | medium=photoreal-live-action | 不自动添加魔法粒子 |
+| 日系 3D 动漫电影 / 半写实 CG | medium=semi-realistic-japanese-cg | 明确三维与真实深度 |
+| Pixar感 / 欧美卡通电影 | medium=toon-3d + style=pixar-like-animation | 审美标签不改变剧情题材 |
+| MJ风格 / 梦幻柔光 / 朦胧艺术电影 | style=mj-dreamlike 或 soft-diffused | 用户只说“MJ”时保留不确定性 |
+| 国风武侠 / 武打 | genre=wuxia | 不默认仙术 |
+| 修仙 / 东方仙侠 | genre=xianxia | 有法力的世界观，但不强制当前镜头施法 |
+| 机甲 / mecha | genre=mecha | 不自动新增机械武器 |
+| 剑气 / sword projectile | 原子 family=weapon-motion，使用前区分贴身拖尾与离体投射 | 不等同普通 weapon trail |
+| 刀光 / slash arc | family=weapon/motion 候选 | 贴合真实武器运动路径 |
+| 护盾 / barrier / shield | 原子 system=technology/ritual 候选 | 必须先判断科技或超自然来源 |
+| 特效呼吸 / energy pulse | family=energy | 允许仅在武器表面，不必爆炸 |
+| 随手抹除、凭空闪现 | transformation/spatial 候选 | 需剧情授权且不能遮盖身份连续性 |
+
+别名仅用于**理解和检索扩展**，绝不将近义词机械视为视觉效果等价。上游 [566条原子词库](../third_party/skill-movie/vfx-effect-construction-engine/references/vfx-atom-index.md) 原样保留；词库中英文名交给原始检索脚本处理。
+
 ## 路由顺序
 用户明确声明（硬约束） > 已有参考/输入中的明确线索 > 类型默认 > unknown。若只输入「MJ风格」，优先返回少量风格方向而不是杜撰精确效果；用户目的明确且画面已充分描述时可采用保守默认并声明假设。
 
