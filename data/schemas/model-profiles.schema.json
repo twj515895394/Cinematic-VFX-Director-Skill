@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Only MiniMax H3 and Seedance model adapters",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "default_model",
+    "models",
+    "selection_policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_model": {
+      "const": "minimax-h3"
+    },
+    "models": {
+      "type": "object",
+      "required": [
+        "minimax-h3",
+        "seedance"
+      ],
+      "additionalProperties": false,
+      "minProperties": 2,
+      "maxProperties": 2,
+      "properties": {
+        "minimax-h3": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "type",
+            "prompt_language",
+            "default",
+            "supported_input_modes",
+            "official_modes",
+            "source_guides",
+            "rules",
+            "guardrails"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "prompt_language": {
+              "type": "string",
+              "minLength": 1
+            },
+            "default": {
+              "type": "boolean"
+            },
+            "supported_input_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "official_modes": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "source_guides": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "rules": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "guardrails": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        },
+        "seedance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "label",
+            "type",
+            "prompt_language",
+            "default",
+            "supported_input_modes",
+            "official_modes",
+            "source_guides",
+            "rules",
+            "guardrails"
+          ],
+          "properties": {
+            "label": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "prompt_language": {
+              "type": "string",
+              "minLength": 1
+            },
+            "default": {
+              "type": "boolean"
+            },
+            "supported_input_modes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "official_modes": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "source_guides": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "rules": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "guardrails": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "selection_policy": {
+      "type": "object",
+      "required": [
+        "explicit_user_model_overrides_default",
+        "unrecognized_explicit_model",
+        "when_user_only_says_seedance",
+        "never_auto_switch_model"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "explicit_user_model_overrides_default": {
+          "const": true
+        },
+        "unrecognized_explicit_model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "when_user_only_says_seedance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "never_auto_switch_model": {
+          "const": true
+        }
+      }
+    }
+  }
+}
